@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuModule } from './menu/menu.module';
-
+import {NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,7 +12,9 @@ import { MenuModule } from './menu/menu.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MenuModule
+    MenuModule,
+    NgbModule,
+    NgbDropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
