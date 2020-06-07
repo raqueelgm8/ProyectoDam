@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { HomeComponent } from './components/pages/home/home.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,4 +10,16 @@ import { NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
 export class AppComponent {
   title = 'proyecto-web';
   navbarCollapsed = true;
+  constructor(
+    private route: Router
+  ) { }
+  clickHome() {
+    this.route.navigate(['/home']);
+  }
+  clickProductos() {
+    this.route.navigate(['/productos']);
+  }
+  clickAdopciones() {
+    this.route.navigate(['/adopciones']);
+  }
 }
