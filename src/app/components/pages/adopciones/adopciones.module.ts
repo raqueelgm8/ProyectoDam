@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdopcionesRoutingModule } from './adopciones-routing.module';
-import { AdopcionesComponent } from './adopciones.component';
+import { PerrosComponent } from './perros/perros.component';
+import { GatosComponent } from './gatos/gatos.component';
+import { OtrosComponent } from './otros/otros.component';
 
 
 @NgModule({
-  declarations: [AdopcionesComponent],
+  declarations: [PerrosComponent, GatosComponent, OtrosComponent],
   imports: [
     CommonModule,
     AdopcionesRoutingModule

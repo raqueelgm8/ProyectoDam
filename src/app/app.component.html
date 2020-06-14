@@ -10,11 +10,40 @@
         <div class="collapse navbar-collapse" id="mainNavBar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" (click)="clickHome()">Home</a></li>
-                <li class="nav-item"><a class="nav-link" (click)="clickAdopciones()">Adopciones</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Adopciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" (click)="clickPerros()">Perros</a>
+                      <a class="dropdown-item" (click)="clickGatos()">Gatos</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" (click)="clickOtros()">Otros</a>
+                    </div>
+                  </li>
                 <li class="nav-item"><a class="nav-link" (click)="clickProductos()">Productos</a></li>
                 <li class="nav-item"><a class="nav-link"><i class="fa fa-user"></i> Iniciar sesión</a></li>
                 <li class="nav-item"><a class="nav-link"><i class="fa fa-edit"></i> Registrarse</a></li>
             </ul>
         </div>
 </nav>
+
 <router-outlet></router-outlet>
+
+
+<footer id="footer" class="p-3 bg-success">
+    <ul class="nav text-center justify-content-center flex-column flex-sm-row">
+        <li class="nav-item">
+            <a href="#" class="nav-link  text-white">Contacto</a>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link  text-white">Adopciones</a>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link  text-white">Productos</a>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link  text-white">Sobre nosotros</a>
+        </li>
+    </ul>
+</footer>

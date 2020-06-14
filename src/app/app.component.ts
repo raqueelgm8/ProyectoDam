@@ -19,7 +19,13 @@ export class AppComponent {
   clickProductos() {
     this.route.navigate(['/productos']);
   }
-  clickAdopciones() {
-    this.route.navigate(['/adopciones']);
+  clickPerros() {
+    this.route.navigate(['/adopciones/perros']);
+  }
+  clickGatos() {
+    this.route.navigate(['/adopciones/gatos']);
+  }
+  clickOtros() {
+    this.route.navigate(['/adopciones/otros']);
   }
 }
