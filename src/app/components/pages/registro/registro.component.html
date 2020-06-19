@@ -1,0 +1,14 @@
+<!-- Nombre, email, nombre de usuario, contraseña, revisión de contraseña,  -->
+<body>
+    <form [formGroup]="formRegistro">
+        <div class="testbox">
+            <h1 class="text-center">Registro</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <label id="icon" for="name"><i class="fa fa-paw"></i></label>
+                    <input type="text" formControlName="nombre" name="nombre" id="nombre" placeholder="Nombre" required/>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

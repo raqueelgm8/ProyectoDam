@@ -30,4 +30,7 @@ export class AppComponent {
   clickOtros() {
     this.route.navigate(['/adopciones/otros']);
   }
+  clickRegistro() {
+    this.route.navigate(['/registro']);
+  }
 }
