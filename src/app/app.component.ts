@@ -11,8 +11,10 @@ export class AppComponent {
   title = 'proyecto-web';
   navbarCollapsed = true;
   constructor(
-    private route: Router
-  ) { }
+    private route: Router,
+  ) {
+    this.route.navigate(['/home']);
+   }
   clickHome() {
     this.route.navigate(['/home']);
   }
