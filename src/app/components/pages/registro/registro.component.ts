@@ -20,6 +20,14 @@ export class RegistroComponent implements OnInit {
   iniciarForm() {
     this.formRegistro = this.fb.group({
       nombre: null,
+      email: null,
+      usuario: null,
+      pass1: null,
+      pass2: null,
+      sexo: null
     });
+  }
+  registrarse() {
+
   }
 }

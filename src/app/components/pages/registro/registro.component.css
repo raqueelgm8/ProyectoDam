@@ -26,5 +26,12 @@ pre, form, fieldset, input, textarea, p, blockquote, th, td {
     margin-bottom: 10px;
   }
   .left-margin {
-      margin-left: 15px;
+      margin-left: 50px;
   }
+.sexo {
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+input[type="radio"] {
+  
+}
