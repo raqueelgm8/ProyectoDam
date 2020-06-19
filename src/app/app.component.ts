@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(
     private route: Router,
   ) {
-    this.route.navigate(['/home']);
+    // this.route.navigate(['/home']);
    }
   clickHome() {
     this.route.navigate(['/home']);
