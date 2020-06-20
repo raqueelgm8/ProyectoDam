@@ -4,7 +4,7 @@
             <h1 class="text-center">Registro</h1>
             <hr>
             <div class="row left-margin">
-                <div class="col-md-10">
+                <div class="col-10">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="row left-margin">
-                <div class="col-md-10">
+                <div class="col-10">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text fa fa-envelope text-white bg-success" aria-hidden="true"></span>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="row left-margin">
-                <div class="col-md-10">
+                <div class="col-10">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-white bg-success fa fa-key" aria-hidden="true"></span>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="row left-margin">
-                <div class="col-md-10">
+                <div class="col-10">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text fa fa-unlock-alt text-white bg-success" aria-hidden="true"></span>
@@ -44,14 +44,14 @@
                 </div>
             </div>
             <!--Sexo radio buttons-->
-            <div class="sexo">
-                <input type="radio" value="None" id="male" name="gender" checked/>
-                <label for="male" class="radio">Male</label>
-                <input type="radio" value="None" id="female" name="gender" />
-                <label for="female" class="radio">Female</label>
+            <div class="sexo justify-content-center">
+                <input type="radio" value="hombre" id="hombre" name="sexo" checked/>
+                <label for="male">Hombre</label>
+                <input type="radio" value="mujer" id="mujer" name="sexo" class="left-margin "/>
+                <label for="mujer">Mujer</label>
             </div>
             <!--Botón registrarse-->
-
+            <hr>
             <div class="row justify-content-center">
                 <button class="btn btn-success" (click)="registrarse()">Registrarse</button>
             </div>

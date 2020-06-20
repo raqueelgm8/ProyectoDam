@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -28,6 +29,6 @@ export class RegistroComponent implements OnInit {
     });
   }
   registrarse() {
-
+    Swal.fire('¡Éxito!', 'Registro realizado correctamente', 'success');
   }
 }
