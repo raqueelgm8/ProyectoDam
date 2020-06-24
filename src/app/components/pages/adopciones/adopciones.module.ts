@@ -5,10 +5,11 @@ import { AdopcionesRoutingModule } from './adopciones-routing.module';
 import { PerrosComponent } from './perros/perros.component';
 import { GatosComponent } from './gatos/gatos.component';
 import { OtrosComponent } from './otros/otros.component';
+import { PerritoComponent } from './perros/perrito/perrito.component';
 
 
 @NgModule({
-  declarations: [PerrosComponent, GatosComponent, OtrosComponent],
+  declarations: [PerrosComponent, GatosComponent, OtrosComponent, PerritoComponent],
   imports: [
     CommonModule,
     AdopcionesRoutingModule
