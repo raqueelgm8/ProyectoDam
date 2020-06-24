@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistroRoutingModule } from './registro-routing.module';
 import { RegistroComponent } from './registro.component';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 
 
 @NgModule({
-  declarations: [RegistroComponent],
+  declarations: [RegistroComponent, InicioSesionComponent],
   imports: [
     CommonModule,
     RegistroRoutingModule,

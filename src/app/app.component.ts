@@ -33,4 +33,7 @@ export class AppComponent {
   clickRegistro() {
     this.route.navigate(['/registro']);
   }
+  clickInicioSesion() {
+    this.route.navigate(['/registro/inicio-sesion']);
+  }
 }
