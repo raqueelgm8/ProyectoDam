@@ -18,12 +18,11 @@ export class FichaAnimalComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.animal === 'Perro') {
         this.perro = JSON.parse(params.perro);
-        console.log(this.perro);
-      } else if(params.animal === 'Gato') {
-
-      } else if(params.animal === 'Otro') {
-
-      } 
+      } else if (params.animal === 'Gato') {
+        // this.gato = JSON.parse(params.gato);
+      } else if (params.animal === 'Otro') {
+        // this.otro = JSON.parse(params.otro);
+      }
     });
   }
 
