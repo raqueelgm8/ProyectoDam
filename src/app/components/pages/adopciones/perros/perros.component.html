@@ -45,7 +45,7 @@
             <!--Cards de los perros-->
         <div class="row card-group">
             <div class="col-md-4" *ngFor="let perro of perros">
-                <div class="card mb-4" style="width: 18rem;">
+                <div class="card mb-4" style="width: 18rem;" (click) = clickCard(perro)>
                     <img src="{{perro.imagen}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <b class="card-title">{{perro.nombre}}</b>

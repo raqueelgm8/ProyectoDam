@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { url } from 'inspector';
+import { Router } from '@angular/router';
 
 
 export interface CodeDescription {
@@ -51,6 +51,7 @@ export class PerrosComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -67,5 +68,11 @@ export class PerrosComponent implements OnInit {
   }
   cambiaValorSlider() {
     this.valorSlider = this.formCabecera.controls.edad.value;
+  }
+  clickCard(perro: Perro) {
+    console.log(perro);
+    this.router.navigate(['/adopciones/ficha-animal', ], {queryParams: {
+      perro: JSON.stringify(perro), animal: 'Perro'
+    }});
   }
 }

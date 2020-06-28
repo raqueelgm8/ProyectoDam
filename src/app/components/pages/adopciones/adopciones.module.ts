@@ -6,10 +6,11 @@ import { PerrosComponent } from './perros/perros.component';
 import { GatosComponent } from './gatos/gatos.component';
 import { OtrosComponent } from './otros/otros.component';
 import { PerritoComponent } from './perros/perrito/perrito.component';
+import { FichaAnimalComponent } from './ficha-animal/ficha-animal.component';
 
 
 @NgModule({
-  declarations: [PerrosComponent, GatosComponent, OtrosComponent, PerritoComponent],
+  declarations: [PerrosComponent, GatosComponent, OtrosComponent, PerritoComponent, FichaAnimalComponent],
   imports: [
     CommonModule,
     AdopcionesRoutingModule,
