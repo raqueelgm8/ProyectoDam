@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdopcionesRoutingModule } from './adopciones-routing.module';
 import { PerrosComponent } from './perros/perros.component';
 import { GatosComponent } from './gatos/gatos.component';
@@ -12,7 +12,9 @@ import { PerritoComponent } from './perros/perrito/perrito.component';
   declarations: [PerrosComponent, GatosComponent, OtrosComponent, PerritoComponent],
   imports: [
     CommonModule,
-    AdopcionesRoutingModule
+    AdopcionesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdopcionesModule { }
