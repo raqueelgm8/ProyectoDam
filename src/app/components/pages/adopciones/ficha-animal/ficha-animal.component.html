@@ -1,14 +1,14 @@
 <div class="row">
     <div class="col-md-6 mb-4 ml-5" style="width: 40rem;">
-        <img src="{{perro.imagen}}" class="card-img-top" alt="...">
+        <img src="{{animal.imagen}}" class="card-img-top" alt="...">
     </div>
     <div class="col-md-5">
-        <b class="text-center">{{perro.nombre}}</b>
+        <b class="text-center">{{animal.nombre}}</b>
         <hr>
-        <p >{{perro.description}}</p>
-        <p class="card-text">Edad: {{perro.edad}}</p>
-        <p class="card-text">Raza: {{perro.raza}}</p>
-        <p class="card-text">Sexo: {{perro.sexo}}</p>
-        <button class="btn btn-success" type="button">¡Adóptame!</button>
+        <p >{{animal.description}}</p>
+        <p class="card-text">Edad: {{animal.edad}}</p>
+        <p class="card-text">Raza: {{animal.raza}}</p>
+        <p class="card-text">Sexo: {{animal.sexo}}</p>
+        <button class="btn btn-success" type="button" (click)="clickAdoptame()">¡Adóptame!</button>
     </div>
 </div>

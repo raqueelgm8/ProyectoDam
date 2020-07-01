@@ -1,1 +1,61 @@
-<p>gatos works!</p>
+<h1 class="text-center">Adopción de gatos</h1>
+<div class="container">
+    <form [formGroup]="formCabecera">
+        <div class="row busqueda">
+            <!--<div class="col-md-6">
+                <span class="mw-100"><i class="fa fa-paw mw-100"></i></span>
+            </div>-->
+            <div class="col-md-4">
+                <label class="" for="raza">Raza</label>
+                <select class="form-control" id="raza" formControlName="raza">
+                    <option [ngValue]="null"></option>
+                    <option *ngFor="let raza of razas" [value]="raza.id">
+                        {{raza.description}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-8 radio-inline">
+                <label for="edad">Edad mínima</label>
+                <input type="range" class="custom-range" min="0" max="20" formControlName="edad" name="edad" id="edad"
+                    data-slider-id='edad' data-slider-min="0" data-slider-max="20" 
+                data-slider-step="1" data-slider-value="5" data-toggle="tooltip" data-placement="top" 
+                (input)="cambiaValorSlider()" title={{this.valorSlider}}>
+            </div>
+            <div class="col-md-3 radio-inline">
+                <label class="formato-etiqueta" for="disponible">Disponible en adopción</label>
+                <input type="checkbox" name="disponible" id="disponible" formControlName="disponible">
+            </div>
+            <div class="col-md-3 radio-inline">
+                <label class="formato-etiqueta" for="sexo">Macho</label>
+                <input type="radio" name="sexo" id="macho"[checked]="true">
+                <label class="formato-etiqueta ml-2" for="disponible">Hembra</label>
+                <input type="radio" name="sexo" id="hembra">
+            </div>
+            <div class="col-md-5 radio-inline">
+                <label class="formato-etiqueta" for="tipoEdad">Cachorro</label>
+                <input type="radio" name="tipoEdad" id="cachorro"[checked]="true">
+                <label class="formato-etiqueta ml-2" for="tipoEdad">Adulto</label>
+                <input type="radio" name="tipoEdad" id="adulto">
+                <label class="formato-etiqueta ml-2" for="tipoEdad">Joven</label>
+                <input type="radio" name="tipoEdad" id="joven">
+            </div>
+        </div>
+    </form>
+        <!--Cards de los perros-->
+    <div class="row card-group">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let gato of gatos">
+            <div class="card mb-4" style="width: 18rem;" (click) = clickCard(gato)>
+                <img src="{{gato.imagen}}" class="card-img-top2 fluid hover-card">
+                <div class="card-body">
+                    <b class="card-title">{{gato.nombre}}</b>
+                    <hr>
+                    <p class="card-text">{{gato.description}}</p>
+                    <p class="card-text">Edad: {{gato.edad}}</p>
+                    <p class="card-text">Raza: {{gato.raza}}</p>
+                    <!--Imagen hembra o macho?-->
+                    <p class="card-text">Sexo: {{gato.sexo}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

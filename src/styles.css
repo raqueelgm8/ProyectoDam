@@ -31,14 +31,19 @@ input[type="radio"] {
     background-color: #e7e6e7;
     border-radius: 50%;
   }
-  
-  /* appearance for checked radiobutton */
-  input[type="radio"]:checked {
-    background-color: #28a745;
-  }
-  
-  /* optional styles for centering radiobuttons */
-  .sound-signal {
-    display: flex;
-    align-items: center;
-  }
+
+/* appearance for checked radiobutton */
+input[type="radio"]:checked {
+  background-color: #28a745;
+}
+
+/* optional styles for centering radiobuttons */
+.sound-signal {
+  display: flex;
+  align-items: center;
+}
+.card-img-top2 {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}

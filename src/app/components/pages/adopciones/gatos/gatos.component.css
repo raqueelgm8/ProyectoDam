@@ -1,0 +1,12 @@
+h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: #4c4c4c;
+}
+.formato-etiqueta {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.hover-card {
+    cursor: pointer;
+}
