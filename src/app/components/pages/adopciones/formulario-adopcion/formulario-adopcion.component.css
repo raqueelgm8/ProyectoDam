@@ -1,7 +1,7 @@
 .testbox {
     margin: 20px auto;
     width: 700px; 
-    height: 800px; 
+    height: 2000px; 
     -webkit-border-radius: 8px/7px; 
     -moz-border-radius: 8px/7px; 
     border-radius: 8px/7px; 
@@ -23,4 +23,8 @@ h1 {
 }
 input label{
     display: inline-block;
+}
+.textarea{
+    resize: none;
+    height: 200px;
 }

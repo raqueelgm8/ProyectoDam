@@ -6,11 +6,40 @@
             <div class="row ml-4">
                 <div class="col-md-4">
                     <label for="nombre">Nombre*</label>
-                    <input type="text" class="form-control" name="nombre">
+                    <input type="text" class="form-control" name="nombre" formControlName="nombre">
                 </div>
                 <div class="col-md-7">
                     <label for="apellidos">Apellidos*</label>
-                    <input type="text" class="form-control" name="apellidos">
+                    <input type="text" class="form-control" name="apellidos" formControlName="apellidos">
+                </div>
+            </div>
+            <div class="row ml-4">
+                <div class="col-md-11">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control" name="direccion" formControlName="direccion">
+                </div>
+            </div>
+            <div class="row ml-4">
+                <div class="col-md-11">
+                    <label for="poblacion">Población</label>
+                    <input type="text" class="form-control" name="poblacion" formControlName="poblacion">
+                </div>
+            </div>
+            <div class="row ml-4">
+                <div class="col-md-4">
+                    <label for="codPostal">Código Postal</label>
+                    <input type="text" class="form-control" name="codPostal" formControlName="codPostal">
+                </div>
+                <div class="col-md-7">
+                    <label for="telefonoMovil">Teléfono Móvil</label>
+                    <input type="text" class="form-control" name="telefonoMovil" formControlName="telefonoMovil">
+                </div>
+            </div>
+            <div class="row ml-4">
+                <div class="col-md-11">
+                    <label for="razon">¿Por qué quieres adoptar?</label>
+                    <textarea class="form-control textarea" name="razon" formControlName="razon"></textarea>
+                    <!--<input type="text" class="form-control" name="razon" formControlName="razon">-->
                 </div>
             </div>
         </form>
