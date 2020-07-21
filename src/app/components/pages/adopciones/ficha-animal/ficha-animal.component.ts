@@ -29,6 +29,9 @@ export class FichaAnimalComponent implements OnInit {
   ): void {
   }
   clickAdoptame(){
-    this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion']);
+    console.log(JSON.stringify(this.animal));
+    this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion'], {queryParams: {
+      animal: JSON.stringify(this.animal)
+    }});
   }
 }
