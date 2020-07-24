@@ -95,13 +95,14 @@
             </div>
             <div class="row ml-4">
                 <div class="col-md-11">
-                    <input type="checkbox" value="politicaPrivacidad" id="politicaPrivacidad" name="politicaPrivacidad" formControlName="politicaPrivacidad" class="ml-3"/>
+                    <input type="checkbox" value="politicaPrivacidad" id="politicaPrivacidad" name="politicaPrivacidad" formControlName="politicaPrivacidad" class="ml-3" [checked] = "this.privacidad ? true : false"
+                    (change) = cambiarCheck()/>
                     <a class="left-margin link" (click)="abrirModal()">He leído y acepto la política de privacidad y el tratamiento de mis datos.</a>
                 </div>
             </div>
             <hr>
             <div class="row justify-content-center">
-                <button class="btn btn-success" type="button">Enviar</button>
+                <button class="btn btn-success" type="button" (click) = "clickEnviar()">Enviar</button>
             </div>
         </form>
     </div>

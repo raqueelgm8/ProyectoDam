@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import swal from 'sweetalert2';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro',
