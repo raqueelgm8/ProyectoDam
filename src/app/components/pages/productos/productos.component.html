@@ -1,1 +1,32 @@
-<p>productos works!</p>
+<h1 class="text-center">Productos</h1>
+<div class="container">
+    <div class="row busqueda">
+        <div class="col-md-4">
+            <label class="" for="raza">Raza</label>
+            <select class="form-control" id="raza" formControlName="raza">
+                <option></option>
+                <option *ngFor="let animal of animales" [value]="animal.id">
+                    {{animal.description}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>Juguetes</label>
+            <input class="ml-2" type="checkbox" value="juguetes" name="juguetes"/>
+        </div>
+        <div class="col-md-2">
+            <label>Accesorios</label>
+            <input class="ml-2" type="checkbox" value="accesorios" name="accesorios"/>
+        </div>
+        <div class="col-md-3">
+            <label>Comida</label>
+            <input class="ml-2" type="checkbox" value="comida" name="comida"/>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-8">
+            <h2><i class="fa fa-paw"></i> ¡Lo mejor para nuestros peluditos! <i class="fa fa-paw"></i></h2>
+        </div>
+    </div>
+</div>
