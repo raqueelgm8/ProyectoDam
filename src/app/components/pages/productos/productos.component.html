@@ -1,32 +1,49 @@
 <h1 class="text-center">Productos</h1>
 <div class="container">
-    <div class="row busqueda">
-        <div class="col-md-4">
-            <label class="" for="raza">Raza</label>
-            <select class="form-control" id="raza" formControlName="raza">
-                <option></option>
-                <option *ngFor="let animal of animales" [value]="animal.id">
-                    {{animal.description}}
-                </option>
-            </select>
+    <form [formGroup]="formCabecera">
+        <div class="row busqueda">
+            <div class="col-md-4">
+                <label class="" for="raza">Animal</label>
+                <select class="form-control" id="animal" formControlName="animal">
+                    <option></option>
+                    <option *ngFor="let animal of animales" [value]="animal.id">
+                        {{animal.description}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label>Juguetes</label>
+                <input class="ml-2" type="checkbox" value="juguetes" name="juguetes" formControlName="juguetes"/>
+            </div>
+            <div class="col-md-2">
+                <label>Accesorios</label>
+                <input class="ml-2" type="checkbox" value="accesorios" name="accesorios" formControlName="accesorios"/>
+            </div>
+            <div class="col-md-3">
+                <label>Comida</label>
+                <input class="ml-2" type="checkbox" value="comida" name="comida" formControlName="comida"/>
+            </div>
+            <div class="col-md-4">
+    
+            </div>
+            <div class="col-md-8">
+                <h2><i class="fa fa-paw"></i> ¡Lo mejor para nuestros peluditos! <i class="fa fa-paw"></i></h2>
+            </div>
         </div>
-        <div class="col-md-2">
-            <label>Juguetes</label>
-            <input class="ml-2" type="checkbox" value="juguetes" name="juguetes"/>
-        </div>
-        <div class="col-md-2">
-            <label>Accesorios</label>
-            <input class="ml-2" type="checkbox" value="accesorios" name="accesorios"/>
-        </div>
-        <div class="col-md-3">
-            <label>Comida</label>
-            <input class="ml-2" type="checkbox" value="comida" name="comida"/>
-        </div>
-        <div class="col-md-4">
-
-        </div>
-        <div class="col-md-8">
-            <h2><i class="fa fa-paw"></i> ¡Lo mejor para nuestros peluditos! <i class="fa fa-paw"></i></h2>
+    </form>
+    <!--Productos-->
+    <div class="row card-group">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let producto of productos">
+            <div class="card mb-4" style="width: 18rem;" (click) = clickCard(producto)>
+                <img src="{{producto.imagen}}" class="card-img-top2 fluid hover-card">
+                <div class="card-body">
+                    <b class="card-title">{{producto.nombre}}</b>
+                    <hr>
+                    <p class="card-text">{{producto.description}}</p>
+                    <p class="card-text">Precio: {{producto.precio}} €</p>
+                    <p class="card-text">Animal: {{producto.tipoAnimal}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

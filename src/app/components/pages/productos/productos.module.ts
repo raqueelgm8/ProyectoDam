@@ -16,6 +16,8 @@ import { FichaProductoComponent } from './ficha-producto/ficha-producto.componen
     ProductosRoutingModule,
     FormsModule,
     ReactiveFormsModule
+  ], entryComponents: [
+    FichaProductoComponent
   ]
 })
 export class ProductosModule { }
