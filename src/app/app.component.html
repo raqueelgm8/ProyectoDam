@@ -29,7 +29,7 @@
 </nav>
 
 <div class="p-0" style="min-height: 70vh;">
-    <router-outlet class="container"></router-outlet>
+    <router-outlet class="container" (activate)="recibirCesta($event)" (deactivate)="recibirCesta($event)" (stateChanged)="recibirCesta($event)" ></router-outlet>
 </div>
 
 <footer id="footer" class="p-3 bg-success">

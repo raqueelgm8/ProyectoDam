@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { HomeComponent } from './components/pages/home/home.component';
+import { Producto } from './components/pages/productos/productos.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +11,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 export class AppComponent {
   title = 'proyecto-web';
   navbarCollapsed = true;
+  cesta: Producto[];
   constructor(
     private route: Router,
   ) {
@@ -35,5 +37,11 @@ export class AppComponent {
   }
   clickInicioSesion() {
     this.route.navigate(['/registro/inicio-sesion']);
+  }
+  recibirCesta(event: any) {
+    if (event.cesta !== undefined && event.cesta !== null && event.cesta !== []) {
+      this.cesta = event.cesta;
+      console.log(this.cesta);
+    }
   }
 }

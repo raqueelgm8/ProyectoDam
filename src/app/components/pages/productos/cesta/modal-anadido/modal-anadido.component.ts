@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-anadido',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-anadido.component.css']
 })
 export class ModalAnadidoComponent implements OnInit {
-
-  constructor() { }
+  @Input() nombre: string;
+  constructor(
+    private modal: NgbActiveModal,
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
   }
-
+  clickAceptar() {
+    this.modal.close();
+  }
+  clickCesta() {
+    this.modal.close('cesta');
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CodeDescription } from '../adopciones/perros/perros.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -42,7 +42,9 @@ export class ProductosComponent implements OnInit {
     {id: '6', description: 'Producto 6', precio: 10, tipoAnimal: 'Todos',
     imagen: '', tipoProducto: 'Comida', nombre: 'Producto 4'},
   ];
+  @Output() cestaEvent = new EventEmitter<any>();
   formCabecera: FormGroup;
+  cesta: Producto[];
   constructor(
     private fb: FormBuilder,
     private modal: NgbModal
@@ -62,9 +64,12 @@ export class ProductosComponent implements OnInit {
       size: 'lg'
     });
     modalRef.componentInstance.producto = producto;
+    modalRef.componentInstance.cesta = this.cesta;
     modalRef.result.then((result) => {
       if (!R.isNil(result)) {
-        
+        this.cesta = result;
+        console.log(this.cesta);
+        this.cestaEvent.emit(this.cesta);
       }
     });
   }
