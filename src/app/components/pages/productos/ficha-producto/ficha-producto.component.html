@@ -87,11 +87,13 @@
 
             <!-- Add to Cart -->
             <div class="card-body">
+              <form [formGroup]="formCantidad">
                 <div class="row">
                     <div class="col-md-4">
-                        <input class="form-control" type="number" value="1" min="1" max="1000" step="1"/>
+                        <input class="form-control" type="number" value="1" min="1" max="1000" step="1" formControlName="cantidad"/>
                     </div>
                 </div>
+              </form>
                 <br>
               <!--<div class="row">
                 <div class="col-md-6">
@@ -119,8 +121,8 @@
               </div>-->
               <div class="row justify-content-end">
 
-                <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Cerrar</button>
-                <button class="btn btn-primary">Añadir a la cesta
+                <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal" (click)="clickCerrar()">Cerrar</button>
+                <button class="btn btn-primary" (click)="clickAdd()">Añadir a la cesta
                   <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
                 </button>
               </div>

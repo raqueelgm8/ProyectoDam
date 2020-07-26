@@ -13,6 +13,7 @@ export interface Producto {
   precio: number;
   tipoAnimal: string;
   tipoProducto: string;
+  cantidad?: number;
 }
 @Component({
   selector: 'app-productos',
