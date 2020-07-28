@@ -24,7 +24,8 @@ export class RegistroComponent implements OnInit {
       usuario: null,
       pass1: null,
       pass2: null,
-      sexo: null
+      sexo: null,
+      apellidos: null
     });
   }
   registrarse() {

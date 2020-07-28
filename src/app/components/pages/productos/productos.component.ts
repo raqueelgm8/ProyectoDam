@@ -30,7 +30,7 @@ export class ProductosComponent implements OnInit {
   ];
   productos: Producto[] = [
     {id: '1', description: 'Pienso Pet shop 15 kg', precio: 19.99, tipoAnimal: 'Perro',
-    imagen: 'https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1d83046b/images/pienso_perros_start_adulto_pollo_KWK114_M.jpg' , tipoProducto: 'Comida', nombre: 'Pienso adelgazador'},
+    imagen: 'https://cdn.pixabay.com/photo/2019/08/05/15/08/dog-4386211_960_720.png' , tipoProducto: 'Comida', nombre: 'Pienso adelgazador'},
     {id: '2', description: 'Producto 2', precio: 5, tipoAnimal: 'Todos',
     imagen: 'https://www.terranovacnc.com/wp-content/uploads/2020/05/the-company-of-animals-collar-halty-color-rojo-para-perros.jpg', tipoProducto: 'Accesorios', nombre: 'Collar rojo'},
     {id: '3', description: 'Bozal para perros', precio: 2, tipoAnimal: 'Perro',
