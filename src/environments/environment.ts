@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   BASEURL: 'localhost:8080',
-  applicationName: "Masccotas",
+  applicationName: "Mascotas",
   API_BASE_PATH: 'http://localhost:8080',
   
   /*

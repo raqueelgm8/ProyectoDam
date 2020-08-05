@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
 
 
 export interface CodeDescription {
@@ -49,6 +50,8 @@ export class PerrosComponent implements OnInit {
 
   valorSlider = '10';
   formCabecera: FormGroup;
+  comboRazas: Combo[];
+
 
   constructor(
     public fb: FormBuilder,
@@ -58,8 +61,8 @@ export class PerrosComponent implements OnInit {
 
   ngOnInit() {
     this.iniciarGrupos();
-    this.httpClient.get('api/combos/combos').subscribe((res) => {
-      console.log(res);
+    this.httpClient.get('api/combos/combos').subscribe((result) => {
+      this.comboRazas = result as Combo[];
   });
   }
   iniciarGrupos() {

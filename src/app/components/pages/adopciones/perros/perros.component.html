@@ -9,8 +9,8 @@
                 <label class="" for="raza">Raza</label>
                 <select class="form-control" id="raza" formControlName="raza">
                     <option [ngValue]="null"></option>
-                    <option *ngFor="let raza of razas" [value]="raza.id">
-                        {{raza.description}}
+                    <option *ngFor="let raza of comboRazas" [value]="raza.id">
+                        {{raza.descripcion}}
                     </option>
                 </select>
             </div>
