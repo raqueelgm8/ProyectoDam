@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 
 export interface CodeDescription {
@@ -51,11 +52,15 @@ export class PerrosComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public httpClient: HttpClient
   ) { }
 
   ngOnInit() {
     this.iniciarGrupos();
+    this.httpClient.get('api/combos/combos').subscribe((res) => {
+      console.log(res);
+  });
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({
