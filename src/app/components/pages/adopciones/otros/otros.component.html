@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-3 radio-inline">
                 <label class="formato-etiqueta" for="disponible">Disponible en adopción</label>
-                <input type="checkbox" name="disponible" id="disponible" formControlName="disponible">
+                <input type="checkbox" name="disponible" id="disponible" formControlName="disponible" checked>
             </div>
             <div class="col-md-3 radio-inline">
                 <label class="formato-etiqueta" for="sexo">Macho</label>
@@ -45,7 +45,7 @@
     <div class="row card-group">
         <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let otro of otros">
             <div class="card mb-4" style="width: 18rem;">
-                <img src="{{otro.imagen}}" (click) = clickCard(otro) class="card-img-top hover-card " alt="...">
+                <img src="{{otro.imagen}}" (click) = clickCard(otro) class="card-img-top2 fluid hover-card" alt="...">
                 <div class="card-body">
                     <b class="card-title">{{otro.nombre}}</b>
                     <hr>

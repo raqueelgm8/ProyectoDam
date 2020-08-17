@@ -23,11 +23,13 @@
             </div>
             <div class="col-md-3 radio-inline">
                 <label class="formato-etiqueta" for="disponible">Disponible en adopción</label>
-                <input type="checkbox" name="disponible" id="disponible" formControlName="disponible">
+                <input type="checkbox" name="disponible" id="disponible" formControlName="disponible" checked>
             </div>
             <div class="col-md-3 radio-inline">
-                <label class="formato-etiqueta" for="sexo">Macho</label>
-                <input type="radio" name="sexo" id="macho"[checked]="true">
+                <label class="formato-etiqueta" for="sexo">Cualquiera</label>
+                <input type="radio" name="sexo" id="cualquiera"[checked]="true">
+                <label class="formato-etiqueta ml-2" for="sexo">Macho</label>
+                <input type="radio" name="sexo" id="macho">
                 <label class="formato-etiqueta ml-2" for="disponible">Hembra</label>
                 <input type="radio" name="sexo" id="hembra">
             </div>

@@ -61,13 +61,13 @@ export class PerrosComponent implements OnInit {
 
   ngOnInit() {
     this.iniciarGrupos();
-    this.httpClient.get('api/combos/combos').subscribe((result) => {
+    this.httpClient.get('api/combos/tipo/Perro').subscribe((result) => {
       this.comboRazas = result as Combo[];
   });
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({
-      disponible: null,
+      disponible: true,
       edad: 10,
       // sexo: null
       // tipoEdad: null

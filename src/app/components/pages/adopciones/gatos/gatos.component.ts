@@ -58,7 +58,7 @@ export class GatosComponent implements OnInit {
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({
-      disponible: null,
+      disponible: true,
       edad: 10,
       // sexo: null
       // tipoEdad: null
