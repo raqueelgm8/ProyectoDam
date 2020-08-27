@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from 'angular-webstorage-service';
@@ -81,6 +81,7 @@ export class PerrosComponent implements OnInit {
   recuperarPerros() {
     this.animalesService.obtenerAnimalesTipo('Perro').then((result) => {
       this.animales = result;
+      console.log(this.animales);
       this.animales.forEach(element => {
         const binaryString = window.atob(element.imagen);
         const binaryLen = binaryString.length;
@@ -107,10 +108,10 @@ export class PerrosComponent implements OnInit {
   cambiaValorSlider() {
     this.valorSlider = this.formCabecera.controls.edad.value;
   }
-  clickCard(perro: Perro) {
+  clickCard(perro: Animal) {
     console.log(perro);
     this.router.navigate(['/adopciones/ficha-animal', ], {queryParams: {
-      perro: JSON.stringify(perro), animal: 'Perro'
+      idAnimal: perro.idAnimal
     }});
   }
 }

@@ -22,5 +22,15 @@ export class AnimalesService {
       });
     });
   }
-
+  async obtenerAnimalPorId(id: number): Promise<Animal> {
+    return new Promise<Animal>( async (resolve, reject) => {
+      let animal: Animal;
+      this.httpClient.get('api/animales/getAnimalById/' + id).subscribe((result) => {
+        animal = result as Animal;
+        resolve(animal);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }
