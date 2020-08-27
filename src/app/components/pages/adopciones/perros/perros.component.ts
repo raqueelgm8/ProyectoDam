@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { StorageService } from 'angular-webstorage-service';
 import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
+import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
+import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
+import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
+import { ArchivosService } from 'src/app/api-rest/api/Archivos/archivos.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpHeaders } from '@angular/common/http';
 
 
 export interface CodeDescription {
@@ -51,19 +57,43 @@ export class PerrosComponent implements OnInit {
   valorSlider = '10';
   formCabecera: FormGroup;
   comboRazas: Combo[];
-
+  animales: Animal[];
 
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    public httpClient: HttpClient
+    private combo: ComboService,
+    private animalesService: AnimalesService,
+    public sanitizer: DomSanitizer,
+    private archivosService: ArchivosService,
   ) { }
 
   ngOnInit() {
     this.iniciarGrupos();
-    this.httpClient.get('api/combos/tipo/Perro').subscribe((result) => {
-      this.comboRazas = result as Combo[];
-  });
+    this.recuperarCombos();
+    this.recuperarPerros();
+  }
+  recuperarCombos() {
+    this.combo.obtenerComboTipo('Perro').then((result) => {
+      this.comboRazas = result;
+    });
+  }
+  recuperarPerros() {
+    this.animalesService.obtenerAnimalesTipo('Perro').then((result) => {
+      this.animales = result;
+      this.animales.forEach(element => {
+        const binaryString = window.atob(element.imagen);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+      });
+    });
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({

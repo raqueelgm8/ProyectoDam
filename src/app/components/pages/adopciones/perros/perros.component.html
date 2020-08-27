@@ -45,17 +45,17 @@
     </form>
         <!--Cards de los perros-->
     <div class="row card-group">
-        <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let perro of perros">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let perro of this.animales">
             <div class="card mb-4" style="width: 18rem;" (click) = clickCard(perro)>
-                <img src="{{perro.imagen}}" class="card-img-top hover-card " alt="...">
+                <img [src]="perro.imagenSrc" class="card-img-top hover-card " alt="...">
                 <div class="card-body">
                     <b class="card-title">{{perro.nombre}}</b>
                     <hr>
-                    <p class="card-text">{{perro.description}}</p>
+                    <p class="card-text">{{perro.descripcion}}</p>
                     <p class="card-text">Edad: {{perro.edad}}</p>
                     <p class="card-text">Raza: {{perro.raza}}</p>
                     <!--Imagen hembra o macho?-->
-                    <p class="card-text">Sexo: {{perro.sexo}}</p>
+                    <!--<p class="card-text">Sexo: {{perro.sexo}}</p>-->
                 </div>
             </div>
         </div>
