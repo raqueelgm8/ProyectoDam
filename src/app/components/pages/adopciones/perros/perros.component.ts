@@ -33,27 +33,6 @@ export interface Perro {
 
 export class PerrosComponent implements OnInit {
 
-  // MOCKEADOS
-
-  razas: CodeDescription[] = [
-    {id: '1', description: 'Golden Retriever'},
-    {id: '2', description: 'Mestizo'},
-    {id: '3', description: 'Pastor Alemán'},
-    {id: '4', description: 'Mastín'},
-    {id: '5', description: 'Beagle'},
-    {id: '6', description: 'Cocker'},
-  ];
-  perros: Perro[] = [
-    {id: '23', description: 'Perro más bonico del mundo', edad: 0, raza: 'Golden Retriever', tipoEdad: 'Cachorro', nombre: 'Selene', sexo: 'Hembra',
-     imagen: 'https://cdn.redcanina.es/wp-content/uploads/2019/02/12102930/golden-cachorro-e1549967733842-1024x650.jpg'},
-     {id: '24', description: 'Perro doble de  bonico', edad: 2, raza: 'Mestizo', tipoEdad: 'Joven', nombre: 'José Luis', sexo: 'Macho',
-     imagen: 'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/04/12185602/Lagotto-Romangolo-Tongue-Out.jpg'},
-     {id: '25', description: 'Perro triple de bonico', edad: 5, raza: 'Cocker', tipoEdad: 'Joven', nombre: 'Tami', sexo: 'Hembra',
-     imagen: 'https://blog.mascotaysalud.com/wp-content/uploads/2019/09/cocker-spaniel-ingles-corriendo.jpg'},
-     {id: '26', description: 'Perro más bonico aún', edad: 4, raza: 'Pastor Alemán', tipoEdad: 'Joven',  nombre: 'Thor', sexo: 'Macho',
-     imagen: 'https://t1.ea.ltmcdn.com/es/images/3/2/9/curiosidades_del_pastor_aleman_23923_600.jpg'}
-  ];
-
   valorSlider = '10';
   formCabecera: FormGroup;
   comboRazas: Combo[];
@@ -65,7 +44,6 @@ export class PerrosComponent implements OnInit {
     private combo: ComboService,
     private animalesService: AnimalesService,
     public sanitizer: DomSanitizer,
-    private archivosService: ArchivosService,
   ) { }
 
   ngOnInit() {
@@ -80,9 +58,10 @@ export class PerrosComponent implements OnInit {
   }
   recuperarPerros() {
     this.animalesService.obtenerAnimalesTipo('Perro').then((result) => {
-      this.animales = result;
+      this.animales = result as Animal[];
       console.log(this.animales);
       this.animales.forEach(element => {
+        element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
         const binaryString = window.atob(element.imagen);
         const binaryLen = binaryString.length;
         const bytes = new Uint8Array(binaryLen);

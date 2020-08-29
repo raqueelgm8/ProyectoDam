@@ -14,7 +14,7 @@ export class ComboService {
   async obtenerComboTipo(tipo: string): Promise<Combo[]> {
     return new Promise<Combo[]>( async (resolve, reject) => {
       let combo: Combo[];
-      this.httpClient.get('api/combos/tipo/' + tipo).subscribe((result) => {
+      this.httpClient.get('api/combo/getTiposAnimales/' + tipo).subscribe((result) => {
         combo = result as Combo[];
         resolve(combo);
       }, error => {

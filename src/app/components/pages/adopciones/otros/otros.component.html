@@ -9,8 +9,8 @@
                 <label class="" for="raza">Animal</label>
                 <select class="form-control" id="raza" formControlName="raza">
                     <option [ngValue]="null"></option>
-                    <option *ngFor="let animal of animales" [value]="animal.id">
-                        {{animal.description}}
+                    <option *ngFor="let animal of razas" [value]="animal.id">
+                        {{animal.descripcion}}
                     </option>
                 </select>
             </div>
@@ -45,11 +45,11 @@
     <div class="row card-group">
         <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let otro of otros">
             <div class="card mb-4" style="width: 18rem;">
-                <img src="{{otro.imagen}}" (click) = clickCard(otro) class="card-img-top2 fluid hover-card" alt="...">
+                <img [src]="otro.imagenSrc"(click) = clickCard(otro) class="card-img-top2 fluid hover-card" alt="...">
                 <div class="card-body">
                     <b class="card-title">{{otro.nombre}}</b>
                     <hr>
-                    <p class="card-text">{{otro.description}}</p>
+                    <p class="card-text">{{otro.descripcion}}</p>
                     <p class="card-text">Edad: {{otro.edad}}</p>
                     <p class="card-text">Raza: {{otro.raza}}</p>
                     <!--Imagen hembra o macho?-->

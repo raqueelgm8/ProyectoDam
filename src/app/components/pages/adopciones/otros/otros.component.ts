@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-export interface CodeDescription {
-  id: string;
-  description: string;
-}
-export interface Otro {
-  id: string;
-  description: string;
-  imagen: string;
-  raza: string;
-  edad: number;
-  tipoEdad: string;
-  nombre: string;
-  sexo: string;
-}
+import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
+import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
+import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
+import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-otros',
   templateUrl: './otros.component.html',
@@ -23,34 +15,22 @@ export interface Otro {
 export class OtrosComponent implements OnInit {
 
   // MOCKEADOS
-
-  animales: CodeDescription[] = [
-    {id: '1', description: 'Pájaro'},
-    {id: '2', description: 'Tortuga'},
-    {id: '3', description: 'Conejo'},
-    {id: '4', description: 'Hámster'},
-  ];
-  otros: Otro[] = [
-    {id: '23', description: 'Tortuga maja', edad: 10, raza: 'Tortuga siberiana', tipoEdad: 'Adulta', nombre: 'Crush', sexo: 'Macho',
-     imagen: 'https://cdn.pixabay.com/photo/2014/08/06/16/52/terrapin-411853_1280.jpg'},
-     {id: '24', description: 'Hámster agradable', edad: 1, raza: 'Mestizo', tipoEdad: 'Joven', nombre: 'Lily', sexo: 'Hembra',
-     imagen: 'https://cdn.pixabay.com/photo/2016/10/26/22/00/hamster-1772742_1280.jpg'},
-     {id: '25', description: 'Conejo como Bugs Bunny', edad: 5, raza: 'Conejo Común', tipoEdad: 'Adulto', nombre: 'Jackie', sexo: 'Macho',
-     imagen: 'https://cdn.pixabay.com/photo/2020/04/07/20/36/bunny-5014814_1280.jpg'},
-     {id: '26', description: 'Pájaro', edad: 1, raza: 'Loro', tipoEdad: 'Joven',  nombre: 'Merlín', sexo: 'Macho',
-     imagen: 'https://cdn.pixabay.com/photo/2014/04/09/10/31/parrot-320006_1280.jpg'}
-  ];
-
   valorSlider = '10';
   formCabecera: FormGroup;
-
+  otros: Animal[];
+  razas: Combo[];
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private combo: ComboService,
+    private animalesService: AnimalesService,
+    public sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
     this.iniciarGrupos();
+    this.recuperarCombos();
+    this.recuperarOtros();
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({
@@ -61,13 +41,37 @@ export class OtrosComponent implements OnInit {
       raza: null
     });
   }
+  recuperarCombos() {
+    this.combo.obtenerComboTipo('Otro').then((result) => {
+      this.razas = result;
+    });
+  }
+  recuperarOtros() {
+    this.animalesService.obtenerAnimalesTipo('Otro').then((result) => {
+      this.otros = result as Animal[];
+      console.log(this.otros);
+      this.otros.forEach(element => {
+        element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
+        const binaryString = window.atob(element.imagen);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+      });
+    });
+  }
   cambiaValorSlider() {
     this.valorSlider = this.formCabecera.controls.edad.value;
   }
-  clickCard(otro: Otro) {
+  clickCard(otro: Animal) {
     console.log(otro);
     this.router.navigate(['/adopciones/ficha-animal', ], {queryParams: {
-      perro: JSON.stringify(otro), animal: 'Perro'
+      idAnimal: otro.idAnimal
     }});
   }
 

@@ -22,7 +22,8 @@ export class FichaAnimalComponent implements OnInit {
     edad: 0,
     raza: '',
     tipoAnimal: '',
-    tipoEdad: ''
+    tipoEdad: '',
+    sexo: ''
   };
   idAnimal: number;
   constructor(

@@ -11,4 +11,5 @@ export class Animal {
     tipoAnimal: string;
     tipoEdad: string;
     imagenSrc?: any;
+    sexo: string;
 }

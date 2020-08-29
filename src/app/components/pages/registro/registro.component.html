@@ -35,7 +35,7 @@
                 <div class="col-10">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success fa fa-key" aria-hidden="true"></span>
+                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
                         </div>
                         <input type="password" class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required/>
                     </div>
@@ -48,6 +48,65 @@
                             <span class="input-group-text fa fa-unlock-alt text-white bg-success" aria-hidden="true"></span>
                         </div>
                         <input type="password" class="form-control" formControlName="pass2" name="pass2" id="pass2" placeholder="Verifica contraseña" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row left-margin">
+                <div class="col-10 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <select class="form-control" id="raza" formControlName="provincia">
+                            <option hidden [ngValue]="null" selected>Provincia</option>
+                            <option *ngFor="let provincia of comboProvincias" [value]="provincia.id">
+                                {{provincia.descripcion}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-10 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="number" class="form-control" formControlName="codigoPostal" name="codigoPostal" id="codigoPostal" placeholder="Código Postal" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row left-margin">
+                <div class="col-10 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="dni" name="dni" id="dni" placeholder="DNI/NIF" required/>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="number" class="form-control" formControlName="edad" min="18" name="edad" id="edad" placeholder="Edad" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row left-margin">
+                <div class="col-10 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="direccion" name="direccion" id="direccion" placeholder="Dirección" required/>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="telefono" name="telefono" id="telefono" placeholder="Teléfono" required/>
                     </div>
                 </div>
             </div>
