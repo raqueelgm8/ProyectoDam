@@ -38,6 +38,9 @@ export class AppComponent {
   clickInicioSesion() {
     this.route.navigate(['/registro/inicio-sesion']);
   }
+  clickPerfil() {
+    this.route.navigate(['/registro/mi-perfil']);
+  }
   recibirCesta(event: any) {
     if (event.cesta !== undefined && event.cesta !== null && event.cesta !== []) {
       this.cesta = event.cesta;
