@@ -5,6 +5,11 @@ import { RegistroRoutingModule } from './registro-routing.module';
 import { RegistroComponent } from './registro.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -13,7 +18,13 @@ import { PerfilComponent } from './perfil/perfil.component';
     CommonModule,
     RegistroRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ]
 })
 export class RegistroModule { }

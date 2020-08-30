@@ -1,1 +1,184 @@
-<p>perfil works!</p>
+<div class="fondo">
+    <form [formGroup]="formPerfil">
+        <div class="testbox">
+            <h1 class="text-center">Mi Perfil</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h1 class="">Datos Personales</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <label for="nombre">Nombre</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="nombre" name="nombre" id="nombre" placeholder="Nombre" required/>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label for="apellidos">Apellidos</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="apellidos" name="apellidos" id="apellidos" placeholder="Apellidos"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-envelope text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="email" class="form-control" formControlName="email" name="email" id="email" placeholder="Email"/>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label for="dni">DNI/NIF</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-id-badge"></i></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="dni" name="dni" id="dni" placeholder="DNI/NIF"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <label for="telefono">Teléfono</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-phone"></i></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="telefono" name="telefono" id="telefono" placeholder="Teléfono" required/>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label for="direccion">Dirección</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="direccion" name="direccion" id="direccion" placeholder="Dirección" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <label for="provincia">Provincia</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-globe-europe"></i></span>
+                        </div>
+                        <select class="form-control" id="raza" formControlName="provincia" required>
+                            <option hidden [ngValue]="null" selected>Provincia</option>
+                            <option *ngFor="let provincia of comboProvincias" [value]="provincia.id">
+                                {{provincia.descripcion}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label for="codigoPostal">Código Postal</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
+                        </div>
+                        <input type="text" maxlength="5" class="form-control" formControlName="codigoPostal" name="codigoPostal" id="codigoPostal" placeholder="Código Postal" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <label for="edad">Edad</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                        </div>
+                        <input type="number" class="form-control" formControlName="edad" min="18" name="edad" id="edad" placeholder="Edad" required/>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label for="sexo">Sexo</label>
+                    <div class="sexo justify-content-center">
+                        <input formControlName="sexo" class="mr-2" type="radio" value="H" id="hombre" name="sexo"/>
+                        <label for="male">Hombre</label>
+                        <input formControlName="sexo" type="radio" value="M" id="mujer" name="sexo" class="left-margin "/>
+                        <label class="ml-2" for="mujer">Mujer</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h1 class="">Mis Solicitudes</h1>
+                </div>
+            </div>
+            <div class="mensaje" *ngIf="sinDatosSolicitudes">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                        No hay información para mostrar.
+                    </div>
+                </div>
+              </div>
+              <div class="tabla responsiva mr10 mt20" [hidden]="sinDatosSolicitudes">
+                <mat-table [dataSource]="solicitudes" matSort>
+                    <ng-container  matColumnDef="idSolicitud">
+                        <mat-header-cell *matHeaderCellDef>Id Solicitud</mat-header-cell>
+                        <mat-cell *matCellDef="let solicitud">
+                            {{solicitud.idSolicitud}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container  matColumnDef="animal">
+                        <mat-header-cell *matHeaderCellDef>Animal</mat-header-cell>
+                        <mat-cell *matCellDef="let solicitud">
+                            {{solicitud.animal}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container  matColumnDef="tipoAnimal">
+                        <mat-header-cell *matHeaderCellDef>Tipo Animal</mat-header-cell>
+                        <mat-cell *matCellDef="let solicitud">
+                            {{solicitud.tipoAnimal}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container  matColumnDef="estado">
+                        <mat-header-cell *matHeaderCellDef>Estado Solicitud</mat-header-cell>
+                        <mat-cell *matCellDef="let solicitud">
+                            {{solicitud.estado}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container  matColumnDef="acciones">
+                        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                        <mat-cell *matCellDef="let solicitud">
+                            
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumnsSolicitudes"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumnsSolicitudes"></mat-row>
+                </mat-table>
+              </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h1 class="">Mis Pedidos</h1>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

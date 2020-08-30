@@ -13,7 +13,7 @@ export class UsuarioService {
   async obtenerUsuarioPorId(id: number): Promise<Usuario> {
     return new Promise<Usuario>( async (resolve, reject) => {
       let usuario: Usuario;
-      this.httpClient.get('api/usuarios/' + id).subscribe((result) => {
+      this.httpClient.get('/api/usuarios/' + id).subscribe((result) => {
         usuario = result as Usuario;
         resolve(usuario);
       }, error => {
@@ -24,7 +24,7 @@ export class UsuarioService {
   async obtenerTodosLosUsuarios(): Promise<Usuario[]> {
     return new Promise<Usuario[]>( async (resolve, reject) => {
       let usuarios: Usuario[];
-      this.httpClient.get('api/usuarios/usuarios').subscribe((result) => {
+      this.httpClient.get('/api/usuarios/usuarios').subscribe((result) => {
         usuarios = result as Usuario[];
         resolve(usuarios);
       }, error => {
