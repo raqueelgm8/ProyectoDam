@@ -58,4 +58,14 @@ export class UsuarioService {
       });
     });
   }
+  async eliminarUsuario(idUsuario: number): Promise<string> {
+    return new Promise<string>( async (resolve, reject) => {
+      this.httpClient.get('api/usuarios/eliminarUsuario/'+ idUsuario).subscribe((result) => {
+        resolve('El usuario se ha eliminado correctamente');
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 }

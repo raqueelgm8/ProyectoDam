@@ -135,11 +135,11 @@
                 </div>
               </div>
               <div class="tabla responsiva mr10 mt20" [hidden]="sinDatosSolicitudes">
-                <mat-table [dataSource]="solicitudes" matSort>
+                <mat-table [dataSource]="this.solicitudes" matSort>
                     <ng-container  matColumnDef="idSolicitud">
                         <mat-header-cell *matHeaderCellDef>Id Solicitud</mat-header-cell>
                         <mat-cell *matCellDef="let solicitud">
-                            {{solicitud.idSolicitud}}
+                            {{solicitud.id}}
                         </mat-cell>
                     </ng-container>
                     <ng-container  matColumnDef="animal">

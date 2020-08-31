@@ -7,7 +7,8 @@ import { Pedido } from 'src/app/api-rest/models/Pedido/pedido.model';
 import { Solicitud } from 'src/app/api-rest/models/Solicitud/solicitud.model';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
-
+import Swal from 'sweetalert2';
+import { SolicitudesService } from 'src/app/api-rest/api/Solicitudes/solicitudes.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -27,7 +28,8 @@ export class PerfilComponent implements OnInit {
     public route: ActivatedRoute,
     public fb: FormBuilder,
     public combos: ComboService,
-    public usuarioService: UsuarioService
+    public usuarioService: UsuarioService,
+    public solicitudesService: SolicitudesService
   ) {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
@@ -55,20 +57,40 @@ export class PerfilComponent implements OnInit {
       telefono: null,
     });
   }
+  recuperarPerfil() {
+    this.usuarioService.obtenerUsuarioPorId(this.idUsuario).then((result) => {
+      this.usuario = result;
+      this.formPerfil.controls.nombre.setValue(result.nombre);
+      this.formPerfil.controls.apellidos.setValue(result.apellidos);
+      this.formPerfil.controls.email.setValue(result.email);
+      this.formPerfil.controls.sexo.setValue(result.sexo);
+      this.formPerfil.controls.dni.setValue(result.dni);
+      this.formPerfil.controls.edad.setValue(result.edad);
+      this.formPerfil.controls.direccion.setValue(result.direccion);
+      this.formPerfil.controls.provincia.setValue(result.provincia);
+      this.formPerfil.controls.codigoPostal.setValue(result.codigoPostal);
+      this.formPerfil.controls.telefono.setValue(result.telefono);
+      console.log(this.usuario);
+    }, error => {
+      Swal.fire('¡ERROR!', error, 'error');
+    });
+  }
   recuperarCombos() {
     this.combos.obtenerComboTipo('Provincia').then((result) => {
       this.comboProvincias = result;
     });
   }
-  recuperarPerfil() {
-    this.usuarioService.obtenerUsuarioPorId(this.idUsuario).then((result) => {
-      this.usuario = result;
-      console.log(this.usuario);
-    }, error => {
-
+  recuperarSolicitudes() {
+    this.sinDatosSolicitudes = true;
+    this.solicitudesService.obtenerSolicitudesPorIdUsuario(this.idUsuario).then((result) => {
+      this.solicitudes = result;
+      console.log(this.solicitudes);
+      if (result !== undefined && result !== null && result !== []) {
+        this.sinDatosSolicitudes = false;
+      }
     });
   }
-  recuperarSolicitudes() {
-    this.sinDatosSolicitudes = false;
+  recuperarPedidos() {
+
   }
 }
