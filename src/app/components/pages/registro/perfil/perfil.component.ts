@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
@@ -9,6 +9,9 @@ import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
 import Swal from 'sweetalert2';
 import { SolicitudesService } from 'src/app/api-rest/api/Solicitudes/solicitudes.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -20,16 +23,37 @@ export class PerfilComponent implements OnInit {
   formPerfil: FormGroup;
   comboProvincias: Combo[];
   pedidos: Pedido[];
-  solicitudes: Solicitud[];
+  solicitudes: Solicitud[] = [];
   displayedColumnsSolicitudes = ['idSolicitud', 'animal', 'tipoAnimal', 'estado', 'acciones'];
   sinDatosSolicitudes: boolean;
   usuario: Usuario;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  dataSourceSolicitudes = new MatTableDataSource();
+
+  private paginator: MatPaginator;
+  private sort: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  setDataSourceAttributes() {
+    this.dataSourceSolicitudes.paginator = this.paginator;
+    this.dataSourceSolicitudes.sort = this.sort;
+  }
+
+
   constructor(
     public route: ActivatedRoute,
     public fb: FormBuilder,
     public combos: ComboService,
     public usuarioService: UsuarioService,
-    public solicitudesService: SolicitudesService
+    public solicitudesService: SolicitudesService,
+    private changeDetectorRefs: ChangeDetectorRef
   ) {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
@@ -42,6 +66,7 @@ export class PerfilComponent implements OnInit {
     this.recuperarCombos();
     this.recuperarPerfil();
     this.recuperarSolicitudes();
+    this.setDataSourceAttributes();
   }
   iniciarForm() {
     this.formPerfil = this.fb.group({
@@ -70,7 +95,6 @@ export class PerfilComponent implements OnInit {
       this.formPerfil.controls.provincia.setValue(result.provincia);
       this.formPerfil.controls.codigoPostal.setValue(result.codigoPostal);
       this.formPerfil.controls.telefono.setValue(result.telefono);
-      console.log(this.usuario);
     }, error => {
       Swal.fire('¡ERROR!', error, 'error');
     });
@@ -81,16 +105,46 @@ export class PerfilComponent implements OnInit {
     });
   }
   recuperarSolicitudes() {
-    this.sinDatosSolicitudes = true;
     this.solicitudesService.obtenerSolicitudesPorIdUsuario(this.idUsuario).then((result) => {
       this.solicitudes = result;
-      console.log(this.solicitudes);
-      if (result !== undefined && result !== null && result !== []) {
+      this.dataSourceSolicitudes = new MatTableDataSource<Solicitud>(this.solicitudes);
+      this.setDataSourceAttributes();
+      if (result.length === 0) {
         this.sinDatosSolicitudes = false;
+      } else {
+        this.sinDatosSolicitudes = true;
       }
     });
   }
   recuperarPedidos() {
+
+  }
+  eliminarSolicitud(solicitud: Solicitud) {
+    Swal.fire({
+      title: '¿Estás seguro de que deseas eliminar la solicitud?',
+      text: 'No podrás revertir esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar solicitud'
+    }).then((mensaje) => {
+      if (mensaje.value) {
+        this.solicitudesService.eliminarSolicitud(solicitud.id.idUsuario, solicitud.id.idSolicitud, solicitud.id.idAnimal);
+        const index = this.solicitudes.findIndex(element => element.id.idUsuario === solicitud.id.idUsuario
+                                  && element.id.idSolicitud === solicitud.id.idSolicitud
+                                  && element.id.idAnimal === solicitud.id.idAnimal);
+        this.solicitudes.splice(index, 1);
+        this.dataSourceSolicitudes =  new MatTableDataSource(this.solicitudes);
+        this.setDataSourceAttributes();
+        this.changeDetectorRefs.detectChanges();
+      }
+    });
+  }
+  editarSolicitud() {
+
+  }
+  verSolicitud() {
 
   }
 }

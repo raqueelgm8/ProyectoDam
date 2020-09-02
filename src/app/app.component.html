@@ -25,11 +25,11 @@
                 <li class="nav-item"><a class="nav-link" (click)="clickInicioSesion()"><i class="fa fa-user"></i> Iniciar sesión</a></li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" (click)="clickPerfil()" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user"></i> Perfil
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item">Mi Perfil <i class="fa fa-user" aria-hidden="true"></i></a>
+                      <a class="dropdown-item" (click)="clickPerfil()" >Mi Perfil <i class="fa fa-user" aria-hidden="true"></i></a>
                       <a class="dropdown-item">Cerrar Sesión <i class="fas fa-sign-out-alt" aria-hidden="true"></i></a>
                     </div>
                 </li>

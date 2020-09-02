@@ -1,7 +1,7 @@
 .testbox {
     margin: 20px auto;
     width: 1000px; 
-    height: 1000px;
+    min-height: 1250px;
     -webkit-border-radius: 8px/7px; 
     -moz-border-radius: 8px/7px; 
     border-radius: 8px/7px; 
@@ -31,4 +31,22 @@ h1 {
 }
 .ml5 {
   margin-left: 6px !important;
+}
+.mat-column-idSolicitud {
+  min-width: 200px;
+}
+.mat-column-animal {
+  min-width: 200px;
+}
+.mat-column-tipoAnimal {
+  min-width: 100px;
+}
+.mat-column-estado {
+  min-width: 200px;
+}
+.mat-column-acciones {
+  min-width: 300px;
+}
+.indexS {
+  z-index: 60000 !important;
 }

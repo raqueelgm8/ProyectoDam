@@ -1,7 +1,9 @@
 export class Solicitud {
-    idSolicitud: number;
-    idUsuario: number;
-    idAnimal: number;
+    id: {
+        idSolicitud: number;
+        idUsuario: number;
+        idAnimal: number;
+    };
     razonAdopcion: string;
     mascotasCasa: boolean;
     terraza: boolean;
@@ -9,4 +11,6 @@ export class Solicitud {
     horarioTrabajo: string;
     miembrosFamilia: string;
     estado: string;
+    nombreAnimal: string;
+    tipoAnimal: string;
 }
