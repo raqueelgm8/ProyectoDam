@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Perro } from '../perros/perros.component';
 import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
-
+let usuario = JSON.parse(localStorage.getItem('usuario'));
 @Component({
   selector: 'app-ficha-animal',
   templateUrl: './ficha-animal.component.html',
@@ -34,16 +33,13 @@ export class FichaAnimalComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       this.idAnimal = Number(params.idAnimal);
-      console.log(this.idAnimal);
     });
   }
-
   ngOnInit() {
     this.consultarAnimal(this.idAnimal);
   }
   clickAdoptame(){
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion'], {queryParams: {
-      // animal: JSON.stringify(this.animal)
       animalId: this.idAnimal
     }});
   }

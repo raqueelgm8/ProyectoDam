@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+let usuario = JSON.parse(localStorage.getItem('usuario'));
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -12,11 +12,11 @@ export class AppComponent {
   title = 'proyecto-web';
   navbarCollapsed = true;
   cesta: Producto[];
+  usuarioIniciadoSesion: boolean;
   constructor(
     private route: Router,
-  ) {
-    // this.route.navigate(['/home']);
-   }
+    private cd: ChangeDetectorRef
+  ) { }
   clickHome() {
     this.route.navigate(['/home']);
   }
@@ -46,5 +46,17 @@ export class AppComponent {
       this.cesta = event.cesta;
       console.log(this.cesta);
     }
+  }
+  recibirUsuario() {
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (usuario !== null) {
+      this.usuarioIniciadoSesion = true;
+    } else {
+      this.usuarioIniciadoSesion = false;
+    }
+  }
+  cerrarSesion() {
+    localStorage.clear();
+    window.location.reload();
   }
 }

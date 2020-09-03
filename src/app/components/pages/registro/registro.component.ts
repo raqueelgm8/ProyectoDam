@@ -6,6 +6,7 @@ import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
 import { Router } from '@angular/router';
+let usuario = JSON.parse(localStorage.getItem('usuario'));
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -66,7 +67,7 @@ export class RegistroComponent implements OnInit {
         provincia: this.formRegistro.controls.provincia.value,
         sexo: this.formRegistro.controls.sexo.value,
         telefono: this.formRegistro.controls.telefono.value,
-        id_Usuario: null,
+        idUsuario: null,
         pedidos: null,
         solicitudes: null
       };
@@ -82,7 +83,7 @@ export class RegistroComponent implements OnInit {
           if (mensaje.value) {
             // rederigir a mi perfil, cambiar iconos menú
             this.router.navigate(['/registro/mi-perfil'], {queryParams: {
-              idUsuario: result.id_Usuario
+              idUsuario: result.idUsuario
             }});
           }
         });

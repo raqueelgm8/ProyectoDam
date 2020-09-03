@@ -2,7 +2,7 @@ import { Pedido } from '../Pedido/pedido.model';
 import { Solicitud } from '../Solicitud/solicitud.model';
 
 export class Usuario {
-    id_Usuario: number;
+    idUsuario: number;
     apellidos: string;
     nombre: string;
     codigoPostal: string;

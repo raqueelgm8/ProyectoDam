@@ -35,7 +35,9 @@ export class UsuarioService {
   async obtenerUsuariosPorEmailPass(email: string, pass: string): Promise<Usuario[]> {
     return new Promise<Usuario[]>( async (resolve, reject) => {
       let usuarios: Usuario[];
-      this.httpClient.get('/api/usuarios/getUsuarios/' + email + '/' + pass).subscribe((result) => {
+      // getUsuarios/{email}/{pass}
+      const ruta = '/api/usuarios/getUsuarios/' + email + '/' + pass;
+      this.httpClient.get(ruta).subscribe((result) => {
         usuarios = result as Usuario[];
         resolve(usuarios);
       }, error => {
