@@ -5,11 +5,11 @@ export class Solicitud {
         idAnimal: number;
     };
     razonAdopcion: string;
-    mascotasCasa: boolean;
-    terraza: boolean;
-    jardin: boolean;
+    mascotasCasa: number;
+    terraza: number;
+    jardin: number;
     horarioTrabajo: string;
-    miembrosFamilia: string;
+    miembrosfamilia: string;
     estado: string;
     nombreAnimal: string;
     tipoAnimal: string;

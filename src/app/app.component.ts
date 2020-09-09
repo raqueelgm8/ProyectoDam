@@ -12,11 +12,12 @@ export class AppComponent {
   title = 'proyecto-web';
   navbarCollapsed = true;
   cesta: Producto[];
-  usuarioIniciadoSesion: boolean;
+  usuarioIniciadoSesion = false;
   constructor(
     private route: Router,
     private cd: ChangeDetectorRef
-  ) { }
+  ) {
+   }
   clickHome() {
     this.route.navigate(['/home']);
   }
@@ -51,8 +52,10 @@ export class AppComponent {
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     if (usuario !== null) {
       this.usuarioIniciadoSesion = true;
+      localStorage.setItem('usuarioIniciadoSesion', 'true');
     } else {
       this.usuarioIniciadoSesion = false;
+      localStorage.setItem('usuarioIniciadoSesion', 'false');
     }
   }
   cerrarSesion() {

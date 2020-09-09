@@ -10,6 +10,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
 import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
 import { Solicitud } from 'src/app/api-rest/models/Solicitud/solicitud.model';
+import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
+import { SolicitudesService } from 'src/app/api-rest/api/Solicitudes/solicitudes.service';
 @Component({
   selector: 'app-formulario-adopcion',
   templateUrl: './formulario-adopcion.component.html',
@@ -24,22 +26,35 @@ export class FormularioAdopcionComponent implements OnInit {
   nombreAnimal: string;
   animalSrc: string;
   idUsuario: number;
+  idSolicitud: number;
+  modoConsulta = false;
   constructor(
     public fb: FormBuilder,
     public route: ActivatedRoute,
     private modal: NgbModal,
     public router: Router,
     public sanitizer: DomSanitizer,
-    private animalesService: AnimalesService
+    private animalesService: AnimalesService,
+    private solicitudService: SolicitudesService
   ) {
     this.route.queryParams.subscribe(params => {
       this.idAnimal = Number(params.animalId);
+      if (params.modoConsulta === 'consulta') {
+        this.modoConsulta = true;
+        const usuario: Usuario = JSON.parse( localStorage.getItem('usuario'));
+        this.idUsuario = usuario.idUsuario;
+        this.idSolicitud = Number(params.idSolicitud);
+      }
     });
    }
 
   ngOnInit() {
     this.iniciarGrupoAdopcion();
     this.consultarAnimal(this.idAnimal);
+    if (this.modoConsulta) {
+      this.consultarSolicitud();
+      this.formAdopcion.disable();
+    }
   }
   iniciarGrupoAdopcion() {
     this.formAdopcion = this.fb.group({
@@ -82,7 +97,7 @@ export class FormularioAdopcionComponent implements OnInit {
       horarioTrabajo: this.formAdopcion.controls.horarioTrabajo.value,
       jardin: this.formAdopcion.controls.jardin.value,
       mascotasCasa: this.formAdopcion.controls.mascotas.value,
-      miembrosFamilia: this.formAdopcion.controls.miembrosFamilia.value,
+      miembrosfamilia: this.formAdopcion.controls.miembrosFamilia.value,
       nombreAnimal: this.nombreAnimal,
       razonAdopcion: this.formAdopcion.controls.razon.value,
       terraza: this.formAdopcion.controls.terraza.value,
@@ -120,6 +135,26 @@ export class FormularioAdopcionComponent implements OnInit {
       this.animal = result as Animal;
       this.nombreAnimal = this.animal.nombre;
       this.animalSrc = this.animal.imagenSrc;
+    });
+  }
+  // Consultar solicitud
+  consultarSolicitud() {
+    this.solicitudService.obtenerSolicitudPorId(this.idUsuario, this.idSolicitud, this.idAnimal).then((result) => {
+      this.formAdopcion = this.fb.group({
+        nombre: null,
+        apellidos: null,
+        direccion: null,
+        poblacion: null,
+        codPostal: null,
+        telefonoMovil: null,
+        razon: result.razonAdopcion,
+        mascotas: result.mascotasCasa === 0 ? '0' : '1',
+        terraza: result.terraza === 0 ? '0' : '1',
+        jardin: result.jardin === 0 ? '0' : '1',
+        horarioTrabajo: result.horarioTrabajo,
+        miembrosFamilia: result.miembrosfamilia,
+        politicaPrivacidad: true,
+      });
     });
   }
 }

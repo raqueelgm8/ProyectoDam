@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
 import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
@@ -46,14 +46,14 @@ export class PerfilComponent implements OnInit {
     this.dataSourceSolicitudes.sort = this.sort;
   }
 
-
   constructor(
     public route: ActivatedRoute,
     public fb: FormBuilder,
     public combos: ComboService,
     public usuarioService: UsuarioService,
     public solicitudesService: SolicitudesService,
-    private changeDetectorRefs: ChangeDetectorRef
+    private changeDetectorRefs: ChangeDetectorRef,
+    private router: Router
   ) {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
@@ -85,6 +85,8 @@ export class PerfilComponent implements OnInit {
   recuperarPerfil() {
     this.usuarioService.obtenerUsuarioPorId(this.idUsuario).then((result) => {
       this.usuario = result;
+      localStorage.setItem('usuario', JSON.stringify(this.usuario));
+      localStorage.setItem('usuarioIniciadoSesion', 'true');
       this.formPerfil.controls.nombre.setValue(result.nombre);
       this.formPerfil.controls.apellidos.setValue(result.apellidos);
       this.formPerfil.controls.email.setValue(result.email);
@@ -144,7 +146,30 @@ export class PerfilComponent implements OnInit {
   editarSolicitud() {
 
   }
-  verSolicitud() {
-
+  verSolicitud(solicitud: Solicitud) {
+    this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
+      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoConsulta: 'consulta'
+    }});
+  }
+  eliminarCuenta() {
+    Swal.fire({
+      title: '¿Estás seguro de que deseas eliminar la cuenta de usuario?',
+      text: 'No podrás revertir esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar cuenta'
+    }).then((mensaje) => {
+      if (mensaje.value) {
+        this.usuarioService.eliminarUsuario(this.idUsuario).then((result) => {
+          localStorage.clear();
+          localStorage.setItem('usuarioIniciadoSesion', 'false');
+          this.router.navigate(['/home']);
+        }, error => {
+          Swal.fire('¡ERROR!', error, 'error');
+        });
+      }
+    });
   }
 }
