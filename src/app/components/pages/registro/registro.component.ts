@@ -34,27 +34,31 @@ export class RegistroComponent implements OnInit {
   }
   iniciarForm() {
     this.formRegistro = this.fb.group({
-      nombre: null,
-      email: null,
-      usuario: null,
-      pass1: null,
-      pass2: null,
-      sexo: 'H',
-      apellidos: null,
-      provincia: null,
-      dni: null,
-      edad: null,
-      direccion: null,
-      codigoPostal: null,
-      telefono: null
+      nombre: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email, Validators.required]],
+      // usuario: [null, [Validators.required]],
+      pass1: [null, [Validators.required]],
+      pass2: [null, [Validators.required]],
+      sexo: ['H', [Validators.required]],
+      apellidos: [null, [Validators.required]],
+      provincia: [null, [Validators.required]],
+      dni: [null, [Validators.required]],
+      edad: [null, [Validators.required, Validators.compose([Validators.min(18), Validators.max(130)])]],
+      direccion: [null, [Validators.required]],
+      codigoPostal: [null, [Validators.required]],
+      telefono: [null, [Validators.required]]
     });
   }
   registrarse() {
+    console.log(this.formRegistro.value);
+    console.log(this.formRegistro.invalid);
     if (this.formRegistro.invalid) {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
     } else if (this.formRegistro.controls.pass1.value !== this.formRegistro.controls.pass2.value) {
       Swal.fire('ERROR!', 'Las contraseñas no coinciden', 'error');
-    } else {
+    } else if (this.formRegistro.controls.edad.value < 18) {
+      Swal.fire('ERROR!', 'La edad debe ser mayor de 18', 'error');
+    }else {
       const user: Usuario = {
         apellidos: this.formRegistro.controls.apellidos.value,
         nombre: this.formRegistro.controls.nombre.value,
