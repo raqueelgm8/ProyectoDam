@@ -50,8 +50,6 @@ export class RegistroComponent implements OnInit {
     });
   }
   registrarse() {
-    console.log(this.formRegistro.value);
-    console.log(this.formRegistro.invalid);
     if (this.formRegistro.invalid) {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
     } else if (this.formRegistro.controls.pass1.value !== this.formRegistro.controls.pass2.value) {

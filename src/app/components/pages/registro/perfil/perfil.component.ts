@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
 import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
 import { Pedido } from 'src/app/api-rest/models/Pedido/pedido.model';
@@ -62,7 +62,6 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.iniciarForm();
-    this.formPerfil.disable();
     this.recuperarCombos();
     this.recuperarPerfil();
     this.recuperarSolicitudes();
@@ -70,16 +69,18 @@ export class PerfilComponent implements OnInit {
   }
   iniciarForm() {
     this.formPerfil = this.fb.group({
-      nombre: null,
-      apellidos: null,
-      email: null,
-      sexo: null,
-      dni: null,
-      edad: null,
-      direccion: null,
-      provincia: null,
-      codigoPostal: null,
-      telefono: null,
+      nombre: [null, [Validators.required]],
+      apellidos: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email, Validators.required]],
+      sexo: ['H', [Validators.required]],
+      dni: [null, [Validators.required]],
+      edad: [null, [Validators.required, Validators.compose([Validators.min(18), Validators.max(130)])]],
+      direccion: [null, [Validators.required]],
+      provincia: [null, [Validators.required]],
+      codigoPostal: [null, [Validators.required]],
+      telefono: [null, [Validators.required]],
+      pass1: [null, [Validators.required]],
+      pass2: [null, [Validators.required]],
     });
   }
   recuperarPerfil() {
@@ -97,6 +98,8 @@ export class PerfilComponent implements OnInit {
       this.formPerfil.controls.provincia.setValue(result.provincia);
       this.formPerfil.controls.codigoPostal.setValue(result.codigoPostal);
       this.formPerfil.controls.telefono.setValue(result.telefono);
+      this.formPerfil.controls.pass1.setValue(result.password);
+      this.formPerfil.controls.pass2.setValue(result.password);
     }, error => {
       Swal.fire('¡ERROR!', error, 'error');
     });
@@ -144,7 +147,6 @@ export class PerfilComponent implements OnInit {
     });
   }
   editarSolicitud() {
-
   }
   verSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
@@ -171,5 +173,48 @@ export class PerfilComponent implements OnInit {
         });
       }
     });
+  }
+  clickEditar() {
+    const usuario: Usuario = {
+      apellidos: this.formPerfil.controls.apellidos.value,
+      nombre: this.formPerfil.controls.nombre.value,
+      codigoPostal: this.formPerfil.controls.codigoPostal.value,
+      direccion: this.formPerfil.controls.direccion.value,
+      dni: this.formPerfil.controls.dni.value,
+      edad: Number(this.formPerfil.controls.edad.value),
+      email: this.formPerfil.controls.email.value,
+      password: this.formPerfil.controls.pass1.value,
+      provincia: this.formPerfil.controls.provincia.value,
+      sexo: this.formPerfil.controls.sexo.value,
+      telefono: this.formPerfil.controls.telefono.value,
+      idUsuario: null,
+      pedidos: this.pedidos,
+      solicitudes: this.solicitudes
+    };
+    if (this.formPerfil.invalid) {
+      Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
+    } else if (this.formPerfil.controls.pass1.value !== this.formPerfil.controls.pass2.value) {
+      Swal.fire('ERROR!', 'Las contraseñas no coinciden', 'error');
+    } else if (this.formPerfil.controls.edad.value < 18) {
+      Swal.fire('ERROR!', 'La edad debe ser mayor de 18', 'error');
+    }else {
+      this.usuarioService.editarUsuario(this.idUsuario, usuario).then((result) => {
+        this.usuario = result;
+      }, error => {
+        Swal.fire('ERROR!', 'Error', 'error');
+      });
+    }
+  }
+  clickReestablecer() {
+    this.formPerfil.controls.nombre.setValue(this.usuario.nombre);
+    this.formPerfil.controls.apellidos.setValue(this.usuario.apellidos);
+    this.formPerfil.controls.email.setValue(this.usuario.email);
+    this.formPerfil.controls.sexo.setValue(this.usuario.sexo);
+    this.formPerfil.controls.dni.setValue(this.usuario.dni);
+    this.formPerfil.controls.edad.setValue(this.usuario.edad);
+    this.formPerfil.controls.direccion.setValue(this.usuario.direccion);
+    this.formPerfil.controls.provincia.setValue(this.usuario.provincia);
+    this.formPerfil.controls.codigoPostal.setValue(this.usuario.codigoPostal);
+    this.formPerfil.controls.telefono.setValue(this.usuario.telefono);
   }
 }

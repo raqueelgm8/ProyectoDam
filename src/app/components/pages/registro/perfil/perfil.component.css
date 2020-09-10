@@ -50,3 +50,6 @@ h1 {
 .indexS {
   z-index: 60000 !important;
 }
+p {
+  color: red;
+}

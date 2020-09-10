@@ -70,5 +70,16 @@ export class UsuarioService {
       });
     });
   }
-
+  async editarUsuario(id: number, usuario: Usuario): Promise<Usuario> {
+    return new Promise<Usuario>( async (resolve, reject) => {
+      const ruta = '/api/usuarios/editarUsuario/' + id;
+      this.httpClient.put(ruta, usuario).subscribe((result) => {
+        usuario = result as Usuario;
+        Swal.fire('¡Éxito!', 'Usuario editado con éxito', 'success');
+        resolve(usuario);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

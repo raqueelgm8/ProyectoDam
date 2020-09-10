@@ -130,8 +130,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-id-badge"></i></span>
                         </div>
-                        <input type="text" class="form-control" formControlName="dni" name="dni" id="dni" placeholder="DNI/NIF" required
-                        attern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" [ngClass]="{ 'is-invalid': this.formRegistro.get('dni').errors }" />
+                        <input type="text" class="form-control" formControlName="dni" name="dni" id="dni" placeholder="DNI/NIF" required maxlength="9"
+                        pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" [ngClass]="{ 'is-invalid': this.formRegistro.get('dni').errors }" />
                     </div>
                 </div>
                 <div *ngIf="this.formRegistro.get('dni').errors" class="col-10">
