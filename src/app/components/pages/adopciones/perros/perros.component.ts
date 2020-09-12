@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from 'angular-webstorage-service';
@@ -6,10 +6,7 @@ import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
 import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
 import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
-import { ArchivosService } from 'src/app/api-rest/api/Archivos/archivos.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { HttpHeaders } from '@angular/common/http';
-
 
 export interface CodeDescription {
   id: string;
@@ -33,11 +30,11 @@ export interface Perro {
 
 export class PerrosComponent implements OnInit {
 
-  valorSlider = '10';
+  valorSlider = '1';
   formCabecera: FormGroup;
   comboRazas: Combo[];
   animales: Animal[];
-
+  buscarPerros: Animal[];
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -59,7 +56,6 @@ export class PerrosComponent implements OnInit {
   recuperarPerros() {
     this.animalesService.obtenerAnimalesTipo('Perro').then((result) => {
       this.animales = result as Animal[];
-      console.log(this.animales);
       this.animales.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
         const binaryString = window.atob(element.imagen);
@@ -77,20 +73,54 @@ export class PerrosComponent implements OnInit {
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({
-      disponible: true,
-      edad: 10,
-      // sexo: null
-      // tipoEdad: null
-      raza: null
+      disponible: false,
+      edad: 1,
+      sexo: null,
+      raza: null,
+      tipoEdad: null,
     });
   }
   cambiaValorSlider() {
     this.valorSlider = this.formCabecera.controls.edad.value;
   }
   clickCard(perro: Animal) {
-    console.log(perro);
     this.router.navigate(['/adopciones/ficha-animal', ], {queryParams: {
       idAnimal: perro.idAnimal
     }});
+  }
+  buscar() {
+    const raza: Combo = this.comboRazas.find(element => element.id === this.formCabecera.controls.raza.value);
+    const perro: Animal = {
+      idAnimal: null,
+      // adoptado: this.formCabecera.controls.disponible.value,
+      adoptado: this.formCabecera.controls.disponible.value,
+      descripcion: null,
+      edad: this.formCabecera.controls.edad.value,
+      imagen: null,
+      nombre: null,
+      raza: raza !== undefined ? raza.descripcion : null,
+      // sexo: this.formCabecera.controls.sexo.value,
+      sexo: this.formCabecera.controls.sexo.value !== null && this.formCabecera.controls.sexo.value !== 'null' ?
+      this.formCabecera.controls.sexo.value : null,
+      tipoAnimal: 'Perro',
+      tipoEdad: this.formCabecera.controls.tipoEdad.value !== null &&
+      this.formCabecera.controls.tipoEdad.value !== 'null' ? this.formCabecera.controls.tipoEdad.value : null,
+    };
+    this.animalesService.buscarAnimales('Perro', perro).then((result) => {
+      this.animales = result;
+      this.animales.forEach(element => {
+        element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
+        const binaryString = window.atob(element.imagen);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+      });
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Animal } from '../../models/Animal/animal.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { OptionsGeneric } from '@popperjs/core';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,50 @@ export class AnimalesService {
       this.httpClient.get('api/animales/getAnimalById/' + id).subscribe((result) => {
         animal = result as Animal;
         resolve(animal);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  async buscarAnimales(tipoAnimal: string, animal: Animal): Promise<Animal[]> {
+    return new Promise<Animal[]>( async (resolve, reject) => {
+      let animales: Animal[];
+      let ruta = 'api/animales/buscarAnimalFiltro/' + tipoAnimal + '?';
+      const body = {
+        raza: animal.raza,
+        edad: animal.edad,
+        tipoEdad: animal.tipoEdad,
+        adoptado: animal.adoptado,
+        sexo: animal.sexo
+      };
+      if (animal.raza !== null) {
+        ruta = ruta + '&raza=' + animal.raza;
+      }
+      if (animal.edad !== null) {
+        ruta = ruta + '&edad=' + animal.edad;
+      }
+      if (animal.tipoEdad !== null) {
+        ruta = ruta + '&tipoEdad=' + animal.tipoEdad;
+      }
+      if (animal.adoptado !== null) {
+        ruta = ruta + '&adoptado=' + (animal.adoptado === true ? '0' : '1');
+      }
+      if (animal.sexo) {
+        ruta = ruta + '&sexo=' + animal.sexo;
+      }
+      const params: HttpParams = new HttpParams();
+      params.set('raza', animal.raza);
+      params.set('edad', animal.edad.toString());
+      params.set('tipoEdad', animal.raza);
+      params.set('adoptado', (animal.adoptado === true ? '0' : '1'));
+      params.set('sexo', animal.sexo);
+      const options = {
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        params
+      };
+      this.httpClient.get<Animal[]>(ruta, options).subscribe((result) => {
+        animales = result;
+        resolve(animales);
       }, error => {
         reject(error);
       });

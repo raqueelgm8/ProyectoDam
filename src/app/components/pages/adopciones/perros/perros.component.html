@@ -23,31 +23,36 @@
             </div>
             <div class="col-md-3 radio-inline">
                 <label class="formato-etiqueta" for="disponible">Disponible en adopción</label>
-                <input type="checkbox" name="disponible" id="disponible" formControlName="disponible" checked>
+                <input type="checkbox" name="disponible" id="disponible" formControlName="disponible">
             </div>
             <div class="col-md-3 radio-inline">
                 <label class="formato-etiqueta" for="sexo">Cualquiera</label>
-                <input type="radio" name="sexo" id="cualquiera"[checked]="true">
+                <input formControlName="sexo" type="radio" name="sexo" id="cualquiera"[checked]="true" value="null">
                 <label class="formato-etiqueta ml-2" for="sexo">Macho</label>
-                <input type="radio" name="sexo" id="macho">
+                <input formControlName="sexo"  type="radio" name="sexo" id="macho" value="M">
                 <label class="formato-etiqueta ml-2" for="disponible">Hembra</label>
-                <input type="radio" name="sexo" id="hembra">
+                <input  formControlName="sexo" type="radio" name="sexo" id="hembra" value="H">
             </div>
             <div class="col-md-5 radio-inline">
-                <label class="formato-etiqueta" for="tipoEdad">Cachorro</label>
-                <input type="radio" name="tipoEdad" id="cachorro"[checked]="true">
+                <label class="formato-etiqueta" for="tipoEdad">Cualquiera</label>
+                <input type="radio" name="tipoEdad" id="cualquiera" [checked]="true" formControlName="tipoEdad" value="null">
+                <label class="formato-etiqueta ml-2" for="tipoEdad">Cachorro</label>
+                <input type="radio" name="tipoEdad" id="cachorro" formControlName="tipoEdad" value="Cachorro">
                 <label class="formato-etiqueta ml-2" for="tipoEdad">Adulto</label>
-                <input type="radio" name="tipoEdad" id="adulto">
+                <input type="radio" name="tipoEdad" id="adulto" formControlName="tipoEdad" value="Adulto">
                 <label class="formato-etiqueta ml-2" for="tipoEdad">Joven</label>
-                <input type="radio" name="tipoEdad" id="joven">
+                <input type="radio" name="tipoEdad" id="joven" formControlName="tipoEdad" value="Joven">
             </div>
         </div>
     </form>
+    <div class="row justify-content-end mb-3">
+        <button class="btn btn-primary" (click)="buscar()">Buscar</button>
+    </div>
         <!--Cards de los perros-->
     <div class="row card-group">
         <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let perro of this.animales">
             <div class="card mb-4" style="width: 18rem;" (click) = clickCard(perro)>
-                <img [src]="perro.imagenSrc" class="card-img-top hover-card " alt="...">
+                <img [src]="perro.imagenSrc" class="card-img-top2 hover-card " alt="...">
                 <div class="card-body">
                     <b class="card-title">{{perro.nombre}}</b>
                     <hr>
