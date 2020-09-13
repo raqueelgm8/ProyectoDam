@@ -73,11 +73,11 @@ export class PerrosComponent implements OnInit {
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({
-      disponible: false,
+      disponible: true,
       edad: 1,
-      sexo: null,
+      sexo: 'null',
       raza: null,
-      tipoEdad: null,
+      tipoEdad: 'null',
     });
   }
   cambiaValorSlider() {

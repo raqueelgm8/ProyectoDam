@@ -38,13 +38,6 @@ export class AnimalesService {
     return new Promise<Animal[]>( async (resolve, reject) => {
       let animales: Animal[];
       let ruta = 'api/animales/buscarAnimalFiltro/' + tipoAnimal + '?';
-      const body = {
-        raza: animal.raza,
-        edad: animal.edad,
-        tipoEdad: animal.tipoEdad,
-        adoptado: animal.adoptado,
-        sexo: animal.sexo
-      };
       if (animal.raza !== null) {
         ruta = ruta + '&raza=' + animal.raza;
       }
@@ -60,17 +53,7 @@ export class AnimalesService {
       if (animal.sexo) {
         ruta = ruta + '&sexo=' + animal.sexo;
       }
-      const params: HttpParams = new HttpParams();
-      params.set('raza', animal.raza);
-      params.set('edad', animal.edad.toString());
-      params.set('tipoEdad', animal.raza);
-      params.set('adoptado', (animal.adoptado === true ? '0' : '1'));
-      params.set('sexo', animal.sexo);
-      const options = {
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
-        params
-      };
-      this.httpClient.get<Animal[]>(ruta, options).subscribe((result) => {
+      this.httpClient.get<Animal[]>(ruta).subscribe((result) => {
         animales = result;
         resolve(animales);
       }, error => {
