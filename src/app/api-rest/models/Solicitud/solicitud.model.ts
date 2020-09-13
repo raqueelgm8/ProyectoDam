@@ -8,7 +8,7 @@ export class Solicitud {
     mascotasCasa: number;
     terraza: number;
     jardin: number;
-    horarioTrabajo: string;
+    horariotrabajo: string;
     miembrosfamilia: string;
     estado: string;
     nombreAnimal: string;

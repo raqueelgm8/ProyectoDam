@@ -39,4 +39,15 @@ export class SolicitudesService {
       Swal.fire('¡ERROR!', error, 'error');
     });
   }
+  async guardarSolicitud(solicitud: Solicitud): Promise<Solicitud> {
+    console.log(solicitud);
+    return new Promise<Solicitud>( async (resolve, reject) => {
+      const ruta = '/api/solicitudes/guardarSolicitud/';
+      this.httpClient.post(ruta, solicitud).subscribe((result) => {
+        resolve(result as Solicitud);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

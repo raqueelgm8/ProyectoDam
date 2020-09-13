@@ -47,7 +47,6 @@ export class UsuarioService {
   }
   async registrarUsuario(usuario: Usuario): Promise<Usuario> {
     return new Promise<Usuario>( async (resolve, reject) => {
-      // /crearUsuario/{nombre}/{apellidos}/{email}/{pass}/{sexo}/{dni}/{edad}/{direccion}/{provincia}/{codigoPostal}/{telefono}"
       const ruta = '/api/usuarios/crearUsuario/'
       + usuario.nombre + '/' + usuario.apellidos +'/' + usuario.email + '/' + usuario.password + '/'
       + usuario.sexo + '/' + usuario.dni + '/' + usuario.edad + '/'

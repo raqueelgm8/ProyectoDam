@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
+import Swal from 'sweetalert2';
 let usuario = JSON.parse(localStorage.getItem('usuario'));
 @Component({
   selector: 'app-ficha-animal',
@@ -39,9 +40,15 @@ export class FichaAnimalComponent implements OnInit {
     this.consultarAnimal(this.idAnimal);
   }
   clickAdoptame(){
-    this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion'], {queryParams: {
-      animalId: this.idAnimal
-    }});
+    if (localStorage.getItem('usuario') !== undefined && localStorage.getItem('usuario') !== null) {
+      this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion'], {queryParams: {
+        animalId: this.idAnimal
+      }});
+    } else {
+      Swal.fire('Registro necesario', 'Para poder enviar una solicitud debe de estar registrado', 'warning');
+      this.router.navigate(['/registro']);
+    }
+
   }
   consultarAnimal(idAnimal: number) {
     this.animalesService.obtenerAnimalPorId(idAnimal).then((result) => {
