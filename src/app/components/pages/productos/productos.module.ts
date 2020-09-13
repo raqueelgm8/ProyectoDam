@@ -19,6 +19,7 @@ import { ModalAnadidoComponent } from './cesta/modal-anadido/modal-anadido.compo
     ReactiveFormsModule
   ], entryComponents: [
     FichaProductoComponent
+  ], exports: [
   ]
 })
 export class ProductosModule { }
