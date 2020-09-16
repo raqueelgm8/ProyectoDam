@@ -199,9 +199,9 @@
                 </div>
               </div>
 
-              <div class="mat-elevation-z8" *ngIf="sinDatosSolicitudes">
-                <table class="indexS" mat-table [dataSource]="dataSourceSolicitudes" class="mat-elevation-z8" #tabla1 >
-                  <ng-container matColumnDef="idSolicitud">
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSourceSolicitudes" class="mat-elevation-z8" matSort width="100%">  
+                    <ng-container matColumnDef="idSolicitud">
                     <th mat-header-cell *matHeaderCellDef>Id Solicitud</th>
                     <td mat-cell *matCellDef="let solicitud"> 
                         {{solicitud.id.idSolicitud + '-' + solicitud.id.idUsuario + '-' + solicitud.id.idAnimal}}
@@ -241,7 +241,7 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumnsSolicitudes"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumnsSolicitudes;"></tr>
                 </table>
-                <mat-paginator class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+                <mat-paginator #MatPaginatorSolicitudes class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
               </div>
             <hr>
             <div class="row">
@@ -250,6 +250,65 @@
                     <h1 class="">Mis Pedidos</h1>
                 </div>
             </div>
+            <div class="mensaje" *ngIf="!sinDatosPedidos">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                        No hay información para mostrar.
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSourcePedidos" class="mat-elevation-z8" matSort width="100%">
+                  <ng-container matColumnDef="idPedido">
+                    <th mat-header-cell *matHeaderCellDef>Id Pedido</th>
+                    <td mat-cell *matCellDef="let pedido"> 
+                        {{pedido.id.idPedido + '-' + pedido.id.idUsuario}}
+                    </td>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef>Estado</th>
+                    <td mat-cell *matCellDef="let pedido"> 
+                        {{pedido.estadoPedido}}
+                    </td>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef>Total</th>
+                    <td mat-cell *matCellDef="let pedido"> 
+                        {{pedido.total}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="fechaPedido">
+                    <th mat-header-cell *matHeaderCellDef>Fecha Pedido</th>
+                    <td mat-cell *matCellDef="let pedido"> 
+                        {{pedido.fechaPedido | date : 'dd/MM/yyyy'}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="metodoPago">
+                    <th mat-header-cell *matHeaderCellDef>Método de pago</th>
+                    <td mat-cell *matCellDef="let pedido"> 
+                        {{pedido.metodopago}}
+                    </td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let pedido"> 
+                        <button class="btn btn-success mr-1" (click)="verPedido(pedido)"><i class="far fa-eye"></i></button>
+                        <!--<button class="btn btn-warning mr-1"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger" (click)="eliminarSolicitud(solicitud)"><i class="fas fa-trash-alt"></i></button>-->
+                    </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsPedidos"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsPedidos;"></tr>
+                </table>
+                <mat-paginator #MatPaginatorPedidos class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+              </div>
             <hr>
             <div class="row justify-content-center">
                 <button class="btn btn-danger" (click)="eliminarCuenta()">Eliminar cuenta</button>

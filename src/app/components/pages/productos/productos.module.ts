@@ -8,10 +8,11 @@ import { CestaComponent } from './cesta/cesta.component';
 import { ModalCestaComponent } from './cesta/modal-cesta/modal-cesta.component';
 import { FichaProductoComponent } from './ficha-producto/ficha-producto.component';
 import { ModalAnadidoComponent } from './cesta/modal-anadido/modal-anadido.component';
+import { ConsultarPedidoComponent } from './consultar-pedido/consultar-pedido.component';
 
 
 @NgModule({
-  declarations: [ProductosComponent, CestaComponent, ModalCestaComponent, FichaProductoComponent, ModalAnadidoComponent],
+  declarations: [ProductosComponent, CestaComponent, ModalCestaComponent, FichaProductoComponent, ModalAnadidoComponent, ConsultarPedidoComponent],
   imports: [
     CommonModule,
     ProductosRoutingModule,

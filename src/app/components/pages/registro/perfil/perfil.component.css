@@ -42,10 +42,22 @@ h1 {
   min-width: 100px;
 }
 .mat-column-estado {
-  min-width: 200px;
+  min-width: 150px;
 }
 .mat-column-acciones {
-  min-width: 300px;
+  min-width: 200px;
+}
+.mat-column-idPedido {
+  min-width: 150px;
+}
+.mat-column-total {
+  min-width: 100px;
+}
+.mat-column-fechaPedido {
+  min-width: 150px;
+}
+.mat-column-metodoPago {
+  min-width: 170px;
 }
 .indexS {
   z-index: 60000 !important;
