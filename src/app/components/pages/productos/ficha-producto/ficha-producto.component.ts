@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Producto } from '../productos.component';
 import { ProductoServiceService } from 'src/app/services/producto-service.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,6 +6,7 @@ import * as R from 'ramda';
 import { ModalAnadidoComponent } from '../cesta/modal-anadido/modal-anadido.component';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Producto } from 'src/app/api-rest/models/Producto/producto.model';
 @Component({
   selector: 'app-ficha-producto',
   templateUrl: './ficha-producto.component.html',

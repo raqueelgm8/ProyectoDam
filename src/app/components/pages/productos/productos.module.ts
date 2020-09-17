@@ -5,14 +5,16 @@ import { ProductosRoutingModule } from './productos-routing.module';
 import { ProductosComponent } from './productos.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CestaComponent } from './cesta/cesta.component';
-import { ModalCestaComponent } from './cesta/modal-cesta/modal-cesta.component';
 import { FichaProductoComponent } from './ficha-producto/ficha-producto.component';
 import { ModalAnadidoComponent } from './cesta/modal-anadido/modal-anadido.component';
 import { ConsultarPedidoComponent } from './consultar-pedido/consultar-pedido.component';
+import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
 
 
 @NgModule({
-  declarations: [ProductosComponent, CestaComponent, ModalCestaComponent, FichaProductoComponent, ModalAnadidoComponent, ConsultarPedidoComponent],
+  declarations: [
+    ProductosComponent, CestaComponent, FichaProductoComponent, ModalAnadidoComponent, ConsultarPedidoComponent,
+    CompraRealizadaComponent],
   imports: [
     CommonModule,
     ProductosRoutingModule,

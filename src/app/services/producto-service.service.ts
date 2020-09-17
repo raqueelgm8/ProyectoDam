@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Producto } from '../components/pages/productos/productos.component';
 import { throwError } from 'rxjs';
+import { Producto } from '../api-rest/models/Producto/producto.model';
 
 @Injectable({
   providedIn: 'root'

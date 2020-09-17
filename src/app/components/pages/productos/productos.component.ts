@@ -1,20 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CodeDescription } from '../adopciones/perros/perros.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FichaProductoComponent } from './ficha-producto/ficha-producto.component';
 import * as R from 'ramda';
-export interface Producto {
-  id: string;
-  nombre: string;
-  description: string;
-  imagen: string;
-  precio: number;
-  tipoAnimal: string;
-  tipoProducto: string;
-  cantidad?: number;
-}
+import { ProductosService } from 'src/app/api-rest/api/Productos/productos.service';
+import { Producto } from 'src/app/api-rest/models/Producto/producto.model';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -22,40 +13,39 @@ export interface Producto {
 })
 export class ProductosComponent implements OnInit {
 
-  // MOCKEADOS
-  animales: CodeDescription[] = [
-    {id: '1', description: 'Perro'},
-    {id: '2', description: 'Gato'},
-    {id: '3', description: 'Otros'},
-  ];
-  productos: Producto[] = [
-    {id: '1', description: 'Pienso Pet shop 15 kg', precio: 19.99, tipoAnimal: 'Perro',
-    imagen: 'https://cdn.pixabay.com/photo/2019/08/05/15/08/dog-4386211_960_720.png' , tipoProducto: 'Comida', nombre: 'Pienso adelgazador'},
-    {id: '2', description: 'Producto 2', precio: 5, tipoAnimal: 'Todos',
-    imagen: 'https://www.terranovacnc.com/wp-content/uploads/2020/05/the-company-of-animals-collar-halty-color-rojo-para-perros.jpg', tipoProducto: 'Accesorios', nombre: 'Collar rojo'},
-    {id: '3', description: 'Bozal para perros', precio: 2, tipoAnimal: 'Perro',
-    imagen: 'https://myanimals.com/es/wp-content/uploads/2015/11/bozal-para-perros.jpg' , tipoProducto: 'Accesorios', nombre: 'Bozal canino'},
-    {id: '4', description: 'Producto 4', precio: 10, tipoAnimal: 'Otros',
-    imagen: '', tipoProducto: 'Comida', nombre: 'Producto 3'},
-    {id: '5', description: 'Producto 5', precio: 10, tipoAnimal: 'Perro',
-    imagen: '' , tipoProducto: 'Comida', nombre: 'Producto 3'},
-    {id: '6', description: 'Producto 6', precio: 10, tipoAnimal: 'Todos',
-    imagen: '', tipoProducto: 'Comida', nombre: 'Producto 4'},
-  ];
+  productos: Producto[];
   @Output() cestaEvent = new EventEmitter<any>();
   formCabecera: FormGroup;
   cesta: Producto[];
   constructor(
     private fb: FormBuilder,
-    private modal: NgbModal
+    private modal: NgbModal,
+    private productosService: ProductosService,
+    public sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
     this.formCabecera = this.fb.group({
       animal: null,
-      juguetes: null,
-      accesorios: null,
-      comida: null
+      categoria: null
+    });
+    this.buscarAlLPedidos();
+  }
+  buscarAlLPedidos() {
+    this.productosService.buscarTodosProductos().then((result) => {
+      this.productos = result;
+      this.productos.forEach(element => {
+        const binaryString = window.atob(element.imagen);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+      });
     });
   }
   clickCard(producto: Producto) {
@@ -71,6 +61,26 @@ export class ProductosComponent implements OnInit {
         console.log(this.cesta);
         this.cestaEvent.emit(this.cesta);
       }
+    });
+  }
+  buscar() {
+    const tipoAnimal = this.formCabecera.controls.animal.value;
+    const categoria = this.formCabecera.controls.categoria.value !== null && this.formCabecera.controls.categoria.value !== 'null' ?
+    this.formCabecera.controls.categoria.value : null;
+    this.productosService.buscarProductos(categoria, tipoAnimal).then((result) => {
+      this.productos = result;
+      this.productos.forEach(element => {
+        const binaryString = window.atob(element.imagen);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+      });
     });
   }
 }

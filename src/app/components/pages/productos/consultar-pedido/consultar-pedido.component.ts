@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PedidosService } from 'src/app/api-rest/api/Pedidos/pedidos.service';
+import { Pedido } from 'src/app/api-rest/models/Pedido/pedido.model';
 
 @Component({
   selector: 'app-consultar-pedido',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultarPedidoComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  idUsuario: number;
+  idPedido: number;
+  pedido: Pedido;
+  constructor(
+    public route: ActivatedRoute,
+    private pedidoService: PedidosService
+  ) {
+      this.route.queryParams.subscribe(params => {
+        this.idUsuario = Number(params.idUsuario);
+        this.idPedido = Number(params.idPedido);
+      });
   }
 
+  ngOnInit(): void {
+    this.consultarPedido();
+  }
+  consultarPedido() {
+    this.pedidoService.obtenerPedidoPorId(this.idUsuario, this.idPedido).then((result) => {
+      this.pedido = result;
+    });
+  }
 }

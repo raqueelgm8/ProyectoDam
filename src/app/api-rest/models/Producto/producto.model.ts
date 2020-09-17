@@ -8,6 +8,8 @@ export class Producto {
     stock: number;
     tipoProducto: string;
     cantidad?: number;
+    imagenSrc?: any;
+    tipoAnimal: string;
     /*
     private int idProducto;
 

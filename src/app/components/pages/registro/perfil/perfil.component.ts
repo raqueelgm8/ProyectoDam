@@ -125,7 +125,6 @@ export class PerfilComponent implements OnInit {
     this.pedidosService.obtenerTodosPedidosUsuario(this.idUsuario).then((result) => {
       this.pedidos = result;
       this.dataSourcePedidos = new MatTableDataSource<Pedido>(this.pedidos);
-      console.log(result);
       if (result.length === 0) {
         this.sinDatosPedidos = false;
       } else {
@@ -228,6 +227,8 @@ export class PerfilComponent implements OnInit {
     this.formPerfil.controls.telefono.setValue(this.usuario.telefono);
   }
   verPedido(pedido: Pedido) {
-
+    this.router.navigate(['/productos/consultar-pedido', ], {queryParams: {
+      idPedido: pedido.id.idPedido, idUsuario: pedido.id.idUsuario
+    }});
   }
 }
