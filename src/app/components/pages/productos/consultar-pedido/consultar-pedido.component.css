@@ -1,0 +1,26 @@
+.testbox {
+    margin: 20px auto;
+    width: 1250px; 
+    min-height: 500px;
+    -webkit-border-radius: 8px/7px; 
+    -moz-border-radius: 8px/7px; 
+    border-radius: 8px/7px; 
+    background-color: #ebebeb; 
+    -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+    -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+    box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+    border: solid 1px #cbc9c9;
+}
+h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: #4c4c4c;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.mat-column-idProducto {
+min-width: 100px;
+}
+.mat-column-producto {
+min-width: 300px;
+}

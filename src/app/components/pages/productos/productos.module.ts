@@ -9,6 +9,11 @@ import { FichaProductoComponent } from './ficha-producto/ficha-producto.componen
 import { ModalAnadidoComponent } from './cesta/modal-anadido/modal-anadido.component';
 import { ConsultarPedidoComponent } from './consultar-pedido/consultar-pedido.component';
 import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -19,7 +24,13 @@ import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.co
     CommonModule,
     ProductosRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ], entryComponents: [
     FichaProductoComponent
   ], exports: [

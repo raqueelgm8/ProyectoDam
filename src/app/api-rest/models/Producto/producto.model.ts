@@ -1,3 +1,5 @@
+import { DetallePedido } from '../DetallePedido/detalle-pedido.model';
+
 export class Producto {
     idProducto: string;
     precio: number;
@@ -10,17 +12,5 @@ export class Producto {
     cantidad?: number;
     imagenSrc?: any;
     tipoAnimal: string;
-    /*
-    private int idProducto;
-
-	private String categoria;
-
-	private String descripcion;
-
-	private String nombre;
-
-	private double precio;
-
-	private int stock;
-    */
+    detallePedido: DetallePedido[];
 }

@@ -21,10 +21,6 @@ h1 {
 .left-margin {
     margin-left: 50px;
 }
-.fondo {
-    background-image: url(../../../../../assets/backgroundBonesPaws.jpg);
-    min-height: 500px;
-}
 .mensaje {
   color: rgba(0, 0, 0, 0.54);
   padding: 15px 24px;
