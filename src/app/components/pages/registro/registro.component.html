@@ -1,211 +1,209 @@
- <body>
-    <form [formGroup]="formRegistro">
-        <div class="testbox">
-            <h1 class="text-center">Registro</h1>
-            <hr>
-            <div class="row left-margin">
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="nombre" name="nombre" id="nombre" 
-                        placeholder="Nombre" required [ngClass]="{ 'is-invalid': this.formRegistro.get('nombre').errors}"/>
+<form [formGroup]="formRegistro">
+    <div class="testbox">
+        <h1 class="text-center">Registro</h1>
+        <hr>
+        <div class="row left-margin">
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
                     </div>
+                    <input type="text" class="form-control" formControlName="nombre" name="nombre" id="nombre" 
+                    placeholder="Nombre" required [ngClass]="{ 'is-invalid': this.formRegistro.get('nombre').errors}"/>
                 </div>
-                <div *ngIf="this.formRegistro.get('nombre').errors" class="col-10">
-                    <div *ngIf="this.formRegistro.get('nombre').hasError('required')" class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('nombre').hasError('required')">Debe de introducir un nombre</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="apellidos" name="apellidos" 
-                        id="apellidos" placeholder="Apellidos" required [ngClass]="{ 'is-invalid': this.formRegistro.get('apellidos').errors}"/>
-                    </div>
-                </div>
-                <div *ngIf="this.formRegistro.get('apellidos').errors" class="col-10">
-                    <div *ngIf="this.formRegistro.get('apellidos').hasError('required')" class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('apellidos').hasError('required')">Debe de introducir apellidos</p>
-                        </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('nombre').errors" class="col-10">
+                <div *ngIf="this.formRegistro.get('nombre').hasError('required')" class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('nombre').hasError('required')">Debe de introducir un nombre</p>
                     </div>
                 </div>
             </div>
-            <div class="row left-margin">
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text fa fa-envelope text-white bg-success" aria-hidden="true"></span>
-                        </div>
-                        <input type="email" class="form-control" formControlName="email" name="email" id="email" placeholder="Email" required
-                        [ngClass]="{ 'is-invalid': this.formRegistro.get('email').errors}"/>
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
                     </div>
+                    <input type="text" class="form-control" formControlName="apellidos" name="apellidos" 
+                    id="apellidos" placeholder="Apellidos" required [ngClass]="{ 'is-invalid': this.formRegistro.get('apellidos').errors}"/>
                 </div>
-                <div *ngIf="this.formRegistro.get('email').errors" class="col-10">
-                    <div *ngIf="this.formRegistro.get('email').errors" class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('email').hasError('required') || this.formRegistro.get('email').hasError('email')">Debe de introducir un email</p>
-                        </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('apellidos').errors" class="col-10">
+                <div *ngIf="this.formRegistro.get('apellidos').hasError('required')" class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('apellidos').hasError('required')">Debe de introducir apellidos</p>
                     </div>
                 </div>
             </div>
-            <div class="row left-margin">
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
-                        </div>
-                        <input type="password" class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required
-                        [ngClass]="{ 'is-invalid': this.formRegistro.get('pass1').errors}"/>
-                    </div>
-                </div>
-            </div>
-            <div class="row left-margin">
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
-                        </div>
-                        <input type="password" class="form-control" formControlName="pass2" name="pass2" id="pass2" placeholder="Verifica contraseña" required
-                        [ngClass]="{ 'is-invalid': this.formRegistro.get('pass2').errors}"/>
-                    </div>
-                </div>
-            </div>
-            <div class="row left-margin">
-                <div class="col-10 mb-3">
-                    <div *ngIf="this.formRegistro.get('pass1').value !== this.formRegistro.get('pass2').value " class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p>Las contraseñas no coinciden</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row left-margin">
-                <div class="col-10 mb-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-globe-europe"></i></span>
-                        </div>
-                        <select class="form-control" id="provincia" formControlName="provincia" required [ngClass]="{ 'is-invalid': this.formRegistro.get('provincia').errors}">
-                            <option hidden [ngValue]="null" selected>Provincia</option>
-                            <option *ngFor="let provincia of comboProvincias" [value]="provincia.id">
-                                {{provincia.descripcion}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div *ngIf="this.formRegistro.get('provincia').errors" class="col-10">
-                    <div *ngIf="this.formRegistro.get('provincia').hasError('required')" class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('provincia').hasError('required')">Debe de seleccionar una provincia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-10 mb-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="codigoPostal" maxlength="5" [ngClass]="{ 'is-invalid': this.formRegistro.get('codigoPostal').errors }" pattern="[0-9]{5}"
-                         name="codigoPostal" id="codigoPostal" placeholder="Código Postal" required/>
-                    </div>
-                </div>
-                <div *ngIf="this.formRegistro.get('codigoPostal').errors" class="col-10">
-                    <div class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('codigoPostal').errors">Debe de introducir un código postal válido</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row left-margin">
-                <div class="col-10 mb-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-id-badge"></i></span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="dni" name="dni" id="dni" placeholder="DNI/NIF" required maxlength="9"
-                        pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" [ngClass]="{ 'is-invalid': this.formRegistro.get('dni').errors }" />
-                    </div>
-                </div>
-                <div *ngIf="this.formRegistro.get('dni').errors" class="col-10">
-                    <div class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('dni').errors">Debe de introducir un dni válido</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
-                        </div>
-                        <input type="number" class="form-control" formControlName="edad" min="18" max="130" maxlength="3" name="edad" id="edad" placeholder="Edad" required
-                        [ngClass]="{ 'is-invalid': this.formRegistro.get('edad').errors }"/>
-                    </div>
-                </div>
-                <div *ngIf="this.formRegistro.get('edad').value < 18" class="col-10">
-                    <div class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('edad').value < 18">La edad debe ser mínimo 18</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row left-margin">
-                <div class="col-10 mb-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="direccion" name="direccion" id="direccion" placeholder="Dirección" required
-                        [ngClass]="{ 'is-invalid': this.formRegistro.get('direccion').errors }"/>
-                    </div>
-                </div>
-                <div *ngIf="this.formRegistro.get('direccion').errors" class="col-10">
-                    <div *ngIf="this.formRegistro.get('direccion').hasError('required')" class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('direccion').hasError('required')">Debe de introducir una dirección</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-phone"></i></span>
-                        </div>
-                        <input type="text" maxlength="9" class="form-control" formControlName="telefono" 
-                        name="telefono" id="telefono" placeholder="Teléfono" required maxlength="9" 
-                        pattern="[0-9]{9}" [ngClass]="{ 'is-invalid': this.formRegistro.get('telefono').errors}"/>
-                    </div>
-                </div>
-                <div *ngIf="this.formRegistro.get('telefono').errors" class="col-10">
-                    <div *ngIf="this.formRegistro.get('telefono').errors" class="row left-margin">
-                        <div class="col-10 mb-3">
-                            <p *ngIf="this.formRegistro.get('telefono').errors">Debe de introducir un nº de teléfono</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Sexo radio buttons-->
-            <div class="sexo justify-content-center">
-                <input formControlName="sexo" class="mr-2" type="radio" value="H" id="hombre" name="sexo"/>
-                <label for="male">Hombre</label>
-                <input formControlName="sexo" type="radio" value="M" id="mujer" name="sexo" class="left-margin "/>
-                <label class="ml-2" for="mujer">Mujer</label>
-            </div>
-            <!--Botón registrarse-->
-            <hr>
-            <div class="row justify-content-center">
-                <button type="submit" class="btn btn-success" (click)="registrarse()">Registrarse</button>
-            </div>
-            <br>
         </div>
-    </form>
-</body>
+        <div class="row left-margin">
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-envelope text-white bg-success" aria-hidden="true"></span>
+                    </div>
+                    <input type="email" class="form-control" formControlName="email" name="email" id="email" placeholder="Email" required
+                    [ngClass]="{ 'is-invalid': this.formRegistro.get('email').errors}"/>
+                </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('email').errors" class="col-10">
+                <div *ngIf="this.formRegistro.get('email').errors" class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('email').hasError('required') || this.formRegistro.get('email').hasError('email')">Debe de introducir un email</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row left-margin">
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
+                    </div>
+                    <input type="password" class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required
+                    [ngClass]="{ 'is-invalid': this.formRegistro.get('pass1').errors}"/>
+                </div>
+            </div>
+        </div>
+        <div class="row left-margin">
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
+                    </div>
+                    <input type="password" class="form-control" formControlName="pass2" name="pass2" id="pass2" placeholder="Verifica contraseña" required
+                    [ngClass]="{ 'is-invalid': this.formRegistro.get('pass2').errors}"/>
+                </div>
+            </div>
+        </div>
+        <div class="row left-margin">
+            <div class="col-10 mb-3">
+                <div *ngIf="this.formRegistro.get('pass1').value !== this.formRegistro.get('pass2').value " class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p>Las contraseñas no coinciden</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row left-margin">
+            <div class="col-10 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-globe-europe"></i></span>
+                    </div>
+                    <select class="form-control" id="provincia" formControlName="provincia" required [ngClass]="{ 'is-invalid': this.formRegistro.get('provincia').errors}">
+                        <option hidden [ngValue]="null" selected>Provincia</option>
+                        <option *ngFor="let provincia of comboProvincias" [value]="provincia.id">
+                            {{provincia.descripcion}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('provincia').errors" class="col-10">
+                <div *ngIf="this.formRegistro.get('provincia').hasError('required')" class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('provincia').hasError('required')">Debe de seleccionar una provincia</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="codigoPostal" maxlength="5" [ngClass]="{ 'is-invalid': this.formRegistro.get('codigoPostal').errors }" pattern="[0-9]{5}"
+                     name="codigoPostal" id="codigoPostal" placeholder="Código Postal" required/>
+                </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('codigoPostal').errors" class="col-10">
+                <div class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('codigoPostal').errors">Debe de introducir un código postal válido</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row left-margin">
+            <div class="col-10 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-id-badge"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="dni" name="dni" id="dni" placeholder="DNI/NIF" required maxlength="9"
+                    pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" [ngClass]="{ 'is-invalid': this.formRegistro.get('dni').errors }" />
+                </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('dni').errors" class="col-10">
+                <div class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('dni').errors">Debe de introducir un dni válido</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                    </div>
+                    <input type="number" class="form-control" formControlName="edad" min="18" max="130" maxlength="3" name="edad" id="edad" placeholder="Edad" required
+                    [ngClass]="{ 'is-invalid': this.formRegistro.get('edad').errors }"/>
+                </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('edad').value < 18" class="col-10">
+                <div class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('edad').value < 18">La edad debe ser mínimo 18</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row left-margin">
+            <div class="col-10 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="direccion" name="direccion" id="direccion" placeholder="Dirección" required
+                    [ngClass]="{ 'is-invalid': this.formRegistro.get('direccion').errors }"/>
+                </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('direccion').errors" class="col-10">
+                <div *ngIf="this.formRegistro.get('direccion').hasError('required')" class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('direccion').hasError('required')">Debe de introducir una dirección</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-phone"></i></span>
+                    </div>
+                    <input type="text" maxlength="9" class="form-control" formControlName="telefono" 
+                    name="telefono" id="telefono" placeholder="Teléfono" required maxlength="9" 
+                    pattern="[0-9]{9}" [ngClass]="{ 'is-invalid': this.formRegistro.get('telefono').errors}"/>
+                </div>
+            </div>
+            <div *ngIf="this.formRegistro.get('telefono').errors" class="col-10">
+                <div *ngIf="this.formRegistro.get('telefono').errors" class="row left-margin">
+                    <div class="col-10 mb-3">
+                        <p *ngIf="this.formRegistro.get('telefono').errors">Debe de introducir un nº de teléfono</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Sexo radio buttons-->
+        <div class="sexo justify-content-center">
+            <input formControlName="sexo" class="mr-2" type="radio" value="H" id="hombre" name="sexo"/>
+            <label for="male">Hombre</label>
+            <input formControlName="sexo" type="radio" value="M" id="mujer" name="sexo" class="left-margin "/>
+            <label class="ml-2" for="mujer">Mujer</label>
+        </div>
+        <!--Botón registrarse-->
+        <hr>
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-success" (click)="registrarse()">Registrarse</button>
+        </div>
+        <br>
+    </div>
+</form>

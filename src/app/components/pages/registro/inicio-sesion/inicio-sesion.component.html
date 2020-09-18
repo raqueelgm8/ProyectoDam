@@ -1,33 +1,31 @@
-<body>
-    <form [formGroup]="formInicioSesion">
-        <div class="testbox">
-            <h1 class="text-center">Iniciar Sesión</h1>
-            <hr>
-            <div class="row left-margin">
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text fa fa-envelope text-white bg-success" aria-hidden="true"></span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="email" name="email" id="email" placeholder="Email" required/>
+<form [formGroup]="formInicioSesion">
+    <div class="testbox">
+        <h1 class="text-center">Iniciar Sesión</h1>
+        <hr>
+        <div class="row left-margin">
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-envelope text-white bg-success" aria-hidden="true"></span>
                     </div>
+                    <input type="text" class="form-control" formControlName="email" name="email" id="email" placeholder="Email" required/>
                 </div>
-            </div>
-            <div class="row left-margin">
-                <div class="col-10">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-white bg-success fa fa-key" aria-hidden="true"></span>
-                        </div>
-                        <input type="password" class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required/>
-                    </div>
-                </div>
-            </div>
-            <!--Botón inicio sesión-->
-            <hr>
-            <div class="row justify-content-center">
-                <button class="btn btn-success" (click)="iniciarSesion()">Iniciar Sesión</button>
             </div>
         </div>
-    </form>
-</body>
+        <div class="row left-margin">
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success fa fa-key" aria-hidden="true"></span>
+                    </div>
+                    <input type="password" class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required/>
+                </div>
+            </div>
+        </div>
+        <!--Botón inicio sesión-->
+        <hr>
+        <div class="row justify-content-center">
+            <button class="btn btn-success" (click)="iniciarSesion()">Iniciar Sesión</button>
+        </div>
+    </div>
+</form>
