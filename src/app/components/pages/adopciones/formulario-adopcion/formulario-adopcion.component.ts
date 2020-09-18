@@ -30,6 +30,7 @@ export class FormularioAdopcionComponent implements OnInit {
   idSolicitud: number;
   modoConsulta = false;
   usuario: Usuario;
+  modoEditar = false;
   constructor(
     public fb: FormBuilder,
     public route: ActivatedRoute,
@@ -41,13 +42,15 @@ export class FormularioAdopcionComponent implements OnInit {
     private usuariosService: UsuarioService
   ) {
     this.route.queryParams.subscribe(params => {
-      this.idAnimal = Number(params.animalId);
       if (params.modoConsulta === 'consulta') {
         this.modoConsulta = true;
         const usuario: Usuario = JSON.parse( localStorage.getItem('usuario'));
         this.idUsuario = usuario.idUsuario;
-        this.idSolicitud = Number(params.idSolicitud);
+      } else if (params.modoEditar === 'editar') {
+        this.modoEditar = true;
       }
+      this.idAnimal = Number(params.animalId);
+      this.idSolicitud = Number(params.idSolicitud);
     });
    }
 
@@ -58,6 +61,9 @@ export class FormularioAdopcionComponent implements OnInit {
     if (this.modoConsulta) {
       this.consultarSolicitud();
       this.formAdopcion.disable();
+    }
+    if (this.modoEditar) {
+      this.consultarSolicitud();
     }
   }
   iniciarGrupoAdopcion() {
@@ -112,20 +118,30 @@ export class FormularioAdopcionComponent implements OnInit {
       },
       horariotrabajo: this.formAdopcion.controls.horarioTrabajo.value,
     };
-    console.log(solicitud);
     if (this.formAdopcion.invalid) {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
     } else {
-      this.solicitudService.guardarSolicitud(solicitud).then((result) => {
-      Swal.fire('¡Éxito!', 'Solicitud enviada correctamente', 'success');
-      this.router.navigate(['/registro/mi-perfil'], {queryParams: {
-        idUsuario: this.idUsuario
-      }});
-      }, error => {
-        Swal.fire('¡ERROR!', error, 'error');
-      });
+      if (this.modoEditar) {
+        solicitud.id.idSolicitud = this.idSolicitud;
+        this.solicitudService.editarSolicitud(solicitud).then((result) => {
+          Swal.fire('¡Éxito!', 'Solicitud enviada correctamente', 'success');
+          this.router.navigate(['/registro/mi-perfil'], {queryParams: {
+            idUsuario: this.idUsuario
+          }});
+          }, error => {
+            Swal.fire('¡ERROR!', error, 'error');
+          });
+      } else {
+        this.solicitudService.guardarSolicitud(solicitud).then((result) => {
+          Swal.fire('¡Éxito!', 'Solicitud enviada correctamente', 'success');
+          this.router.navigate(['/registro/mi-perfil'], {queryParams: {
+            idUsuario: this.idUsuario
+          }});
+          }, error => {
+            Swal.fire('¡ERROR!', error, 'error');
+          });
+      }
     }
-
   }
   consultarAnimal(idAnimal: number) {
     this.animalesService.obtenerAnimalPorId(idAnimal).then((result) => {
@@ -146,24 +162,16 @@ export class FormularioAdopcionComponent implements OnInit {
       Swal.fire('¡ERROR!', error, 'error');
     });
   }
-  // Consultar solicitud
   consultarSolicitud() {
+    console.log('entro en consultar solicitud');
     this.solicitudService.obtenerSolicitudPorId(this.idUsuario, this.idSolicitud, this.idAnimal).then((result) => {
-      this.formAdopcion = this.fb.group({
-        nombre: null,
-        apellidos: null,
-        direccion: null,
-        // poblacion: null,
-        codPostal: null,
-        telefonoMovil: null,
-        razon: result.razonAdopcion,
-        mascotas: result.mascotasCasa === 0 ? '0' : '1',
-        terraza: result.terraza === 0 ? '0' : '1',
-        jardin: result.jardin === 0 ? '0' : '1',
-        horarioTrabajo: result.horariotrabajo,
-        miembrosFamilia: result.miembrosfamilia,
-        politicaPrivacidad: true,
-      });
+      this.formAdopcion.controls.razon.setValue(result.razonAdopcion);
+      this.formAdopcion.controls.mascotas.setValue(result.mascotasCasa === 0 ? '0' : '1');
+      this.formAdopcion.controls.terraza.setValue(result.terraza === 0 ? '0' : '1');
+      this.formAdopcion.controls.jardin.setValue(result.jardin === 0 ? '0' : '1');
+      this.formAdopcion.controls.horarioTrabajo.setValue(result.horariotrabajo);
+      this.formAdopcion.controls.miembrosFamilia.setValue(result.miembrosfamilia);
+      this.formAdopcion.controls.politicaPrivacidad.setValue(true);
     });
   }
   consultarUsuario() {

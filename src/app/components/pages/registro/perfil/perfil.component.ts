@@ -155,7 +155,10 @@ export class PerfilComponent implements OnInit {
       }
     });
   }
-  editarSolicitud() {
+  editarSolicitud(solicitud: Solicitud) {
+    this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
+      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoEditar: 'editar'
+    }});
   }
   verSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
