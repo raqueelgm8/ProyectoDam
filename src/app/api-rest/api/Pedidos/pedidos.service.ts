@@ -31,4 +31,14 @@ export class PedidosService {
       });
     });
   }
+  async guardarPedido(pedido: Pedido): Promise<Pedido> {
+    return new Promise<Pedido>( async (resolve, reject) => {
+      const ruta = '/api/pedidos/guardarPedido/'
+      this.httpClient.post(ruta, pedido).subscribe((result) => {
+        resolve(result as Pedido);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

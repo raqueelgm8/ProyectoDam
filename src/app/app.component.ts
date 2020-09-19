@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { CestaService } from './api-rest/api/Cesta/cesta.service';
 import { Producto } from './api-rest/models/Producto/producto.model';
 @Component({
   selector: 'app-root',
@@ -12,9 +13,11 @@ export class AppComponent {
   cesta: Producto[];
   usuarioIniciadoSesion = false;
   productos: Producto[];
+  numProductos: number;
   constructor(
     private route: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private cestaService: CestaService
   ) {
    }
   clickHome() {
@@ -41,12 +44,6 @@ export class AppComponent {
   clickPerfil() {
     this.route.navigate(['/registro/mi-perfil']);
   }
-  recibirCesta(event: any) {
-    if (event.cesta !== undefined && event.cesta !== null && event.cesta !== []) {
-      this.cesta = event.cesta;
-      console.log(this.cesta);
-    }
-  }
   recibirUsuario() {
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     if (usuario !== null) {
@@ -62,6 +59,9 @@ export class AppComponent {
     window.location.reload();
   }
   clickCesta() {
-
+    this.route.navigate(['/productos/cesta']);
+  }
+  recibirCesta() {
+    this.cestaService.getItems();
   }
 }

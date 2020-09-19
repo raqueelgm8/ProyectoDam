@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductosModule } from './components/pages/productos/productos.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    ProductosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

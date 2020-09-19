@@ -198,7 +198,7 @@
             </div>
           </div>
 
-          <div class="mat-elevation-z8">
+          <div *ngIf="sinDatosSolicitudes" class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSourceSolicitudes" class="mat-elevation-z8" matSort width="100%">  
                 <ng-container matColumnDef="idSolicitud">
                 <th mat-header-cell *matHeaderCellDef>Id Solicitud</th>
@@ -257,7 +257,7 @@
                 </div>
             </div>
         </div>
-        <div class="mat-elevation-z8">
+        <div *ngIf="sinDatosPedidos" class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSourcePedidos" class="mat-elevation-z8" matSort width="100%">
               <ng-container matColumnDef="idPedido">
                 <th mat-header-cell *matHeaderCellDef>Id Pedido</th>

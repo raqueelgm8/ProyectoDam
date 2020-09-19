@@ -14,12 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { DropdownCestaComponent } from './dropdown-cesta/dropdown-cesta.component';
 
 
 @NgModule({
   declarations: [
     ProductosComponent, CestaComponent, FichaProductoComponent, ModalAnadidoComponent, ConsultarPedidoComponent,
-    CompraRealizadaComponent],
+    CompraRealizadaComponent,
+    DropdownCestaComponent],
   imports: [
     CommonModule,
     ProductosRoutingModule,
@@ -34,6 +36,7 @@ import { MatTableModule } from '@angular/material/table';
   ], entryComponents: [
     FichaProductoComponent
   ], exports: [
+    DropdownCestaComponent
   ]
 })
 export class ProductosModule { }

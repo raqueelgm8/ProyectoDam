@@ -20,6 +20,6 @@ export class ModalAnadidoComponent implements OnInit {
     this.modal.close();
   }
   clickCesta() {
-    this.modal.close('cesta');
+    this.route.navigate(['/productos/cesta']);
   }
 }
