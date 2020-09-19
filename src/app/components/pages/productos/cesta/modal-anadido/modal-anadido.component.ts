@@ -21,5 +21,6 @@ export class ModalAnadidoComponent implements OnInit {
   }
   clickCesta() {
     this.route.navigate(['/productos/cesta']);
+    this.modal.close();
   }
 }

@@ -53,5 +53,6 @@ export class FichaProductoComponent implements OnInit {
     this.producto.cantidad = this.formCantidad.controls.cantidad.value;
     this.cartService.addToCart(this.producto);
     this.abrirModal();
+    this.modal.close();
   }
 }
