@@ -1,7 +1,7 @@
 import { DetallePedido } from '../DetallePedido/detalle-pedido.model';
 
 export class Producto {
-    idProducto: string;
+    idProducto: number;
     precio: number;
     categoria: string;
     nombre: string;

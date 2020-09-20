@@ -11,3 +11,9 @@
     box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
     border: solid 1px #cbc9c9;
 }
+.mat-column-imagenProducto {
+    min-width: 50px;
+}
+.mat-column-nombreProducto {
+    min-width: 300px;
+}

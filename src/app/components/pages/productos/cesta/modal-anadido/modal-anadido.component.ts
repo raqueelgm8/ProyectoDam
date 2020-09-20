@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
 
 @Component({
   selector: 'app-modal-anadido',
@@ -20,7 +21,8 @@ export class ModalAnadidoComponent implements OnInit {
     this.modal.close();
   }
   clickCesta() {
-    this.route.navigate(['/productos/cesta']);
+    const usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    this.route.navigate(['/productos/cesta'], {queryParams: {idUsuario: usuario.idUsuario}});
     this.modal.close();
   }
 }

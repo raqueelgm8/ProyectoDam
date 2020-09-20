@@ -7,7 +7,7 @@ export class Pedido {
     direccion: string;
     email: string;
     fechaPedido: Date;
-    metodopPago: string;
+    metodoPago: string;
     nombre: string;
     provincia: string;
     telefono: string;

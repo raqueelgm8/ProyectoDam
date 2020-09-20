@@ -63,5 +63,6 @@ export class AppComponent {
   }
   recibirCesta() {
     this.cestaService.getItems();
+    this.numProductos = this.cestaService.items.length;
   }
 }

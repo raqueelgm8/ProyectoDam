@@ -23,7 +23,7 @@
                 <li class="nav-item"><a class="nav-link" (click)="clickProductos()"><i class="fas fa-gifts"></i> Productos</a></li>
                 <!--CESTA-->
                 <li class="nav-item dropdown">
-                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fas fa-shopping-cart" aria-hidden="true"></i>Cesta {{this.numProductos}}<span class="caret"></span></a>
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Cesta {{this.numProductos}}<span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-cart">
                         <app-dropdown-cesta (activate)="recibirCesta()"></app-dropdown-cesta>
                     </ul>
