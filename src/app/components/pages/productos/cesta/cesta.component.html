@@ -101,8 +101,9 @@
             <mat-paginator class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
             <label class="ml-4">Precio total: {{this.total | number:'1.2-2'}} €</label>
           </div>
+          <hr>
           <div class="row justify-content-center">
             <button type="submit" class="btn btn-success" (click)="guardarPedido()">Realizar Pedido</button>
-        </div>
+        </div><br>
     </form>
 </div>

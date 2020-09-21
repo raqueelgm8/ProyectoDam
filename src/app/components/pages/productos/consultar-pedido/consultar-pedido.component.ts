@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CestaService } from 'src/app/api-rest/api/Cesta/cesta.service';
 @Component({
   selector: 'app-consultar-pedido',
   templateUrl: './consultar-pedido.component.html',
@@ -20,7 +21,7 @@ export class ConsultarPedidoComponent implements OnInit {
   pedido: Pedido;
 
   detallesPedido: DetallePedido[];
-
+  total: number;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   dataSourcePedido = new MatTableDataSource();
   displayedColumnsSolicitudes = ['idProducto', 'producto', 'imagenProducto', 'cantidad', 'precioUnidad', 'precioTotal'];
@@ -38,11 +39,15 @@ export class ConsultarPedidoComponent implements OnInit {
     private pedidoService: PedidosService,
     private detallesPedidoService: DetallePedidoService,
     public sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private cestaService: CestaService
   ) {
       this.route.queryParams.subscribe(params => {
         this.idUsuario = Number(params.idUsuario);
         this.idPedido = Number(params.idPedido);
+        if (params.limpiarCesta) {
+          this.cestaService.clearCart();
+        }
       });
   }
 
@@ -53,6 +58,7 @@ export class ConsultarPedidoComponent implements OnInit {
   consultarPedido() {
     this.pedidoService.obtenerPedidoPorId(this.idUsuario, this.idPedido).then((result) => {
       this.pedido = result;
+      this.total = result.total;
       console.log(result);
     });
   }

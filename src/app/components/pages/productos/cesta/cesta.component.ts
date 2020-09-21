@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CestaService } from 'src/app/api-rest/api/Cesta/cesta.service';
 import { PedidosService } from 'src/app/api-rest/api/Pedidos/pedidos.service';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
@@ -48,7 +48,8 @@ export class CestaComponent implements OnInit {
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     public combos: ComboService,
-  ) { 
+    private router: Router
+  ) {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
     });
@@ -59,8 +60,20 @@ export class CestaComponent implements OnInit {
     this.recuperarCesta();
     this.iniciarGrupo();
     this.recuperarPerfil();
-    this.realizarPedido();
-    console.log(this.pedido);
+    this.cesta.forEach(element => {
+      const detallePedido: DetallePedido = {
+        cantidad: element.cantidad,
+        id: {
+          idProducto: element.idProducto,
+          idUsuario: this.idUsuario,
+          idPedido: null
+        },
+        precioTotal: element.cantidad * element.precio,
+        precioUnidad: element.precio,
+        producto: element
+      };
+      this.total = this.total + detallePedido.precioTotal;
+    });
   }
   recuperarCombos() {
     this.combos.obtenerComboTipo('Provincia').then((result) => {
@@ -93,7 +106,8 @@ export class CestaComponent implements OnInit {
       provincia: this.formCesta.controls.provincia.value,
       telefono: this.formCesta.controls.telefono.value,
       total: null,
-      detallePedido: null
+      detallePedidos: null,
+      estadoPedido: 'Pendiente'
     };
     this.cesta.forEach(element => {
       const detallePedido: DetallePedido = {
@@ -108,19 +122,16 @@ export class CestaComponent implements OnInit {
         producto: element
       };
       this.detallesPedido.push(detallePedido);
-      console.log(this.detallesPedido);
       this.total = this.total + detallePedido.precioTotal;
     });
-    this.pedido.detallePedido = this.detallesPedido;
+    // this.pedido.detallePedidos = this.detallesPedido;
     this.pedido.total = this.total;
-    console.log(this.pedido);
   }
   recuperarCesta() {
     this.cesta = this.cestaService.getItems();
     this.dataSource = new MatTableDataSource<Producto>(this.cesta);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.matSort;
-    console.log(this.cesta);
   }
   clickEliminar(producto: Producto) {
     Swal.fire({
@@ -134,11 +145,11 @@ export class CestaComponent implements OnInit {
     }).then((mensaje) => {
       if (mensaje.value) {
         this.cestaService.removeItem(producto);
+        this.cesta = this.cestaService.getItems();
         this.dataSource = new MatTableDataSource<Producto>(this.cesta);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.matSort;
         this.total = 0;
-        this.realizarPedido();
         Swal.fire('¡ÉXITO!', 'Producto eliminado de la cesta', 'success');
       }
     });
@@ -150,7 +161,7 @@ export class CestaComponent implements OnInit {
       localStorage.setItem('usuarioIniciadoSesion', 'true');
       this.formCesta.controls.nombre.setValue(result.nombre);
       this.formCesta.controls.apellidos.setValue(result.apellidos);
-      this.formCesta.controls.direccion.setValue(result.apellidos);
+      this.formCesta.controls.direccion.setValue(result.direccion);
       this.formCesta.controls.email.setValue(result.email);
       this.formCesta.controls.provincia.setValue(result.provincia);
       this.formCesta.controls.codigoPostal.setValue(result.codigoPostal);
@@ -160,10 +171,53 @@ export class CestaComponent implements OnInit {
     });
   }
   guardarPedido() {
-    this.pedidoService.guardarPedido(this.pedido).then((result) => {
+    this.total = 0;
+    this.pedido = {
+      apellidos: this.formCesta.controls.apellidos.value,
+      codigoPostal: this.formCesta.controls.codigoPostal.value,
+      direccion: this.formCesta.controls.direccion.value,
+      email: this.formCesta.controls.email.value,
+      //  moment(new Date(), 'DD/MM/yy').toDate(),
+      fechaPedido: moment(new Date(), 'DD/MM/yy').toDate(),
+      id: null,
+      metodoPago: this.formCesta.controls.metodoPago.value,
+      nombre: this.formCesta.controls.nombre.value,
+      provincia: this.formCesta.controls.provincia.value,
+      telefono: this.formCesta.controls.telefono.value,
+      total: null,
+      detallePedidos: null,
+      estadoPedido: 'Pendiente'
+    };
+    this.cesta.forEach(element => {
+      const detallePedido: DetallePedido = {
+        cantidad: element.cantidad,
+        id: {
+          idProducto: element.idProducto,
+          idUsuario: this.idUsuario,
+          idPedido: null
+        },
+        precioTotal: element.cantidad * element.precio,
+        precioUnidad: element.precio,
+        producto: element
+      };
+      this.detallesPedido.push(detallePedido);
+      this.total = this.total + detallePedido.precioTotal;
+    });
+    this.pedido.detallePedidos = this.detallesPedido;
+    this.pedido.total = this.total;
+    this.pedidoService.guardarPedido(this.idUsuario, this.pedido).then((result) => {
       this.pedido = result;
-      this.detallesPedido = [];
-      this.total = 0;
+      if (result !== null) {
+        this.pedidoService.guardarDetallesPedido(this.idUsuario, result.id.idPedido, this.detallesPedido).then((detalles) => {
+          this.detallesPedido = [];
+          this.total = 0;
+          this.cestaService.clearCart();
+          Swal.fire('¡ÉXITO!', 'El pedido se ha realizado correctamente', 'success');
+          this.router.navigate(['/productos/consultar-pedido', ], {queryParams: {
+            idPedido: this.pedido.id.idPedido, idUsuario: this.pedido.id.idUsuario, limpiarCesta: 'true'
+          }});
+        });
+      }
     });
   }
 }

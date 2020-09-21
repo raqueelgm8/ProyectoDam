@@ -41,4 +41,7 @@ export class DropdownCestaComponent implements OnInit {
     const usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
     this.router.navigate(['/productos/cesta'], {queryParams: {idUsuario: usuario.idUsuario}});
   }
+  recibirCesta() {
+    this.productos = this.cestaService.getItems();
+  }
 }

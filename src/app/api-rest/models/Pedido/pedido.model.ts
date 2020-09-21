@@ -11,10 +11,11 @@ export class Pedido {
     nombre: string;
     provincia: string;
     telefono: string;
-    detallePedido: DetallePedido[];
+    detallePedidos: DetallePedido[];
     id: {
         idUsuario: number;
         idPedido: number;
     };
     total: number;
+    estadoPedido: string;
 }

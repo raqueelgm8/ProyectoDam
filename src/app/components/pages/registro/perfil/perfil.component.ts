@@ -51,6 +51,9 @@ export class PerfilComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
+      if (params.idUsuario === undefined) {
+        this.idUsuario = JSON.parse(localStorage.getItem('usuarios')).idUsuario;
+      }
     });
   }
   ngAfterViewInit(): void {
