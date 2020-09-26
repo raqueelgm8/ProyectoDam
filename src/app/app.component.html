@@ -57,16 +57,23 @@
 <footer id="footer" class="p-3 bg-success">
     <ul class="nav text-center justify-content-center flex-column flex-sm-row">
         <li class="nav-item">
-            <a href="#" class="nav-link  text-white">Contacto</a>
+            <a class="nav-link  text-white" (click)="clickPerros()">Perros</a>
         </li>
         <li class="nav-item">
-            <a href="" class="nav-link  text-white">Adopciones</a>
+            <a class="nav-link  text-white" (click)="clickGatos()">Gatos</a>
         </li>
         <li class="nav-item">
-            <a href="" class="nav-link  text-white">Productos</a>
+            <a class="nav-link  text-white" (click)="clickOtros()">Otros</a>
         </li>
         <li class="nav-item">
-            <a href="" class="nav-link  text-white">Sobre nosotros</a>
+            <a class="nav-link  text-white" (click)="clickProductos()">Productos</a>
+        </li>
+        <li class="nav-item">
+            <a href="home/#nosotros" id="nosotros"
+             class="nav-link  text-white" >Sobre nosotros</a>
+        </li>
+        <li class="nav-item">
+            <a href="home/#contacto" id="contacto"class="nav-link  text-white">Contacto</a>
         </li>
     </ul>
 </footer>
