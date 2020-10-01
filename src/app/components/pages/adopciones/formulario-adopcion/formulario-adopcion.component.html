@@ -162,7 +162,8 @@
             </div>
             <hr>
             <div class="row justify-content-center">
-                <button class="btn btn-success" type="button" (click) = "clickEnviar()">Enviar</button>
+                <button *ngIf="!this.modoConsulta" class="btn btn-success" type="button" (click) = "clickEnviar()">Enviar</button>
+                <button *ngIf="this.modoConsulta || this.modoEditar" type="submit" class="btn btn-primary mr-4" (click)="volver()">Volver a mi perfil</button>
             </div>
             <br>
         </form>

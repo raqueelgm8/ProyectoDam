@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CestaService } from './api-rest/api/Cesta/cesta.service';
 import { Producto } from './api-rest/models/Producto/producto.model';
+import { Usuario } from './api-rest/models/Usuario/usuario.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -42,7 +43,9 @@ export class AppComponent {
     this.route.navigate(['/registro/inicio-sesion']);
   }
   clickPerfil() {
-    this.route.navigate(['/registro/mi-perfil']);
+    const usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    const idUsuario = usuario.idUsuario;
+    this.route.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: idUsuario}});
   }
   recibirUsuario() {
     let usuario = JSON.parse(localStorage.getItem('usuario'));

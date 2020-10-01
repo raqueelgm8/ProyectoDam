@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { PedidosService } from 'src/app/api-rest/api/Pedidos/pedidos.service';
+import {MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -36,8 +37,8 @@ export class PerfilComponent implements OnInit {
 
   @ViewChild('MatPaginatorSolicitudes', {read: MatPaginator}) paginatorSolicitudes: MatPaginator;
   @ViewChild('MatPaginatorPedidos', {read: MatPaginator}) paginatorPedidos: MatPaginator;
-  @ViewChild('MatSortPedidos') matSortPedidos: MatSort;
-  @ViewChild('MatSortSolicitudes') matSortSolicitudes: MatSort;
+  @ViewChild('MatSortPedidos', {read: MatPaginator}) matSortPedidos: MatSort;
+  @ViewChild('MatSortSolicitudes', {read: MatPaginator}) matSortSolicitudes: MatSort;
 
   constructor(
     public route: ActivatedRoute,
@@ -47,7 +48,8 @@ export class PerfilComponent implements OnInit {
     public solicitudesService: SolicitudesService,
     private changeDetectorRefs: ChangeDetectorRef,
     private router: Router,
-    private pedidosService: PedidosService
+    private pedidosService: PedidosService,
+    private paginator: MatPaginatorIntl
   ) {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
@@ -63,11 +65,16 @@ export class PerfilComponent implements OnInit {
     this.dataSourcePedidos.sort = this.matSortPedidos;
   }
   ngOnInit(): void {
+    this.paginator.itemsPerPageLabel = "Registros por página";
     this.iniciarForm();
     this.recuperarCombos();
     this.recuperarPerfil();
     this.recuperarSolicitudes();
     this.recuperarPedidos();
+    this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
+    this.dataSourceSolicitudes.sort = this.matSortSolicitudes;
+    this.dataSourcePedidos.paginator = this.paginatorPedidos;
+    this.dataSourcePedidos.sort = this.matSortPedidos;
   }
   iniciarForm() {
     this.formPerfil = this.fb.group({
@@ -115,13 +122,13 @@ export class PerfilComponent implements OnInit {
     this.solicitudesService.obtenerSolicitudesPorIdUsuario(this.idUsuario).then((result) => {
       this.solicitudes = result;
       this.dataSourceSolicitudes = new MatTableDataSource<Solicitud>(this.solicitudes);
+      this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
+      this.dataSourceSolicitudes.sort = this.matSortSolicitudes;
       if (result.length === 0) {
         this.sinDatosSolicitudes = false;
       } else {
         this.sinDatosSolicitudes = true;
       }
-      this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
-      this.dataSourceSolicitudes.sort = this.matSortSolicitudes;
     });
   }
   recuperarPedidos() {

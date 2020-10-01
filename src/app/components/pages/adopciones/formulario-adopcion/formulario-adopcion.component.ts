@@ -184,4 +184,7 @@ export class FormularioAdopcionComponent implements OnInit {
     this.formAdopcion.controls.codPostal.setValue(this.usuario.codigoPostal);
     this.formAdopcion.controls.telefonoMovil.setValue(this.usuario.telefono);
   }
+  volver() {
+    this.router.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: this.idUsuario}});
+  }
 }

@@ -1,7 +1,7 @@
 .testbox {
     margin: 20px auto;
     width: 1000px; 
-    min-height: 1250px;
+    min-height: 1050px;
     -webkit-border-radius: 8px/7px; 
     -moz-border-radius: 8px/7px; 
     border-radius: 8px/7px; 
@@ -60,4 +60,11 @@ h1 {
 }
 p {
   color: red;
+}
+.perPage{
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background-color: inherit;
+  z-index: unset;
 }

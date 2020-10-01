@@ -15,7 +15,7 @@ import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
 export class GatosComponent implements OnInit {
 
   // MOCKEADOS
-  valorSlider = '10';
+  valorSlider = '1';
   formCabecera: FormGroup;
   gatos: Animal[];
   comboRazasGato: Combo[];

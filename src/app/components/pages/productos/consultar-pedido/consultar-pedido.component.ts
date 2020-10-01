@@ -59,7 +59,6 @@ export class ConsultarPedidoComponent implements OnInit {
     this.pedidoService.obtenerPedidoPorId(this.idUsuario, this.idPedido).then((result) => {
       this.pedido = result;
       this.total = result.total;
-      console.log(result);
     });
   }
   consultarDetallesPedido() {
@@ -80,7 +79,6 @@ export class ConsultarPedidoComponent implements OnInit {
       this.dataSourcePedido = new MatTableDataSource<DetallePedido>(this.detallesPedido);
       this.dataSourcePedido.paginator = this.paginatorSolicitudes;
       this.dataSourcePedido.sort = this.matSortSolicitudes;
-      console.log(this.detallesPedido);
     });
   }
   volver() {
