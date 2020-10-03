@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CestaService } from './api-rest/api/Cesta/cesta.service';
 import { Producto } from './api-rest/models/Producto/producto.model';
 import { Usuario } from './api-rest/models/Usuario/usuario.model';
@@ -18,7 +18,8 @@ export class AppComponent {
   constructor(
     private route: Router,
     private cd: ChangeDetectorRef,
-    private cestaService: CestaService
+    private cestaService: CestaService,
+    private activatedRoute: ActivatedRoute
   ) {
    }
   clickHome() {
@@ -59,7 +60,13 @@ export class AppComponent {
   }
   cerrarSesion() {
     localStorage.clear();
-    window.location.reload();
+    console.log(this.route.url);
+    const url = '/registro/mi-perfil?idUsuario=';
+    if (this.route.url.includes(url)) {
+      this.clickHome();
+    } else {
+      window.location.reload();
+    }
   }
   clickCesta() {
     this.route.navigate(['/productos/cesta']);

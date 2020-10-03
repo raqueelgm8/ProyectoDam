@@ -1,12 +1,14 @@
-<h1 class="text-center">Adopción de otros animales</h1>
 <div class="container">
     <form [formGroup]="formCabecera">
         <div class="row busqueda">
             <!--<div class="col-md-6">
                 <span class="mw-100"><i class="fa fa-paw mw-100"></i></span>
             </div>-->
+            <div class="col-md-12">
+                <h1 class="text-center adopcionPerros">Adopción de otros animales</h1>
+            </div>
             <div class="col-md-4">
-                <label class="" for="raza">Animal</label>
+                <label class="letraCabecera" for="raza">Animal</label>
                 <select class="form-control" id="raza" formControlName="raza">
                     <option [ngValue]="null"></option>
                     <option *ngFor="let animal of razas" [value]="animal.id">
@@ -15,32 +17,32 @@
                 </select>
             </div>
             <div class="col-md-8 radio-inline">
-                <label for="edad">Edad mínima</label>
+                <label class="letraCabecera" for="edad">Edad mínima</label>
                 <input type="range" class="custom-range" min="0" max="20" formControlName="edad" name="edad" id="edad"
                     data-slider-id='edad' data-slider-min="0" data-slider-max="20" 
                 data-slider-step="1" data-slider-value="5" data-toggle="tooltip" data-placement="top" 
                 (input)="cambiaValorSlider()" title={{this.valorSlider}}>
             </div>
-            <div class="col-md-3 radio-inline">
+            <!--<div class="col-md-3 radio-inline">
                 <label class="formato-etiqueta" for="disponible">Disponible en adopción</label>
                 <input type="checkbox" name="disponible" id="disponible" formControlName="disponible" checked>
-            </div>
-            <div class="col-md-3 radio-inline">
-                <label class="formato-etiqueta" for="sexo">Cualquiera</label>
+            </div>-->
+            <div class="col-md-4 radio-inline">
+                <label class="formato-etiqueta letraLabels" for="sexo">Cualquiera</label>
                 <input formControlName="sexo" type="radio" name="sexo" id="cualquiera"[checked]="true" value="null">
-                <label class="formato-etiqueta" for="sexo">Macho</label>
+                <label class="formato-etiqueta letraLabels" for="sexo">Macho</label>
                 <input type="radio" formControlName="sexo" name="sexo" id="macho"[checked]="true">
-                <label class="formato-etiqueta ml-2" for="disponible">Hembra</label>
+                <label class="formato-etiqueta ml-2 letraLabels" for="disponible">Hembra</label>
                 <input type="radio" formControlName="sexo" name="sexo" id="hembra">
             </div>
-            <div class="col-md-5 radio-inline">
-                <label class="formato-etiqueta" for="tipoEdad">Cualquiera</label>
+            <div class="col-md-6 radio-inline">
+                <label class="formato-etiqueta letraLabels" for="tipoEdad">Cualquiera</label>
                 <input type="radio" name="tipoEdad" id="cualquiera" [checked]="true" formControlName="tipoEdad" value="null">
-                <label class="formato-etiqueta ml-2" for="tipoEdad">Cachorro</label>
+                <label class="formato-etiqueta ml-2 letraLabels" for="tipoEdad">Cachorro</label>
                 <input type="radio" name="tipoEdad" id="cachorro" formControlName="tipoEdad" value="Cachorro">
-                <label class="formato-etiqueta ml-2" for="tipoEdad">Adulto</label>
+                <label class="formato-etiqueta ml-2 letraLabels" for="tipoEdad">Adulto</label>
                 <input type="radio" name="tipoEdad" id="adulto" formControlName="tipoEdad" value="Adulto">
-                <label class="formato-etiqueta ml-2" for="tipoEdad">Joven</label>
+                <label class="formato-etiqueta ml-2 letraLabels" for="tipoEdad">Joven</label>
                 <input type="radio" name="tipoEdad" id="joven" formControlName="tipoEdad" value="Joven">
             </div>
         </div>

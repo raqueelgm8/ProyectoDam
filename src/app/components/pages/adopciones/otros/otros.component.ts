@@ -33,7 +33,7 @@ export class OtrosComponent implements OnInit {
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({
-      disponible: true,
+      // disponible: true,
       edad: 1,
       sexo: 'null',
       raza: null,
@@ -76,7 +76,7 @@ export class OtrosComponent implements OnInit {
     const perro: Animal = {
       idAnimal: null,
       // adoptado: this.formCabecera.controls.disponible.value,
-      adoptado: this.formCabecera.controls.disponible.value,
+      adoptado: true,
       descripcion: null,
       edad: this.formCabecera.controls.edad.value,
       imagen: null,

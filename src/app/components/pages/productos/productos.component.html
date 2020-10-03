@@ -1,9 +1,11 @@
-<h1 class="text-center">Productos</h1>
 <div class="container">
     <form [formGroup]="formCabecera">
         <div class="row busqueda">
+            <div class="col-md-12">
+                <h1 class="text-center adopcionPerros">Productos</h1>
+            </div>
             <div class="col-md-3">
-                <label class="" for="raza">Animal</label>
+                <label class="letraCabecera" for="raza">Animal</label>
                 <select class="form-control" id="animal" formControlName="animal">
                     <option [ngValue]="null"></option>
                     <option value="Perro">Perro</option>
@@ -12,23 +14,23 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <label>Cualquiera</label>
+                <label class="letraLabels">Cualquiera</label>
                 <input class="ml-2" type="radio" value="null" name="categoria" formControlName="categoria"/>
             </div>
             <div class="col-md-2">
-                <label>Juguetes</label>
+                <label class="letraLabels">Juguetes</label>
                 <input class="ml-2" type="radio" value="Juguetes" name="categoria" formControlName="categoria"/>
             </div>
             <div class="col-md-2">
-                <label>Accesorios</label>
+                <label class="letraLabels">Accesorios</label>
                 <input class="ml-2" type="radio" value="Accesorios" name="categoria" formControlName="categoria"/>
             </div>
             <div class="col-md-3">
-                <label>Cuidado</label>
+                <label class="letraLabels">Cuidado</label>
                 <input class="ml-2" type="radio" value="Cuidado" name="categoria" formControlName="categoria"/>
             </div>
-            <div class="col-md-8">
-                <h2><i class="fa fa-paw"></i> ¡Lo mejor para nuestros peluditos! <i class="fa fa-paw"></i></h2>
+            <div class="col-md-12">
+                <h2 class="text-center"><i class="fa fa-paw"></i> ¡Lo mejor para nuestros peluditos! <i class="fa fa-paw"></i></h2>
             </div>
         </div>
     </form>
