@@ -49,12 +49,17 @@ export class PerfilComponent implements OnInit {
     private changeDetectorRefs: ChangeDetectorRef,
     private router: Router,
     private pedidosService: PedidosService,
-    private paginator: MatPaginatorIntl
+    private paginator: MatPaginatorIntl,
   ) {
     this.route.queryParams.subscribe(params => {
+      const usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+      const idUsuario = usuario.idUsuario;
       this.idUsuario = Number(params.idUsuario);
       if (params.idUsuario === undefined) {
         this.idUsuario = JSON.parse(localStorage.getItem('usuarios')).idUsuario;
+      }
+      if (this.idUsuario !== idUsuario) {
+        this.router.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: idUsuario}});
       }
     });
   }

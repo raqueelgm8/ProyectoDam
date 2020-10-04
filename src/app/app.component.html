@@ -20,7 +20,6 @@
                       <a class="dropdown-item" (click)="clickOtros()">Otros <i class="fas fa-crow" aria-hidden="true"></i></a>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link" (click)="clickProductos()"><i class="fas fa-gifts"></i> Productos</a></li>
                 <!--CESTA-->
                 <li class="nav-item dropdown">
                     <a (activate)="recibirCesta()" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Cesta {{this.numProductos}}<span class="caret"></span></a>
@@ -44,7 +43,7 @@
                 <!--<li class="nav-item"><a class="nav-link"><i class="fas fa-shopping-cart"></i> Cesta</a></li>-->
                 <!--<li class="nav-item"><a class="nav-link" id="cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i>Cesta<span class="badge">3</span></a></li>-->
                 <!--<ul class="navbar-nav ml-auto">-->
-
+                <li class="nav-item"><a class="nav-link" (click)="clickProductos()"><i class="fas fa-gifts"></i> Productos</a></li>
                 
             </ul>
         </div>
