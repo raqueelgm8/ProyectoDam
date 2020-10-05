@@ -44,7 +44,7 @@
                 <!--<li class="nav-item"><a class="nav-link" id="cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i>Cesta<span class="badge">3</span></a></li>-->
                 <!--<ul class="navbar-nav ml-auto">-->
                 <li class="nav-item"><a class="nav-link" (click)="clickProductos()"><i class="fas fa-gifts"></i> Productos</a></li>
-                
+                <li *ngIf="this.usuarioAdmin" class="nav-item"><a class="nav-link" (click)="clickAdmin()"><i class="fa fa-user-plus" aria-hidden="true"></i>Admin</a></li>
             </ul>
         </div>
 </nav>

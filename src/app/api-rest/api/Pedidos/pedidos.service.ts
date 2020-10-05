@@ -62,4 +62,14 @@ export class PedidosService {
       });
     });
   }
+  async todosPedidos(): Promise<Pedido[]> {
+    return new Promise<Pedido[]>( async (resolve, reject) => {
+      const ruta = '/api/pedidos/pedidos/';
+      this.httpClient.get(ruta).subscribe((result) => {
+        resolve(result as Pedido[]);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

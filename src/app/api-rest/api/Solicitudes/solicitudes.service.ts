@@ -59,4 +59,15 @@ export class SolicitudesService {
       });
     });
   }
+  async obtenerTodasSolicitudes(): Promise<Solicitud[]> {
+    return new Promise<Solicitud[]>( async (resolve, reject) => {
+      let solicitudes: Solicitud[];
+      this.httpClient.get('/api/solicitudes/solicitudes').subscribe((result) => {
+        solicitudes = result as Solicitud[];
+        resolve(solicitudes);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

@@ -15,6 +15,7 @@ export class AppComponent {
   usuarioIniciadoSesion = false;
   productos: Producto[];
   numProductos: number;
+  usuarioAdmin = false;
   constructor(
     private route: Router,
     private cd: ChangeDetectorRef,
@@ -49,12 +50,18 @@ export class AppComponent {
     this.route.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: idUsuario}});
   }
   recibirUsuario() {
-    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
     if (usuario !== null) {
       this.usuarioIniciadoSesion = true;
       localStorage.setItem('usuarioIniciadoSesion', 'true');
+      if (usuario.idUsuario === 1) {
+        this.usuarioAdmin = true;
+      } else {
+        this.usuarioAdmin = false;
+      }
     } else {
       this.usuarioIniciadoSesion = false;
+      this.usuarioAdmin = false;
       localStorage.setItem('usuarioIniciadoSesion', 'false');
     }
   }
@@ -74,5 +81,8 @@ export class AppComponent {
   recibirCesta() {
     this.cestaService.getItems();
     this.numProductos = this.cestaService.items.length;
+  }
+  clickAdmin() {
+    this.route.navigate(['/admin']);
   }
 }

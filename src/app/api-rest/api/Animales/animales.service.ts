@@ -94,4 +94,15 @@ export class AnimalesService {
       });
     });
   }
+  async obtenerTodosAnimales(): Promise<Animal[]> {
+    return new Promise<Animal[]>( async (resolve, reject) => {
+      let animales: Animal[];
+      this.httpClient.get('/api/animales/animales').subscribe((result) => {
+        animales = result as Animal[];
+        resolve(animales);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }
