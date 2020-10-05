@@ -31,7 +31,6 @@ export class SolicitudesService {
     });
   }
   eliminarSolicitud(idUsuario: number, idSolicitud: number, idAnimal: number){
-    // http://localhost:8080/api/solicitudes/eliminarSolicitud/1/1/1
     const ruta = '/api/solicitudes/eliminarSolicitud/' + idUsuario + '/' + idSolicitud + '/' + idAnimal;
     this.httpClient.delete(ruta, ).subscribe((result) => {
       Swal.fire('¡Éxito!', 'Solicitud eliminada con éxito', 'success');

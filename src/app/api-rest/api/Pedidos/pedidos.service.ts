@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DetallePedido } from '../../models/DetallePedido/detalle-pedido.model';
 import { Pedido } from '../../models/Pedido/pedido.model';
-
+import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
@@ -47,6 +47,16 @@ export class PedidosService {
       const ruta = '/api/detalles/guardarDetalles/' + idUsuario + '/' + idPedido;
       this.httpClient.post(ruta, detallesPedido).subscribe((result) => {
         resolve(result as DetallePedido[]);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  async eliminarPedido(idUsuario: number, idPedido: number): Promise<string> {
+    return new Promise<string>( async (resolve, reject) => {
+      this.httpClient.delete('api/pedidos/eliminarPedido/' + idUsuario + '/' + idPedido).subscribe((result) => {
+        Swal.fire('¡Éxito!', 'Usuario eliminado con éxito', 'success');
+        resolve('El usuario se ha eliminado correctamente');
       }, error => {
         reject(error);
       });
