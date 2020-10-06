@@ -6,12 +6,9 @@
             </div>
             <div class="col-md-3">
                 <label class="letraCabecera" for="raza">Animal</label>
-                <select class="form-control" id="animal" formControlName="animal">
-                    <option [ngValue]="null"></option>
-                    <option value="Perro">Perro</option>
-                    <option value="Gato">Gato</option>
-                    <option value="Otro">Otro</option>
-                </select>
+                <ng-select [items]="tiposAnimales" formControlName="animal" bindLabel="descripcion"
+                   placeholder="Raza" [(ngModel)]="animalSeleccionado">
+                </ng-select>
             </div>
             <div class="col-md-2">
                 <label class="letraLabels">Cualquiera</label>

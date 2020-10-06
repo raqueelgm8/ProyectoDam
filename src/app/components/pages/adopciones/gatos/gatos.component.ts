@@ -19,6 +19,7 @@ export class GatosComponent implements OnInit {
   formCabecera: FormGroup;
   gatos: Animal[];
   comboRazasGato: Combo[];
+  razaSeleccionada: Combo;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -72,7 +73,6 @@ export class GatosComponent implements OnInit {
     }});
   }
   buscar() {
-    const raza: Combo = this.comboRazasGato.find(element => element.id === this.formCabecera.controls.raza.value);
     const gato: Animal = {
       idAnimal: null,
       // adoptado: this.formCabecera.controls.disponible.value,
@@ -81,7 +81,7 @@ export class GatosComponent implements OnInit {
       edad: this.formCabecera.controls.edad.value,
       imagen: null,
       nombre: null,
-      raza: raza !== undefined ? raza.descripcion : null,
+      raza: this.razaSeleccionada.descripcion,
       // sexo: this.formCabecera.controls.sexo.value,
       sexo: this.formCabecera.controls.sexo.value !== null && this.formCabecera.controls.sexo.value !== 'null' ?
       this.formCabecera.controls.sexo.value : null,

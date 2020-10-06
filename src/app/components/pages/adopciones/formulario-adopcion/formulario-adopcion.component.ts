@@ -1,7 +1,6 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Perro } from '../perros/perros.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPrivacidadComponent } from './modal-privacidad/modal-privacidad.component';
 import * as R from 'ramda';

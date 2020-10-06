@@ -18,6 +18,7 @@ export class OtrosComponent implements OnInit {
   formCabecera: FormGroup;
   otros: Animal[];
   razas: Combo[];
+  razaSeleccionada: Combo;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -72,7 +73,6 @@ export class OtrosComponent implements OnInit {
     }});
   }
   buscar() {
-    const raza: Combo = this.razas.find(element => element.id === this.formCabecera.controls.raza.value);
     const perro: Animal = {
       idAnimal: null,
       // adoptado: this.formCabecera.controls.disponible.value,
@@ -81,7 +81,7 @@ export class OtrosComponent implements OnInit {
       edad: this.formCabecera.controls.edad.value,
       imagen: null,
       nombre: null,
-      raza: raza !== undefined ? raza.descripcion : null,
+      raza: this.razaSeleccionada.descripcion,
       // sexo: this.formCabecera.controls.sexo.value,
       sexo: this.formCabecera.controls.sexo.value !== null && this.formCabecera.controls.sexo.value !== 'null' ?
       this.formCabecera.controls.sexo.value : null,

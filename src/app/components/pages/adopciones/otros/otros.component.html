@@ -9,12 +9,9 @@
             </div>
             <div class="col-md-4">
                 <label class="letraCabecera" for="raza">Animal</label>
-                <select class="form-control" id="raza" formControlName="raza">
-                    <option [ngValue]="null"></option>
-                    <option *ngFor="let animal of razas" [value]="animal.id">
-                        {{animal.descripcion}}
-                    </option>
-                </select>
+                <ng-select [items]="razas" formControlName="raza" bindLabel="descripcion"
+                   placeholder="Raza" [(ngModel)]="razaSeleccionada">
+                </ng-select>
             </div>
             <div class="col-md-8 radio-inline">
                 <label class="letraCabecera" for="edad">Edad mínima</label>

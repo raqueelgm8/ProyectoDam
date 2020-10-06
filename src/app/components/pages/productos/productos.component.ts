@@ -17,6 +17,10 @@ export class ProductosComponent implements OnInit {
   @Output() cestaEvent = new EventEmitter<any>();
   formCabecera: FormGroup;
   cesta: Producto[];
+  tiposAnimales = [
+    {descripcion: 'Perro'}, {descripcion: 'Gato'}, {descripcion: 'Otro'}
+  ];
+  animalSeleccionado: any;
   constructor(
     private fb: FormBuilder,
     private modal: NgbModal,
@@ -64,7 +68,7 @@ export class ProductosComponent implements OnInit {
     });
   }
   buscar() {
-    const tipoAnimal = this.formCabecera.controls.animal.value;
+    const tipoAnimal = this.animalSeleccionado.descripcion;
     const categoria = this.formCabecera.controls.categoria.value !== null && this.formCabecera.controls.categoria.value !== 'null' ?
     this.formCabecera.controls.categoria.value : null;
     this.productosService.buscarProductos(categoria, tipoAnimal).then((result) => {

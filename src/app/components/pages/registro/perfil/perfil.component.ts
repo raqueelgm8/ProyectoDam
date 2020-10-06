@@ -39,7 +39,7 @@ export class PerfilComponent implements OnInit {
   @ViewChild('MatPaginatorPedidos', {read: MatPaginator}) paginatorPedidos: MatPaginator;
   @ViewChild('MatSortPedidos', {read: MatPaginator}) matSortPedidos: MatSort;
   @ViewChild('MatSortSolicitudes', {read: MatPaginator}) matSortSolicitudes: MatSort;
-
+  provinciaSeleccionada: Combo;
   constructor(
     public route: ActivatedRoute,
     public fb: FormBuilder,
@@ -109,7 +109,8 @@ export class PerfilComponent implements OnInit {
       this.formPerfil.controls.dni.setValue(result.dni);
       this.formPerfil.controls.edad.setValue(result.edad);
       this.formPerfil.controls.direccion.setValue(result.direccion);
-      this.formPerfil.controls.provincia.setValue(result.provincia);
+      // this.formPerfil.controls.provincia.setValue(result.provincia);
+      this.provinciaSeleccionada = this.comboProvincias.find(element => element.id === this.usuario.provincia);
       this.formPerfil.controls.codigoPostal.setValue(result.codigoPostal);
       this.formPerfil.controls.telefono.setValue(result.telefono);
       this.formPerfil.controls.pass1.setValue(result.password);
@@ -211,7 +212,7 @@ export class PerfilComponent implements OnInit {
       edad: Number(this.formPerfil.controls.edad.value),
       email: this.formPerfil.controls.email.value,
       password: this.formPerfil.controls.pass1.value,
-      provincia: this.formPerfil.controls.provincia.value,
+      provincia: this.provinciaSeleccionada.id,
       sexo: this.formPerfil.controls.sexo.value,
       telefono: this.formPerfil.controls.telefono.value,
       idUsuario: null,
@@ -240,7 +241,8 @@ export class PerfilComponent implements OnInit {
     this.formPerfil.controls.dni.setValue(this.usuario.dni);
     this.formPerfil.controls.edad.setValue(this.usuario.edad);
     this.formPerfil.controls.direccion.setValue(this.usuario.direccion);
-    this.formPerfil.controls.provincia.setValue(this.usuario.provincia);
+    // this.formPerfil.controls.provincia.setValue(this.usuario.provincia);
+    this.provinciaSeleccionada = this.comboProvincias.find(element => element.id === this.usuario.provincia);
     this.formPerfil.controls.codigoPostal.setValue(this.usuario.codigoPostal);
     this.formPerfil.controls.telefono.setValue(this.usuario.telefono);
   }

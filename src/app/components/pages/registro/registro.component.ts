@@ -16,6 +16,7 @@ export class RegistroComponent implements OnInit {
 
   formRegistro: FormGroup;
   comboProvincias: Combo[];
+  provinciaSeleccionada: Combo;
   constructor(
     public fb: FormBuilder,
     public combo: ComboService,
@@ -66,7 +67,7 @@ export class RegistroComponent implements OnInit {
         edad: Number(this.formRegistro.controls.edad.value),
         email: this.formRegistro.controls.email.value,
         password: this.formRegistro.controls.pass1.value,
-        provincia: this.formRegistro.controls.provincia.value,
+        provincia: this.provinciaSeleccionada.id,
         sexo: this.formRegistro.controls.sexo.value,
         telefono: this.formRegistro.controls.telefono.value,
         idUsuario: null,

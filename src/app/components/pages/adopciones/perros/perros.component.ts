@@ -1,46 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StorageService } from 'angular-webstorage-service';
 import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
 import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
 import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ReplaySubject } from 'rxjs';
 
-export interface CodeDescription {
-  id: string;
-  description: string;
-}
-export interface Perro {
-  id: string;
-  description: string;
-  imagen: string;
-  raza: string;
-  edad: number;
-  tipoEdad: string;
-  nombre: string;
-  sexo: string;
-}
 @Component({
   selector: 'app-perros',
   templateUrl: './perros.component.html',
-  styleUrls: ['./perros.component.css']
+  styleUrls: ['./perros.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class PerrosComponent implements OnInit {
 
   valorSlider = '1';
   formCabecera: FormGroup;
-  comboRazas: Combo[];
+  comboRazas: Combo[] = [];
   animales: Animal[];
   buscarPerros: Animal[];
+  selectedRaza: string;
+  razaSeleccionada: Combo;
+  statelist = [
+    { name: "state1", cities: ["city-1", "city-2"] },
+    { name: "state2", cities: ["city-3", "city-4"] },
+    { name: "state3", cities: ["city-5", "city-6"] },
+    { name: "state4", cities: ["city-7", "city-8"] }
+  ];
+  public filteredBanks: ReplaySubject<Combo[]> = new ReplaySubject<Combo[]>(1);
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private combo: ComboService,
     private animalesService: AnimalesService,
     public sanitizer: DomSanitizer,
+    private cd_: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -50,7 +47,8 @@ export class PerrosComponent implements OnInit {
   }
   recuperarCombos() {
     this.combo.obtenerComboTipo('Perro').then((result) => {
-      this.comboRazas = result;
+      this.comboRazas = [...result];
+      this.cd_.detectChanges();
     });
   }
   recuperarPerros() {
@@ -89,7 +87,6 @@ export class PerrosComponent implements OnInit {
     }});
   }
   buscar() {
-    const raza: Combo = this.comboRazas.find(element => element.id === this.formCabecera.controls.raza.value);
     const perro: Animal = {
       idAnimal: null,
       // adoptado: this.formCabecera.controls.disponible.value,
@@ -98,7 +95,7 @@ export class PerrosComponent implements OnInit {
       edad: this.formCabecera.controls.edad.value,
       imagen: null,
       nombre: null,
-      raza: raza !== undefined ? raza.descripcion : null,
+      raza: this.razaSeleccionada.descripcion,
       // sexo: this.formCabecera.controls.sexo.value,
       sexo: this.formCabecera.controls.sexo.value !== null && this.formCabecera.controls.sexo.value !== 'null' ?
       this.formCabecera.controls.sexo.value : null,

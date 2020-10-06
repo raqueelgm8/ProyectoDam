@@ -23,3 +23,12 @@ h1 {
     font-weight: bold;
     font-size: medium;
 }
+.ng-select.custom {
+    border:0px;
+    min-height: 0px;
+    border-radius: 0;
+}
+.ng-select.custom .ng-select-container  {            
+    min-height: 0px;
+    border-radius: 0;
+}

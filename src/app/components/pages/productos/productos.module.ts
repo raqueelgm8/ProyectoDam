@@ -15,6 +15,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { DropdownCestaComponent } from './dropdown-cesta/dropdown-cesta.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { DropdownCestaComponent } from './dropdown-cesta/dropdown-cesta.componen
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxMatSelectSearchModule,
+    NgSelectModule
   ], entryComponents: [
     FichaProductoComponent
   ], exports: [

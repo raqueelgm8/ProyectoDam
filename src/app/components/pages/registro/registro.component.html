@@ -91,12 +91,15 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-globe-europe"></i></span>
                     </div>
-                    <select class="form-control" id="provincia" formControlName="provincia" required [ngClass]="{ 'is-invalid': this.formRegistro.get('provincia').errors}">
+                    <ng-select style="min-width: 330px;" [items]="comboProvincias" formControlName="provincia" bindLabel="descripcion"
+                   placeholder="Provincia" [(ngModel)]="provinciaSeleccionada">
+                    </ng-select>
+                    <!--<select class="form-control" id="provincia" formControlName="provincia" required [ngClass]="{ 'is-invalid': this.formRegistro.get('provincia').errors}">
                         <option hidden [ngValue]="null" selected>Provincia</option>
                         <option *ngFor="let provincia of comboProvincias" [value]="provincia.id">
                             {{provincia.descripcion}}
                         </option>
-                    </select>
+                    </select>-->
                 </div>
             </div>
             <div *ngIf="this.formRegistro.get('provincia').errors" class="col-10">
