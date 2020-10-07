@@ -110,11 +110,11 @@ export class PerfilComponent implements OnInit {
       this.formPerfil.controls.edad.setValue(result.edad);
       this.formPerfil.controls.direccion.setValue(result.direccion);
       // this.formPerfil.controls.provincia.setValue(result.provincia);
-      this.provinciaSeleccionada = this.comboProvincias.find(element => element.id === this.usuario.provincia);
       this.formPerfil.controls.codigoPostal.setValue(result.codigoPostal);
       this.formPerfil.controls.telefono.setValue(result.telefono);
       this.formPerfil.controls.pass1.setValue(result.password);
       this.formPerfil.controls.pass2.setValue(result.password);
+      this.provinciaSeleccionada = this.comboProvincias.find(element => element.id === this.usuario.provincia);
     }, error => {
       Swal.fire('¡ERROR!', error, 'error');
     });
