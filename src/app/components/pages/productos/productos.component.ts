@@ -6,6 +6,7 @@ import * as R from 'ramda';
 import { ProductosService } from 'src/app/api-rest/api/Productos/productos.service';
 import { Producto } from 'src/app/api-rest/models/Producto/producto.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -53,19 +54,23 @@ export class ProductosComponent implements OnInit {
     });
   }
   clickCard(producto: Producto) {
-    const modalRef = this.modal.open(FichaProductoComponent, {
-      centered: true,
-      size: 'lg'
-    });
-    modalRef.componentInstance.producto = producto;
-    modalRef.componentInstance.cesta = this.cesta;
-    modalRef.result.then((result) => {
-      if (!R.isNil(result)) {
-        this.cesta = result;
-        console.log(this.cesta);
-        this.cestaEvent.emit(this.cesta);
-      }
-    });
+    if (producto.stock > 0) {
+      const modalRef = this.modal.open(FichaProductoComponent, {
+        centered: true,
+        size: 'lg'
+      });
+      modalRef.componentInstance.producto = producto;
+      modalRef.componentInstance.cesta = this.cesta;
+      modalRef.result.then((result) => {
+        if (!R.isNil(result)) {
+          this.cesta = result;
+          console.log(this.cesta);
+          this.cestaEvent.emit(this.cesta);
+        }
+      });
+    } else {
+      Swal.fire('¡SIN STOCK!', 'El producto seleccionado no tiene stock disponible.', 'error');
+    }
   }
   buscar() {
     const tipoAnimal = this.animalSeleccionado.descripcion;
