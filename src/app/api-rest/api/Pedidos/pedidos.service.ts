@@ -54,7 +54,7 @@ export class PedidosService {
   }
   async eliminarPedido(idUsuario: number, idPedido: number): Promise<string> {
     return new Promise<string>( async (resolve, reject) => {
-      this.httpClient.delete('api/pedidos/eliminarPedido/' + idUsuario + '/' + idPedido).subscribe((result) => {
+      this.httpClient.delete('/api/pedidos/eliminarPedido/' + idUsuario + '/' + idPedido).subscribe((result) => {
         Swal.fire('¡Éxito!', 'Usuario eliminado con éxito', 'success');
         resolve('El usuario se ha eliminado correctamente');
       }, error => {

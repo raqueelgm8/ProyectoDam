@@ -1,6 +1,6 @@
 .testbox {
     margin: 20px auto;
-    width: 1250px; 
+    width: 1150px; 
     min-height: 700px;
     -webkit-border-radius: 8px/7px; 
     -moz-border-radius: 8px/7px; 
@@ -17,4 +17,41 @@ h1 {
     color: #4c4c4c;
     padding-top: 10px;
     margin-bottom: 10px;
+}
+.mensaje {
+    color: rgba(0, 0, 0, 0.54);
+    padding: 15px 24px;
+}
+.ml5 {
+  margin-left: 6px !important;
+}
+.mat-column-idSolicitud {
+  min-width: 200px;
+}
+.mat-column-animal {
+  min-width: 200px;
+}
+.mat-column-tipoAnimal {
+  min-width: 100px;
+}
+.mat-column-estado {
+  min-width: 150px;
+}
+.mat-column-acciones {
+  min-width: 200px;
+}
+.mat-column-idPedido {
+  min-width: 150px;
+}
+.mat-column-total {
+  min-width: 100px;
+}
+.mat-column-fechaPedido {
+  min-width: 150px;
+}
+.mat-column-metodoPago {
+  min-width: 170px;
+}
+.indexS {
+  z-index: 60000 !important;
 }

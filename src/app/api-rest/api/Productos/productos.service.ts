@@ -68,9 +68,9 @@ export class ProductosService {
       });
     });
   }
-  async eliminarAnimal(idProducto: number): Promise<string> {
+  async eliminarProducto(idProducto: number): Promise<string> {
     return new Promise<string>( async (resolve, reject) => {
-      this.httpClient.delete('api/productos/eliminarProducto/' + idProducto).subscribe((result) => {
+      this.httpClient.delete('/api/productos/eliminarProducto/' + idProducto).subscribe((result) => {
         Swal.fire('¡Éxito!', 'Animal eliminado con éxito', 'success');
         resolve('El Animal se ha eliminado correctamente');
       }, error => {

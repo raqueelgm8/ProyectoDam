@@ -9,6 +9,60 @@
     </div>
     <!--TABLA USUARIOS-->
 
+    <div class="mensaje" *ngIf="!sindatosUsuario">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                No hay información para mostrar.
+            </div>
+        </div>
+    </div>
+    <div *ngIf="sindatosUsuario" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceUsuarios" class="mat-elevation-z8" matSort width="100%" #MatSortUsuarios="matSort">
+            <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let usuario"> 
+                {{usuario.idUsuario}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let usuario"> 
+                {{usuario.nombre}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="apellidos">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let usuario"> 
+                {{usuario.apellidos}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="provincia">
+            <th mat-header-cell *matHeaderCellDef>Provincia</th>
+            <td mat-cell *matCellDef="let usuario"> 
+                {{usuario.provincia}}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let usuario"> 
+                <button class="btn btn-success mr-1" (click)="verUsuario(usuario)"><i class="far fa-eye"></i></button>
+                <button class="btn btn-warning mr-1" (click)="editarUsuario(usuario)"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="eliminarUsuario(usuario)"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsUsuario"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsUsuario;"></tr>
+        </table>
+      </div>
+      <mat-paginator #MatPaginatorUsuarios="matPaginator" class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+
+
     <hr>
     <div class="row">
         <div class="col-md-1"></div>
@@ -18,6 +72,66 @@
     </div>
     <!--TABLA ANIMALES-->
 
+    <div class="mensaje" *ngIf="!sindatosAnimales">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                No hay información para mostrar.
+            </div>
+        </div>
+    </div>
+    <div *ngIf="sindatosAnimales" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceAnimales" class="mat-elevation-z8" matSort width="100%" #MatSortAnimales="matSort">
+            <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Id Animal</th>
+            <td mat-cell *matCellDef="let animal"> 
+                {{animal.idAnimal}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="animal">
+            <th mat-header-cell *matHeaderCellDef>Animal</th>
+            <td mat-cell *matCellDef="let animal"> 
+                {{animal.nombre}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="tipoAnimal">
+            <th mat-header-cell *matHeaderCellDef>Tipo animal</th>
+            <td mat-cell *matCellDef="let animal"> 
+                {{animal.tipoAnimal}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="edad">
+            <th mat-header-cell *matHeaderCellDef>Edad</th>
+            <td mat-cell *matCellDef="let animal"> 
+                {{animal.edad}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="raza">
+            <th mat-header-cell *matHeaderCellDef>Raza</th>
+            <td mat-cell *matCellDef="let animal"> 
+                {{animal.raza}}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let animal"> 
+                <button class="btn btn-success mr-1" (click)="verAnimal(animal)"><i class="far fa-eye"></i></button>
+                <button class="btn btn-warning mr-1" (click)="editarAnimal(animal)"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="eliminarAnimal(animal)"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsAnimales"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsAnimales;"></tr>
+        </table>
+      </div>
+      <mat-paginator #MatPaginatorAnimales="matPaginator" class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+
     <hr>
     <div class="row">
         <div class="col-md-1"></div>
@@ -26,7 +140,58 @@
         </div>
     </div>
     <!--TABLA SOLICITUDES-->
+    <div class="mensaje" *ngIf="!sinDatosSolicitudes">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                No hay información para mostrar.
+            </div>
+        </div>
+    </div>
+    <div *ngIf="sinDatosSolicitudes" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceSolicitudes" class="mat-elevation-z8" matSort width="100%" #MatSortSolicitudes="matSort">
+            <ng-container matColumnDef="idSolicitud">
+            <th mat-header-cell *matHeaderCellDef>Id Solicitud</th>
+            <td mat-cell *matCellDef="let solicitud"> 
+                {{solicitud.id.idSolicitud + '-' + solicitud.id.idUsuario + '-' + solicitud.id.idAnimal}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="animal">
+            <th mat-header-cell *matHeaderCellDef>Animal</th>
+            <td mat-cell *matCellDef="let solicitud"> 
+                {{solicitud.nombreAnimal}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="tipoAnimal">
+            <th mat-header-cell *matHeaderCellDef>Tipo animal</th>
+            <td mat-cell *matCellDef="let solicitud"> 
+                {{solicitud.tipoAnimal}}
+            </td>
+          </ng-container>
 
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let solicitud"> 
+                {{solicitud.estado}}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let solicitud"> 
+                <button class="btn btn-success mr-1" (click)="verSolicitud(solicitud)"><i class="far fa-eye"></i></button>
+                <button class="btn btn-warning mr-1" (click)="editarSolicitud(solicitud)"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="eliminarSolicitud(solicitud)"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsSolicitudes"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsSolicitudes;"></tr>
+        </table>
+        </div>
+        <mat-paginator #MatPaginatorSolicitudes="matPaginator" class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
 
     <hr>
     <div class="row">
@@ -37,7 +202,66 @@
     </div>
     <!--TABLA PEDIDOS-->
 
+    <div class="mensaje" *ngIf="!sinDatosPedidos">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                No hay información para mostrar.
+            </div>
+        </div>
+    </div>
+    <div *ngIf="sinDatosPedidos" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourcePedidos" class="mat-elevation-z8" matSort width="100%" #MatSortPedidos="matSort">
+          <ng-container matColumnDef="idPedido">
+            <th mat-header-cell *matHeaderCellDef>Id Pedido</th>
+            <td mat-cell *matCellDef="let pedido"> 
+                {{pedido.id.idPedido + '-' + pedido.id.idUsuario}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let pedido"> 
+                {{pedido.estadoPedido}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let pedido"> 
+                {{pedido.total + '€'}}
+            </td>
+          </ng-container>
 
+          <ng-container matColumnDef="fechaPedido">
+            <th mat-header-cell *matHeaderCellDef>Fecha Pedido</th>
+            <td mat-cell *matCellDef="let pedido"> 
+                {{pedido.fechaPedido | date : 'dd/MM/yyyy'}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="metodoPago">
+            <th mat-header-cell *matHeaderCellDef>Método de pago</th>
+            <td mat-cell *matCellDef="let pedido"> 
+                {{pedido.metodopago}}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let pedido"> 
+                <button class="btn btn-success mr-1" (click)="verPedido(pedido)"><i class="far fa-eye"></i></button>
+                <button class="btn btn-warning mr-1"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="eliminarPedido(pedido)"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsPedidos"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsPedidos;"></tr>
+        </table>
+        </div>
+        <mat-paginator #MatPaginatorPedidos="matPaginator" class="perPage" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+      
     <hr>
     <div class="row">
         <div class="col-md-1"></div>
@@ -46,4 +270,72 @@
         </div>
     </div>
     <!--TABLA PRODUCTOS-->
+
+    <div class="mensaje" *ngIf="!sindatosProductos">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                No hay información para mostrar.
+            </div>
+        </div>
+    </div>
+    <div *ngIf="sindatosProductos" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceProductos" class="mat-elevation-z8" matSort width="100%" #MatSortUsuarios="matSort">
+            <ng-container matColumnDef="idProducto">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let producto"> 
+                {{producto.idProducto}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>nombre</th>
+            <td mat-cell *matCellDef="let producto"> 
+                {{producto.nombre}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef>precio</th>
+            <td mat-cell *matCellDef="let producto"> 
+                {{producto.precio + '€'}}
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef>Stock</th>
+            <td mat-cell *matCellDef="let producto"> 
+                {{producto.stock}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef>Categoría</th>
+            <td mat-cell *matCellDef="let producto"> 
+                {{producto.categoria}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="animal">
+            <th mat-header-cell *matHeaderCellDef>Tipo animal</th>
+            <td mat-cell *matCellDef="let producto"> 
+                {{producto.tipoAnimal}}
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let producto"> 
+                <button class="btn btn-success mr-1" (click)="verProducto(producto)"><i class="far fa-eye"></i></button>
+                <button class="btn btn-warning mr-1" (click)="editarProducto(producto)"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="eliminarProducto(producto)"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsProductos"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsProductos;"></tr>
+        </table>
+      </div>
+      <mat-paginator #MatPaginatorProductos="matPaginator" class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+
 </div>
