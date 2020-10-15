@@ -60,6 +60,7 @@
                     <p class="card-text">Raza: {{otro.raza}}</p>
                     <!--Imagen hembra o macho?-->
                     <p class="card-text">Sexo: {{otro.sexo}}</p>
+                    <button *ngIf="this.idUsuario === 1" class="btn btn-danger  fa fa-close" (click)="eliminarAnimal(otro)">Eliminar</button>
                 </div>
             </div>
         </div>

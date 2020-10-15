@@ -60,6 +60,7 @@
                     <p class="card-text">Edad: {{gato.edad}}</p>
                     <p class="card-text">Raza: {{gato.raza}}</p>
                     <p class="card-text">Sexo: {{gato.sexo}}</p>
+                    <button *ngIf="this.idUsuario === 1" class="btn btn-danger  fa fa-close" (click)="eliminarAnimal(gato)">Eliminar</button>
                 </div>
             </div>
         </div>

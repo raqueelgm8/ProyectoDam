@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FichaProductoComponent } from './ficha-producto/ficha-producto.component';
@@ -7,6 +7,8 @@ import { ProductosService } from 'src/app/api-rest/api/Productos/productos.servi
 import { Producto } from 'src/app/api-rest/models/Producto/producto.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
+import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -22,12 +24,18 @@ export class ProductosComponent implements OnInit {
     {descripcion: 'Perro'}, {descripcion: 'Gato'}, {descripcion: 'Otro'}
   ];
   animalSeleccionado: any;
+  usuario: Usuario;
+  idUsuario: number;
   constructor(
     private fb: FormBuilder,
     private modal: NgbModal,
     private productosService: ProductosService,
-    public sanitizer: DomSanitizer
-  ) { }
+    public sanitizer: DomSanitizer,
+    private usuarioService: UsuarioService,
+    private cd_: ChangeDetectorRef,
+  ) { 
+      this.consultarUsuario();
+  }
 
   ngOnInit(): void {
     this.formCabecera = this.fb.group({
@@ -35,6 +43,10 @@ export class ProductosComponent implements OnInit {
       categoria: null
     });
     this.buscarAlLPedidos();
+  }
+  consultarUsuario() {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    this.idUsuario = this.usuario.idUsuario;
   }
   buscarAlLPedidos() {
     this.productosService.buscarTodosProductos().then((result) => {
@@ -90,6 +102,24 @@ export class ProductosComponent implements OnInit {
         const fileUrl = URL.createObjectURL(blob);
         element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
       });
+    });
+  }
+  eliminarProducto(producto: Producto) {
+    Swal.fire({
+      title: '¿Estás seguro de que deseas eliminar este producto?',
+      text: 'No podrás revertir esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar producto'
+    }).then((mensaje) => {
+      if (mensaje.value) {
+        this.productosService.eliminarProducto(producto.idProducto);
+        const index = this.productos.findIndex(element => element.idProducto === producto.idProducto);
+        this.productos.splice(index, 1);
+        this.cd_.detectChanges();
+      }
     });
   }
 }

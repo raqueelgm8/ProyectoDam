@@ -7,7 +7,9 @@ import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service'
 import { Animal } from 'src/app/api-rest/models/Animal/animal.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ReplaySubject } from 'rxjs';
-
+import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
+import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
 @Component({
   selector: 'app-perros',
   templateUrl: './perros.component.html',
@@ -24,26 +26,28 @@ export class PerrosComponent implements OnInit {
   buscarPerros: Animal[];
   selectedRaza: string;
   razaSeleccionada: Combo;
-  statelist = [
-    { name: "state1", cities: ["city-1", "city-2"] },
-    { name: "state2", cities: ["city-3", "city-4"] },
-    { name: "state3", cities: ["city-5", "city-6"] },
-    { name: "state4", cities: ["city-7", "city-8"] }
-  ];
-  public filteredBanks: ReplaySubject<Combo[]> = new ReplaySubject<Combo[]>(1);
+  usuario: Usuario;
+  idUsuario: number;
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private combo: ComboService,
     private animalesService: AnimalesService,
     public sanitizer: DomSanitizer,
-    private cd_: ChangeDetectorRef
-  ) { }
+    private cd_: ChangeDetectorRef,
+    private usuarioService: UsuarioService
+  ) {
+    this.consultarUsuario();
+  }
 
   ngOnInit() {
     this.iniciarGrupos();
     this.recuperarCombos();
     this.recuperarPerros();
+  }
+  consultarUsuario() {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    this.idUsuario = this.usuario.idUsuario;
   }
   recuperarCombos() {
     this.combo.obtenerComboTipo('Perro').then((result) => {
@@ -118,6 +122,24 @@ export class PerrosComponent implements OnInit {
         const fileUrl = URL.createObjectURL(blob);
         element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
       });
+    });
+  }
+  eliminarAnimal(animal: Animal) {
+    Swal.fire({
+      title: '¿Estás seguro de que deseas eliminar este animal?',
+      text: 'No podrás revertir esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar animal'
+    }).then((mensaje) => {
+      if (mensaje.value) {
+        this.animalesService.eliminarAnimal(animal.idAnimal);
+        const index = this.animales.findIndex(element => element.idAnimal === animal.idAnimal);
+        this.animales.splice(index, 1);
+        this.cd_.detectChanges();
+      }
     });
   }
 }

@@ -48,6 +48,7 @@
                     <p *ngIf="producto.stock <= 0" class="card-text negrita">¡SIN STOCK!</p>
                     <p class="card-text">Precio: {{producto.precio}} €</p>
                     <p class="card-text">Animal: {{producto.tipoAnimal}}</p>
+                    <button *ngIf="this.idUsuario === 1" class="btn btn-danger  fa fa-close" (click)="eliminarProducto(producto)">Eliminar</button>
                 </div>
             </div>
         </div>
