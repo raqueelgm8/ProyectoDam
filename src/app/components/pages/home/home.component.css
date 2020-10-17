@@ -4,3 +4,8 @@
 .fondo-blanco {
     background-color: whitesmoke;
 }
+h1 {
+    font-weight: bold;
+    font-size: x-large;
+    text-decoration: underline;
+}

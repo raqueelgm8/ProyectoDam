@@ -10,10 +10,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AnimalNuevoComponent } from './animal-nuevo/animal-nuevo.component';
+import { ProductoNuevoComponent } from './producto-nuevo/producto-nuevo.component';
 
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [AdminComponent, AnimalNuevoComponent, ProductoNuevoComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

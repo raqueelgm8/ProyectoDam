@@ -333,4 +333,10 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+  animalNuevo() {
+    this.router.navigate(['/admin/animal-nuevo']);
+  }
+  productoNuevo() {
+    this.router.navigate(['/admin/producto-nuevo']);
+  }
 }
