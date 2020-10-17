@@ -28,7 +28,7 @@ import { ProductoNuevoComponent } from './producto-nuevo/producto-nuevo.componen
     MatSortModule,
     MatProgressSpinnerModule,
     NgxMatSelectSearchModule,
-    NgSelectModule
+    NgSelectModule,
   ]
 })
 export class AdminModule { }

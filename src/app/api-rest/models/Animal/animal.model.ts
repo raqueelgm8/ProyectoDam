@@ -5,7 +5,7 @@ export class Animal {
     adoptado: boolean;
     descripcion: string;
     edad: number;
-    imagen: string;
+    imagen: any;
     nombre: string;
     raza: string;
     tipoAnimal: string;

@@ -17,10 +17,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DndDirective } from './directivas/dnd/dnd.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DndDirective,
   ],
   imports: [
     BrowserModule,

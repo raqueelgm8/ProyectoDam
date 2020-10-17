@@ -42,6 +42,7 @@
     "sweetalert2": "^9.15.1",
     "tslib": "^1.10.0",
     "validator": "^13.1.1",
+    "xdata": "^2.1.17",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
