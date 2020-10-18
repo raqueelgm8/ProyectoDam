@@ -65,16 +65,35 @@ export class OtrosComponent implements OnInit {
       this.otros = result as Animal[];
       this.otros.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
-        const binaryString = window.atob(element.imagen);
-        const binaryLen = binaryString.length;
-        const bytes = new Uint8Array(binaryLen);
-        for (let i = 0; i < binaryLen; i++) {
-          const ascii = binaryString.charCodeAt(i);
-          bytes[i] = ascii;
+        console.log(element.imagen);
+        let imagen;
+        if (element.archivoImagen !== undefined && element.archivoImagen !== null) {
+          imagen = element.archivoImagen;
+          var splitted = imagen.split(',', 3);
+          console.log(splitted)
+          const binaryString = window.atob(splitted[1]);
+          const binaryLen = binaryString.length;
+          const bytes = new Uint8Array(binaryLen);
+          for (let i = 0; i < binaryLen; i++) {
+            const ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+          }
+          const blob = new Blob([bytes], { type: 'application/png'});
+          const fileUrl = URL.createObjectURL(blob);
+          element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+        } else {
+          imagen = element.imagen;
+          const binaryString = window.atob(imagen);
+          const binaryLen = binaryString.length;
+          const bytes = new Uint8Array(binaryLen);
+          for (let i = 0; i < binaryLen; i++) {
+            const ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+          }
+          const blob = new Blob([bytes], { type: 'application/png'});
+          const fileUrl = URL.createObjectURL(blob);
+          element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
         }
-        const blob = new Blob([bytes], { type: 'application/png'});
-        const fileUrl = URL.createObjectURL(blob);
-        element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
       });
     });
   }
@@ -107,16 +126,35 @@ export class OtrosComponent implements OnInit {
       this.otros = result;
       this.otros.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
-        const binaryString = window.atob(element.imagen);
-        const binaryLen = binaryString.length;
-        const bytes = new Uint8Array(binaryLen);
-        for (let i = 0; i < binaryLen; i++) {
-          const ascii = binaryString.charCodeAt(i);
-          bytes[i] = ascii;
+        console.log(element.imagen);
+        let imagen;
+        if (element.archivoImagen !== undefined && element.archivoImagen !== null) {
+          imagen = element.archivoImagen;
+          var splitted = imagen.split(',', 3);
+          console.log(splitted)
+          const binaryString = window.atob(splitted[1]);
+          const binaryLen = binaryString.length;
+          const bytes = new Uint8Array(binaryLen);
+          for (let i = 0; i < binaryLen; i++) {
+            const ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+          }
+          const blob = new Blob([bytes], { type: 'application/png'});
+          const fileUrl = URL.createObjectURL(blob);
+          element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+        } else {
+          imagen = element.imagen;
+          const binaryString = window.atob(imagen);
+          const binaryLen = binaryString.length;
+          const bytes = new Uint8Array(binaryLen);
+          for (let i = 0; i < binaryLen; i++) {
+            const ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+          }
+          const blob = new Blob([bytes], { type: 'application/png'});
+          const fileUrl = URL.createObjectURL(blob);
+          element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
         }
-        const blob = new Blob([bytes], { type: 'application/png'});
-        const fileUrl = URL.createObjectURL(blob);
-        element.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
       });
     });
   }
