@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-otros',
   templateUrl: './otros.component.html',
@@ -30,7 +31,8 @@ export class OtrosComponent implements OnInit {
     private animalesService: AnimalesService,
     public sanitizer: DomSanitizer,
     private cd_: ChangeDetectorRef,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private location: Location
   ) {
     this.consultarUsuario();
   }
@@ -133,6 +135,7 @@ export class OtrosComponent implements OnInit {
         const index = this.otros.findIndex(element => element.idAnimal === animal.idAnimal);
         this.otros.splice(index, 1);
         this.cd_.detectChanges();
+        this.location.back();
       }
     });
   }

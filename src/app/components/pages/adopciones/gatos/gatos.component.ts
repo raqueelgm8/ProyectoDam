@@ -9,6 +9,7 @@ import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
 import Swal from 'sweetalert2';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-gatos',
   templateUrl: './gatos.component.html',
@@ -30,7 +31,8 @@ export class GatosComponent implements OnInit {
     private animalesService: AnimalesService,
     public sanitizer: DomSanitizer,
     private cd_: ChangeDetectorRef,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private location: Location
   ) {
     this.consultarUsuario();
    }
@@ -132,6 +134,7 @@ export class GatosComponent implements OnInit {
         const index = this.gatos.findIndex(element => element.idAnimal === animal.idAnimal);
         this.gatos.splice(index, 1);
         this.cd_.detectChanges();
+        this.location.back();
       }
     });
   }

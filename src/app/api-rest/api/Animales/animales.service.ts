@@ -77,7 +77,10 @@ export class AnimalesService {
     return new Promise<Animal>( async (resolve, reject) => {
       const ruta = 'api/animales/guardarAnimal';
       console.log(animal);
-      this.httpClient.post(ruta, animal).subscribe((result) => {
+      const options = {
+        headers: {'Content-Type': undefined}
+      };
+      this.httpClient.post(ruta, animal, options).subscribe((result) => {
         animal = result as Animal;
         resolve(animal);
       }, error => {

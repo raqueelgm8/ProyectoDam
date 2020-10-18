@@ -12,4 +12,5 @@ export class Animal {
     tipoEdad: string;
     imagenSrc?: any;
     sexo: string;
+    archivoImagen?: string;
 }

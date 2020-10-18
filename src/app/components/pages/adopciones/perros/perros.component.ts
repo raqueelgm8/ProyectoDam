@@ -10,6 +10,8 @@ import { ReplaySubject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
+import { Location } from '@angular/common';
+import { type } from 'os';
 @Component({
   selector: 'app-perros',
   templateUrl: './perros.component.html',
@@ -35,7 +37,8 @@ export class PerrosComponent implements OnInit {
     private animalesService: AnimalesService,
     public sanitizer: DomSanitizer,
     private cd_: ChangeDetectorRef,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private location: Location
   ) {
     this.consultarUsuario();
   }
@@ -111,6 +114,7 @@ export class PerrosComponent implements OnInit {
       this.animales = result;
       this.animales.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
+        console.log(typeof(element.imagen));
         const binaryString = window.atob(element.imagen);
         const binaryLen = binaryString.length;
         const bytes = new Uint8Array(binaryLen);
@@ -139,6 +143,7 @@ export class PerrosComponent implements OnInit {
         const index = this.animales.findIndex(element => element.idAnimal === animal.idAnimal);
         this.animales.splice(index, 1);
         this.cd_.detectChanges();
+        this.location.back();
       }
     });
   }

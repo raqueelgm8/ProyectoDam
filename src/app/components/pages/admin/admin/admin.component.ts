@@ -79,10 +79,12 @@ export class AdminComponent implements OnInit {
     private router: Router,
     private paginator: MatPaginatorIntl,
     public combos: ComboService,
-  ) { 
-    this.combos.obtenerComboTipo('Provincia').then((result) => {
-      this.comboProvincias = result;
-    });
+  ) {
+    this.consultarUsuarios();
+    this.consultarProductos();
+    this.consultarPedidos();
+    this.consultarAnimales();
+    this.consultarSolicitudes();
   }
   ngAfterViewInit(): void {
     this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
@@ -98,11 +100,6 @@ export class AdminComponent implements OnInit {
   }
   ngOnInit(): void {
     this.paginator.itemsPerPageLabel = "Registros por página";
-    this.consultarProductos();
-    this.consultarPedidos();
-    this.consultarAnimales();
-    this.consultarUsuarios();
-    this.consultarSolicitudes();
     this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
     this.dataSourceSolicitudes.sort = this.matSortSolicitudes;
     this.dataSourcePedidos.paginator = this.paginatorPedidos;
@@ -167,20 +164,28 @@ export class AdminComponent implements OnInit {
     });
   }
   consultarUsuarios() {
-    this.usuariosService.obtenerTodosLosUsuarios().then((result) => {
-      this.listaUsuario = result;
-      this.dataSourceUsuarios = new MatTableDataSource<Usuario>(this.listaUsuario);
-      this.dataSourceUsuarios.paginator = this.paginatorUsuarios;
-      this.dataSourceUsuarios.sort = this.matSortUsuarios;
-      this.listaUsuario.forEach(element => {
-        element.provincia = this.comboProvincias.find(combo => combo.id === element.provincia).descripcion;
+
+    this.combos.obtenerComboTipo('Provincia').then((combos) => {
+      this.comboProvincias = combos;
+      this.usuariosService.obtenerTodosLosUsuarios().then((result) => {
+        this.listaUsuario = result;
+        this.dataSourceUsuarios = new MatTableDataSource<Usuario>(this.listaUsuario);
+        this.dataSourceUsuarios.paginator = this.paginatorUsuarios;
+        this.dataSourceUsuarios.sort = this.matSortUsuarios;
+        if (result.length === 0) {
+          this.sindatosUsuario = false;
+        } else {
+          this.sindatosUsuario = true;
+        }
+        this.listaUsuario.forEach(element => {
+          const combo: Combo = combos.find(combo => combo.id === element.provincia);
+          if (combo) {
+            element.provincia = combo.descripcion;
+          }
+        });
       });
-      if (result.length === 0) {
-        this.sindatosUsuario = false;
-      } else {
-        this.sindatosUsuario = true;
-      }
     });
+
   }
   consultarSolicitudes() {
     this.solicitudesService.obtenerTodasSolicitudes().then((result) => {
