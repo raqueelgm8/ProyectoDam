@@ -29,6 +29,8 @@ export class AnimalNuevoComponent implements OnInit {
     {descripcion: 'Macho'}, {descripcion: 'Hembra'}
   ];
   sexoSeleccionado: any;
+  fileBlob: Blob;
+  base64textString: string;
   constructor(
     private fb: FormBuilder,
     private comboService: ComboService,
@@ -61,48 +63,48 @@ export class AnimalNuevoComponent implements OnInit {
     });
   }
   guardarAnimal() {
-    /*if (this.formAnimal.invalid) {
-      Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
-    } else {*/
-      const file: File = this.formAnimal.controls.imagen.value as File;
-      this._archivosService.cargarImagen(this.miFile).then((resultado) => {
-        console.log(resultado);
-        const animal: Animal = {
-          idAnimal: null,
-          adoptado: false,
-          descripcion: this.formAnimal.controls.descripcion.value,
-          edad: Number(this.formAnimal.controls.edad.value),
-          imagen: resultado,
-          nombre: this.formAnimal.controls.nombre.value,
-          raza: this.razaSeleccionada.descripcion,
-          sexo: this.sexoSeleccionado.descripcion[0],
-          tipoAnimal: this.animalSeleccionado.descripcion,
-          tipoEdad: this.tipoEdadSeleccionado.descripcion
-        };
-        console.log(animal);
-        this.animalService.crearAnimal(animal).then((result) => {
-          Swal.fire({
-            title: '¡El registro se ha realizado con éxito!',
-            icon: 'success',
-            showCancelButton: false,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ir a mi perfil!'
-          }).then((mensaje) => {
-            if (mensaje.value) {
-              Swal.fire('¡ÉXITO!', '¡Animal guardado con éxito!', 'success');
-            }
-          });
-        }, error => {
-          Swal.fire('ERROR!', 'Error', 'error');
-        });
+    const animal: Animal = {
+        idAnimal: null,
+        adoptado: false,
+        descripcion: this.formAnimal.controls.descripcion.value,
+        edad: Number(this.formAnimal.controls.edad.value),
+        imagen: null,
+        nombre: this.formAnimal.controls.nombre.value,
+        raza: this.razaSeleccionada.descripcion,
+        sexo: this.sexoSeleccionado.descripcion[0],
+        tipoAnimal: this.animalSeleccionado.descripcion,
+        tipoEdad: this.tipoEdadSeleccionado.descripcion,
+        archivoImagen: this.base64textString
+      };
+    console.log(animal);
+    this.animalService.crearAnimal(animal).then((result) => {
+      Swal.fire('¡ÉXITO!', '¡Animal guardado con éxito!', 'success');
+      }, error => {
+        Swal.fire('ERROR!', 'Error', 'error');
       });
-    // }
   }
   onFileChange(event) {
-    //this.mifile = event;
+    this.miFile = event.target.files[0];
+    /*const reader = new FileReader();
+    reader.onload = this._handleReaderLoad1ed.bind(this);
+    reader.readAsBinaryString(this.miFile);*/
+    const me = this;
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.base64textString = reader.result.toString();
+      console.log(me.base64textString);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
   }
-
+  _handleReaderLoaded(readerEvt) {
+    const binaryString = readerEvt.target.result;
+    this.base64textString = btoa(binaryString);
+    console.log(this.base64textString);
+   }
   // arrastrar imagenes
   files: any[] = [];
 

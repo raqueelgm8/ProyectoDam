@@ -75,12 +75,9 @@ export class AnimalesService {
   }
   async crearAnimal(animal: Animal): Promise<Animal> {
     return new Promise<Animal>( async (resolve, reject) => {
-      const ruta = 'api/animales/guardarAnimal';
+      const ruta = 'api/animales/guardarAnimal/';
       console.log(animal);
-      const options = {
-        headers: {'Content-Type': undefined}
-      };
-      this.httpClient.post(ruta, animal, options).subscribe((result) => {
+      this.httpClient.post(ruta, animal).subscribe((result) => {
         animal = result as Animal;
         resolve(animal);
       }, error => {

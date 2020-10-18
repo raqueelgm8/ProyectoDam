@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
 import { Location } from '@angular/common';
-import { type } from 'os';
 @Component({
   selector: 'app-perros',
   templateUrl: './perros.component.html',
