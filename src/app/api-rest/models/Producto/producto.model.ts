@@ -6,11 +6,11 @@ export class Producto {
     categoria: string;
     nombre: string;
     descripcion: string;
-    imagen: string;
+    imagen: any;
     stock: number;
-    tipoProducto: string;
     cantidad?: number;
     imagenSrc?: any;
     tipoAnimal: string;
-    detallePedido: DetallePedido[];
+    detallePedido?: DetallePedido[];
+    archivoImagen?: string;
 }

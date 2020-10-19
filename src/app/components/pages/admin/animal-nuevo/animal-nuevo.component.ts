@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
@@ -29,14 +30,14 @@ export class AnimalNuevoComponent implements OnInit {
     {descripcion: 'Macho'}, {descripcion: 'Hembra'}
   ];
   sexoSeleccionado: any;
-  fileBlob: Blob;
   base64textString: string;
   constructor(
     private fb: FormBuilder,
     private comboService: ComboService,
     private animalService: AnimalesService,
     private cd: ChangeDetectorRef,
-    private _archivosService: ArchivosService
+    private _archivosService: ArchivosService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -63,7 +64,10 @@ export class AnimalNuevoComponent implements OnInit {
     });
   }
   guardarAnimal() {
-    const animal: Animal = {
+    if (this.formAnimal.invalid) {
+      Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
+    } else {
+      const animal: Animal = {
         idAnimal: null,
         adoptado: false,
         descripcion: this.formAnimal.controls.descripcion.value,
@@ -76,25 +80,24 @@ export class AnimalNuevoComponent implements OnInit {
         tipoEdad: this.tipoEdadSeleccionado.descripcion,
         archivoImagen: this.base64textString
       };
-    console.log(animal);
-    this.animalService.crearAnimal(animal).then((result) => {
-      Swal.fire('¡ÉXITO!', '¡Animal guardado con éxito!', 'success');
+      this.animalService.crearAnimal(animal).then((result) => {
+        Swal.fire('¡ÉXITO!', '¡Animal guardado con éxito!', 'success');
       }, error => {
         Swal.fire('ERROR!', 'Error', 'error');
       });
+    }
+  }
+  volver() {
+    this.location.back();
   }
   onFileChange(event) {
     this.miFile = event.target.files[0];
-    /*const reader = new FileReader();
-    reader.onload = this._handleReaderLoad1ed.bind(this);
-    reader.readAsBinaryString(this.miFile);*/
     const me = this;
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.base64textString = reader.result.toString();
-      console.log(me.base64textString);
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -103,7 +106,6 @@ export class AnimalNuevoComponent implements OnInit {
   _handleReaderLoaded(readerEvt) {
     const binaryString = readerEvt.target.result;
     this.base64textString = btoa(binaryString);
-    console.log(this.base64textString);
    }
   // arrastrar imagenes
   files: any[] = [];

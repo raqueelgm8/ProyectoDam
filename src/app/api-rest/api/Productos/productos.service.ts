@@ -47,7 +47,7 @@ export class ProductosService {
   }
   async crearProducto(producto: Producto): Promise<Producto> {
     return new Promise<Producto>( async (resolve, reject) => {
-      const ruta = '/api/productos/guardarProducto/';
+      const ruta = 'api/productos/guardarProducto';
       this.httpClient.post(ruta, producto).subscribe((result) => {
         producto = result as Producto;
         resolve(producto);

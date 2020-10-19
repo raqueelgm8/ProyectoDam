@@ -84,7 +84,7 @@
         </div>-->
         <br>
         <div class="col-md-11 dropZone" appDnd (fileDropped)="onFileDropped($event)">
-            <input accept="image/*" class="fileClass" type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event.target.files);onFileChange($event)"/>
+            <input formControlName="imagen" accept="image/*" class="fileClass" type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event.target.files);onFileChange($event)"/>
             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
                 <g fill="#3B454F" fill-rule="nonzero">
                     <path
@@ -96,9 +96,12 @@
                 </g>
             </svg>
         
-            <h3 class="h3File">Drag and drop file here</h3>
-            <h3 class="h3File">or</h3>
-            <label class="labelFile" for="fileDropRef">Browse for file</label>
+            <h3 class="h3File">Arrastra un archivo aquí</h3>
+            <h3 class="h3File">o</h3>
+            <label class="labelFile" for="fileDropRef">Selecciona un archivo</label>
+        </div>
+        <div *ngIf="this.formAnimal.get('imagen').errors">
+            <p *ngIf="this.formAnimal.get('imagen').hasError('required')">Debe de seleccionar una imagen</p>
         </div>
         <div class="files-list">
             <div class="single-file" *ngFor="let file of files; let i = index">
@@ -140,6 +143,7 @@
         </div>
     </form>
     <div class="row justify-content-center">
+        <button class="btn btn-primary mr-2" (click)="volver()">Volver</button>
         <button class="btn btn-primary" (click)="guardarAnimal()">Guardar</button>
     </div>
 </div>

@@ -62,12 +62,10 @@ export class PerrosComponent implements OnInit {
       this.animales = result as Animal[];
       this.animales.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
-        console.log(element.imagen);
         let imagen;
         if (element.archivoImagen !== undefined && element.archivoImagen !== null) {
           imagen = element.archivoImagen;
           var splitted = imagen.split(',', 3);
-          console.log(splitted)
           const binaryString = window.atob(splitted[1]);
           const binaryLen = binaryString.length;
           const bytes = new Uint8Array(binaryLen);
@@ -132,12 +130,10 @@ export class PerrosComponent implements OnInit {
       this.animales = result;
       this.animales.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
-        console.log(element.imagen);
         let imagen;
         if (element.archivoImagen !== undefined && element.archivoImagen !== null) {
           imagen = element.archivoImagen;
-          var splitted = imagen.split(',', 3);
-          console.log(splitted)
+          const splitted = imagen.split(',', 3);
           const binaryString = window.atob(splitted[1]);
           const binaryLen = binaryString.length;
           const bytes = new Uint8Array(binaryLen);
