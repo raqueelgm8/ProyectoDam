@@ -306,10 +306,14 @@ export class AdminComponent implements OnInit {
     });
   }
   editarUsuario(usuario: Usuario) {
-
+    this.router.navigate(['/admin/editar-usuario', ], {queryParams: {
+      idUsuario: usuario.idUsuario, modoEditar: true
+    }});
   }
   verUsuario(usuario: Usuario) {
-
+    this.router.navigate(['/admin/editar-usuario', ], {queryParams: {
+      idUsuario: usuario.idUsuario, modoEditar: false
+    }});
   }
   verProducto(producto: Producto) {
 

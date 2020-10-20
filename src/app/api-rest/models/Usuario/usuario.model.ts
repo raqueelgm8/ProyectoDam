@@ -14,6 +14,6 @@ export class Usuario {
     edad: number;
     sexo: string;
     telefono: string;
-    pedidos: Pedido[];
-    solicitudes: Solicitud[];
+    pedidos?: Pedido[];
+    solicitudes?: Solicitud[];
 }

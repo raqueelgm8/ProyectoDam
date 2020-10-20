@@ -12,10 +12,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AnimalNuevoComponent } from './animal-nuevo/animal-nuevo.component';
 import { ProductoNuevoComponent } from './producto-nuevo/producto-nuevo.component';
+import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { CambiarEstadoPedidoComponent } from './cambiar-estado-pedido/cambiar-estado-pedido.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, AnimalNuevoComponent, ProductoNuevoComponent],
+  declarations: [AdminComponent, AnimalNuevoComponent, ProductoNuevoComponent, EditarUsuarioComponent, CambiarEstadoPedidoComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

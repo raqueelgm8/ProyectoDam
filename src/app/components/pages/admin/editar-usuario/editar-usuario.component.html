@@ -1,0 +1,183 @@
+<form [formGroup]="formPerfil">
+    <div class="testbox">
+        <h1 class="text-center">Mi Perfil</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h1 class="">Datos Personales</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <label for="nombre">Nombre</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="nombre" name="nombre" id="nombre" placeholder="Nombre" required
+                    [ngClass]="{ 'is-invalid': this.formPerfil.get('nombre').errors}"/>
+                </div>
+                <div *ngIf="this.formPerfil.get('nombre').errors">
+                    <p *ngIf="this.formPerfil.get('nombre').hasError('required')">Debe de introducir un nombre</p>
+                </div>
+            </div>
+            
+            <div class="col-md-5">
+                <label for="apellidos">Apellidos</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="apellidos" name="apellidos" id="apellidos" placeholder="Apellidos"
+                    [ngClass]="{ 'is-invalid': this.formPerfil.get('apellidos').errors}"/>
+                </div>
+                <div *ngIf="this.formPerfil.get('apellidos').errors">
+                    <p *ngIf="this.formPerfil.get('apellidos').hasError('required')">Debe de introducir un apellido</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-envelope text-white bg-success" aria-hidden="true"></span>
+                    </div>
+                    <input type="email" class="form-control" formControlName="email" name="email" id="email" placeholder="Email"
+                    [ngClass]="{ 'is-invalid': this.formPerfil.get('email').errors}"/>
+                    <div *ngIf="this.formPerfil.get('email').errors" class="row left-margin">
+                        <p *ngIf="this.formPerfil.get('email').hasError('required') || this.formPerfil.get('email').hasError('email')">Debe de introducir un email</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="dni">DNI/NIF</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-id-badge"></i></span>
+                    </div>
+                    <input maxlength="9" type="text" class="form-control" formControlName="dni" name="dni" id="dni" placeholder="DNI/NIF"
+                    pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" [ngClass]="{ 'is-invalid': this.formPerfil.get('dni').errors }" />
+                </div>
+                <div *ngIf="this.formPerfil.get('dni').errors" class="col-10">
+                    <p *ngIf="this.formPerfil.get('dni').errors">Debe de introducir un dni válido</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <label for="telefono">Teléfono</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-phone"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="telefono" name="telefono" id="telefono" placeholder="Teléfono" required
+                    maxlength="9" pattern="[0-9]{9}" [ngClass]="{ 'is-invalid': this.formPerfil.get('telefono').errors}"/>
+                </div>
+                <div *ngIf="this.formPerfil.get('telefono').errors" class="col-10">
+                    <p *ngIf="this.formPerfil.get('telefono').errors">Debe de introducir un nº de teléfono</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="direccion">Dirección</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="direccion" name="direccion" id="direccion" placeholder="Dirección" required
+                    [ngClass]="{ 'is-invalid': this.formPerfil.get('direccion').errors }"/>
+                </div>
+                <div *ngIf="this.formPerfil.get('direccion').errors" class="col-10">
+                    <p *ngIf="this.formPerfil.get('direccion').hasError('required')">Debe de introducir una dirección</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <label for="provincia">Provincia</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-globe-europe"></i></span>
+                    </div>
+                    <ng-select style="min-width: 330px;" [items]="comboProvincias" formControlName="provincia" bindLabel="descripcion"
+                   placeholder="Provincia" [(ngModel)]="provinciaSeleccionada">
+                    </ng-select>
+                </div>
+                <div *ngIf="this.formPerfil.get('provincia').errors" class="col-10">
+                    <p *ngIf="this.formPerfil.get('provincia').hasError('required')">Debe de seleccionar una provincia</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="codigoPostal">Código Postal</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-home"></i></span>
+                    </div>
+                    <input type="text" maxlength="5" class="form-control" formControlName="codigoPostal" name="codigoPostal" id="codigoPostal" placeholder="Código Postal" required
+                    maxlength="5" [ngClass]="{ 'is-invalid': this.formPerfil.get('codigoPostal').errors }" pattern="[0-9]{5}"/>
+                </div>
+                <div *ngIf="this.formPerfil.get('codigoPostal').errors" class="col-10">
+                    <p *ngIf="this.formPerfil.get('codigoPostal').errors">Debe de introducir un código postal válido</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <label for="edad">Edad</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-user text-white bg-success" aria-hidden="true"></span>
+                    </div>
+                    <input type="number" class="form-control" formControlName="edad" min="18" max="130" maxlength="3" name="edad" id="edad" placeholder="Edad" required
+                    [ngClass]="{ 'is-invalid': this.formPerfil.get('edad').errors }"/>
+                </div>
+                <div *ngIf="this.formPerfil.get('edad').value < 18" class="col-10">
+                    <p *ngIf="this.formPerfil.get('edad').value < 18">La edad debe ser mínimo 18</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="sexo">Sexo</label>
+                <div class="sexo justify-content-center">
+                    <input formControlName="sexo" class="mr-2" type="radio" value="H" id="hombre" name="sexo"/>
+                    <label for="male">Hombre</label>
+                    <input formControlName="sexo" type="radio" value="M" id="mujer" name="sexo" class="left-margin "/>
+                    <label class="ml-2" for="mujer">Mujer</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <label for="telefono">Contraseña</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
+                    </div>
+                    <input type="password" class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required
+                    [ngClass]="{ 'is-invalid': this.formPerfil.get('pass1').errors}"/>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="direccion">Verifica contraseña</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
+                    </div>
+                    <input type="password" class="form-control" formControlName="pass2" name="pass2" id="pass2" placeholder="Verifica contraseña" required
+                    [ngClass]="{ 'is-invalid': this.formPerfil.get('pass2').errors}"/>
+                </div>
+            </div>
+        </div>
+        <br><hr>
+        <div class="row justify-content-center">
+            <button class="btn btn-success mr-3" (click)="volver()">Volver</button>
+            <button *ngIf="this.modoEditar" class="btn btn-success mr-3" (click)="clickEditar()">Editar</button>
+        </div>
+    </div>
+</form>
