@@ -30,6 +30,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
       this.modoEditar = params.modoEditar as boolean;
+      console.log(this.modoEditar);
       this.consultarUsuario();
     });
   }
@@ -49,6 +50,10 @@ export class EditarUsuarioComponent implements OnInit {
       pass1: [null, [Validators.required]],
       pass2: [null, [Validators.required]],
     });
+    if (this.modoEditar.toString() === 'false') {
+      this.formPerfil.disable();
+      console.log('estoy');
+    }
   }
   recuperarCombos() {
     this.combos.obtenerComboTipo('Provincia').then((result) => {
@@ -76,8 +81,9 @@ export class EditarUsuarioComponent implements OnInit {
         this.comboProvincias = combos;
         this.provinciaSeleccionada = combos.find(element => element.id === result.provincia);
       });
-      if (!this.modoEditar) {
+      if (this.modoEditar.toString() === 'false') {
         this.formPerfil.disable();
+        console.log('estoy');
       }
     });
   }
