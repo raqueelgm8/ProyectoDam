@@ -162,8 +162,9 @@
             </div>
             <hr>
             <div class="row justify-content-center">
+                <button *ngIf="this.modoAdmin" type="submit" class="btn btn-primary mr-4" (click)="volverAdmin()">Volver</button>
+                <button *ngIf="(this.modoConsulta || this.modoEditar) && !this.modoAdmin" type="submit" class="btn btn-primary mr-4" (click)="volver()">Volver a mi perfil</button>
                 <button *ngIf="!this.modoConsulta" class="btn btn-success" type="button" (click) = "clickEnviar()">Enviar</button>
-                <button *ngIf="this.modoConsulta || this.modoEditar" type="submit" class="btn btn-primary mr-4" (click)="volver()">Volver a mi perfil</button>
             </div>
             <br>
         </form>

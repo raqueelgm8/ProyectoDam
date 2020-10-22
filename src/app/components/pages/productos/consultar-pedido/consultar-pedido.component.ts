@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CestaService } from 'src/app/api-rest/api/Cesta/cesta.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-consultar-pedido',
   templateUrl: './consultar-pedido.component.html',
@@ -28,7 +29,7 @@ export class ConsultarPedidoComponent implements OnInit {
   @ViewChild(MatPaginator) paginatorSolicitudes: MatPaginator;
   @ViewChild(MatSort) matSortSolicitudes: MatSort;
 
-
+  modoAdmin = false;
   ngAfterViewInit(): void {
     this.dataSourcePedido.paginator = this.paginatorSolicitudes;
     this.dataSourcePedido.sort = this.matSortSolicitudes;
@@ -40,13 +41,17 @@ export class ConsultarPedidoComponent implements OnInit {
     private detallesPedidoService: DetallePedidoService,
     public sanitizer: DomSanitizer,
     private router: Router,
-    private cestaService: CestaService
+    private cestaService: CestaService,
+    private location: Location
   ) {
       this.route.queryParams.subscribe(params => {
         this.idUsuario = Number(params.idUsuario);
         this.idPedido = Number(params.idPedido);
         if (params.limpiarCesta) {
           this.cestaService.clearCart();
+        }
+        if (params.modoAdmin) {
+          this.modoAdmin = true;
         }
       });
   }
@@ -83,5 +88,8 @@ export class ConsultarPedidoComponent implements OnInit {
   }
   volver() {
     this.router.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: this.idUsuario}});
+  }
+  volverAdmin() {
+    this.location.back();
   }
 }

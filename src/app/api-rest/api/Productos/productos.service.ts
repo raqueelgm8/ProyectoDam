@@ -56,7 +56,7 @@ export class ProductosService {
       });
     });
   }
-  async editarAnimal(id: number, producto: Producto): Promise<Producto> {
+  async editarProducto(id: number, producto: Producto): Promise<Producto> {
     return new Promise<Producto>( async (resolve, reject) => {
       const ruta = '/api/productos/editarProducto/' + id;
       this.httpClient.put(ruta, producto).subscribe((result) => {
@@ -73,6 +73,17 @@ export class ProductosService {
       this.httpClient.delete('/api/productos/eliminarProducto/' + idProducto).subscribe((result) => {
         Swal.fire('¡Éxito!', 'Animal eliminado con éxito', 'success');
         resolve('El Animal se ha eliminado correctamente');
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  async obtenerProductoId(id: number): Promise<Producto> {
+    return new Promise<Producto>( async (resolve, reject) => {
+      let producto: Producto;
+      this.httpClient.get('api/productos/getProducto/' + id).subscribe((result) => {
+        producto = result as Producto;
+        resolve(producto);
       }, error => {
         reject(error);
       });

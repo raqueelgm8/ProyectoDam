@@ -147,7 +147,7 @@ export class AdminComponent implements OnInit {
   }
   verPedido(pedido: Pedido) {
     this.router.navigate(['/productos/consultar-pedido', ], {queryParams: {
-      idPedido: pedido.id.idPedido, idUsuario: pedido.id.idUsuario
+      idPedido: pedido.id.idPedido, idUsuario: pedido.id.idUsuario, modoAdmin: true
     }});
   }
   consultarAnimales() {
@@ -225,12 +225,12 @@ export class AdminComponent implements OnInit {
   }
   editarSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
-      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoEditar: 'editar'
+      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoEditar: 'editar', modoAdmin: true
     }});
   }
   verSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
-      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoConsulta: 'consulta'
+      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoConsulta: 'consulta', modoAdmin: true
     }});
   }
   eliminarPedido(pedido: Pedido) {
@@ -276,10 +276,10 @@ export class AdminComponent implements OnInit {
     });
   }
   verAnimal(animal: Animal) {
-
+    this.router.navigate(['/admin/animal-nuevo'], {queryParams: {idAnimal: animal.idAnimal, modoVer: true}});
   }
   editarAnimal(animal: Animal) {
-
+    this.router.navigate(['/admin/animal-nuevo'], {queryParams: {idAnimal: animal.idAnimal, modoEditar: true}});
   }
   eliminarUsuario(usuario: Usuario) {
     Swal.fire({
@@ -316,10 +316,10 @@ export class AdminComponent implements OnInit {
     }});
   }
   verProducto(producto: Producto) {
-
+    this.router.navigate(['/admin/producto-nuevo'], {queryParams: {idProducto: producto.idProducto, modoVer: true}});
   }
   editarProducto(producto: Producto) {
-
+    this.router.navigate(['/admin/producto-nuevo'], {queryParams: {idProducto: producto.idProducto, modoEditar: true}});
   }
   eliminarProducto(producto: Producto) {
     Swal.fire({

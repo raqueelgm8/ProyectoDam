@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
 import { ArchivosService } from 'src/app/api-rest/api/Archivos/archivos.service';
 import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
@@ -31,17 +32,60 @@ export class AnimalNuevoComponent implements OnInit {
   ];
   sexoSeleccionado: any;
   base64textString: string;
+  idAnimal = null;
+  modoEditar = false;
+  modoVer = false;
+  animal: Animal;
   constructor(
     private fb: FormBuilder,
     private comboService: ComboService,
     private animalService: AnimalesService,
     private cd: ChangeDetectorRef,
     private _archivosService: ArchivosService,
-    private location: Location
-  ) { }
+    private location: Location,
+    private route: ActivatedRoute,
+    private combo: ComboService,
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (params.idAnimal) {
+        this.idAnimal = Number(params.idAnimal);
+      }
+      if (params.modoEditar) {
+        this.modoEditar = true;
+      }
+      if (params.modoVer) {
+        this.modoVer = true;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.iniciarGrupo();
+    if (this.modoEditar || this.modoVer) {
+      this.consultarAnimal(this.idAnimal);
+    }
+  }
+  consultarAnimal(idAnimal: number) {
+    this.animalService.obtenerAnimalPorId(idAnimal).then((result) => {
+      this.animal = result as Animal;
+      this.formAnimal.controls.nombre.setValue(result.nombre);
+      this.formAnimal.controls.descripcion.setValue(result.descripcion);
+      this.formAnimal.controls.raza.setValue(result.raza);
+      this.formAnimal.controls.tipoAnimal.setValue(result.tipoAnimal);
+      this.formAnimal.controls.edad.setValue(result.edad);
+      // this.formAnimal.controls.imagen.setValue(result.imagen);
+      this.base64textString = result.archivoImagen;
+      this.formAnimal.controls.sexo.setValue(result.sexo === 'H' ? 'Hembra' : 'Macho');
+      this.formAnimal.controls.tipoEdad.setValue(result.tipoEdad);
+      if (this.modoVer) {
+        this.formAnimal.disable();
+      }
+      this.combo.obtenerComboTipo(result.tipoAnimal).then((result) => {
+        this.comboRazas = [...result];
+        this.cd.detectChanges();
+      });
+
+    });
   }
   iniciarGrupo() {
     this.formAnimal = this.fb.group({
@@ -68,7 +112,7 @@ export class AnimalNuevoComponent implements OnInit {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
     } else {
       const animal: Animal = {
-        idAnimal: null,
+        idAnimal: this.idAnimal,
         adoptado: false,
         descripcion: this.formAnimal.controls.descripcion.value,
         edad: Number(this.formAnimal.controls.edad.value),

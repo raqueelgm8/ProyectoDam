@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ArchivosService } from 'src/app/api-rest/api/Archivos/archivos.service';
 import { ProductosService } from 'src/app/api-rest/api/Productos/productos.service';
 import { Producto } from 'src/app/api-rest/models/Producto/producto.model';
@@ -23,16 +24,52 @@ export class ProductoNuevoComponent implements OnInit {
   ];
   miFile: File;
   base64textString: string;
+  idProducto = null;
+  modoEditar = false;
+  modoVer = false;
+  producto: Producto;
   constructor(
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
     private archivosService: ArchivosService,
     private productosService: ProductosService,
-    private location: Location
-  ) { }
+    private location: Location,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (params.idProducto) {
+        this.idProducto = Number(params.idProducto);
+      }
+      if (params.modoEditar) {
+        this.modoEditar = true;
+      }
+      if (params.modoVer) {
+        this.modoVer = true;
+      }
+    });
+   }
 
   ngOnInit(): void {
     this.iniciarGrupo();
+    if (this.modoEditar || this.modoVer) {
+      this.consultarProducto(this.idProducto);
+    }
+  }
+  consultarProducto(idProducto: number) {
+    this.productosService.obtenerProductoId(idProducto).then((result) => {
+      this.producto = result as Producto;
+      this.formProducto.controls.nombre.setValue(result.nombre);
+      this.formProducto.controls.descripcion.setValue(result.descripcion);
+      this.formProducto.controls.precio.setValue(result.precio);
+      this.formProducto.controls.stock.setValue(result.stock);
+      this.formProducto.controls.categoria.setValue(result.categoria);
+      // this.formProducto.controls.imagen.setValue(result.imagen);
+      this.base64textString = result.archivoImagen;
+      this.formProducto.controls.tipoAnimal.setValue(result.tipoAnimal);
+      if (this.modoVer) {
+        this.formProducto.disable();
+      }
+    });
   }
   iniciarGrupo() {
     this.formProducto  = this.fb.group({

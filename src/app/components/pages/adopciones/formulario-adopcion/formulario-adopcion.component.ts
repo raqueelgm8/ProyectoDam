@@ -12,6 +12,7 @@ import { Solicitud } from 'src/app/api-rest/models/Solicitud/solicitud.model';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
 import { SolicitudesService } from 'src/app/api-rest/api/Solicitudes/solicitudes.service';
 import { UsuarioService } from 'src/app/api-rest/api/Usuario/usuario.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-formulario-adopcion',
   templateUrl: './formulario-adopcion.component.html',
@@ -30,6 +31,7 @@ export class FormularioAdopcionComponent implements OnInit {
   modoConsulta = false;
   usuario: Usuario;
   modoEditar = false;
+  modoAdmin = false;
   constructor(
     public fb: FormBuilder,
     public route: ActivatedRoute,
@@ -38,7 +40,8 @@ export class FormularioAdopcionComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private animalesService: AnimalesService,
     private solicitudService: SolicitudesService,
-    private usuariosService: UsuarioService
+    private usuariosService: UsuarioService,
+    private location: Location
   ) {
     this.route.queryParams.subscribe(params => {
       if (params.modoConsulta === 'consulta') {
@@ -47,6 +50,9 @@ export class FormularioAdopcionComponent implements OnInit {
         this.idUsuario = usuario.idUsuario;
       } else if (params.modoEditar === 'editar') {
         this.modoEditar = true;
+      }
+      if (params.modoAdmin) {
+        this.modoAdmin = true;
       }
       this.idAnimal = Number(params.animalId);
       this.idSolicitud = Number(params.idSolicitud);
@@ -185,5 +191,8 @@ export class FormularioAdopcionComponent implements OnInit {
   }
   volver() {
     this.router.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: this.idUsuario}});
+  }
+  volverAdmin() {
+    this.location.back();
   }
 }

@@ -54,6 +54,7 @@
   <label class="ml-4">Precio total: {{this.total | number:'1.2-2'}} €</label>
   <hr>
   <div class="row justify-content-center">
-    <button type="submit" class="btn btn-primary mr-4" (click)="volver()">Volver a mi perfil</button>
+    <button *ngIf="!this.modoAdmin" type="submit" class="btn btn-primary mr-4" (click)="volver()">Volver a mi perfil</button>
+    <button *ngIf="this.modoAdmin"  type="submit" class="btn btn-primary mr-4" (click)="volverAdmin()">Volver a mi perfil</button>
 </div><br>
 </div>
