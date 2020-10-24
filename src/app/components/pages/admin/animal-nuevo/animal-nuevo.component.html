@@ -100,8 +100,8 @@
             <h3 class="h3File">o</h3>
             <label class="labelFile" for="fileDropRef">Selecciona un archivo</label>
         </div>
-        <div *ngIf="this.formAnimal.get('imagen').errors">
-            <p *ngIf="this.formAnimal.get('imagen').hasError('required')">Debe de seleccionar una imagen</p>
+        <div *ngIf="this.base64textString === null">
+            <p>Debe de seleccionar una imagen</p>
         </div>
         <div class="files-list">
             <div class="single-file" *ngFor="let file of files; let i = index">

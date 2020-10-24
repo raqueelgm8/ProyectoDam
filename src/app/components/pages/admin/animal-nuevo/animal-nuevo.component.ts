@@ -73,10 +73,16 @@ export class AnimalNuevoComponent implements OnInit {
       this.formAnimal.controls.raza.setValue(result.raza);
       this.formAnimal.controls.tipoAnimal.setValue(result.tipoAnimal);
       this.formAnimal.controls.edad.setValue(result.edad);
-      // this.formAnimal.controls.imagen.setValue(result.imagen);
-      this.base64textString = result.archivoImagen;
+      if (result.archivoImagen) {
+        this.base64textString = result.archivoImagen;
+      } else {
+        this.base64textString = result.imagen;
+      }
+      this.animalSeleccionado = { descripcion: result.tipoAnimal};
       this.formAnimal.controls.sexo.setValue(result.sexo === 'H' ? 'Hembra' : 'Macho');
+      this.sexoSeleccionado = {descripcion: this.formAnimal.controls.sexo.value};
       this.formAnimal.controls.tipoEdad.setValue(result.tipoEdad);
+      this.tipoEdadSeleccionado = {descripcion: this.formAnimal.controls.tipoEdad.value};
       if (this.modoVer) {
         this.formAnimal.disable();
       }
@@ -95,7 +101,7 @@ export class AnimalNuevoComponent implements OnInit {
       tipoAnimal: [null, [Validators.required]],
       tipoEdad: [null, [Validators.required]],
       edad: [null, [Validators.required, Validators.compose([Validators.min(0), Validators.max(50)])]],
-      imagen: [null, [Validators.required]],
+      imagen: null,
       sexo: [null, [Validators.required]],
     });
 
@@ -108,7 +114,7 @@ export class AnimalNuevoComponent implements OnInit {
     });
   }
   guardarAnimal() {
-    if (this.formAnimal.invalid) {
+    if (this.formAnimal.invalid || (this.base64textString === null || this.base64textString === undefined )) {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
     } else {
       const animal: Animal = {
@@ -175,6 +181,7 @@ export class AnimalNuevoComponent implements OnInit {
    */
   deleteFile(index: number) {
     this.files.splice(index, 1);
+    this.base64textString = null;
   }
 
   /**

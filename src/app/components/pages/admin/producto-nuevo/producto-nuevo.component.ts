@@ -63,9 +63,14 @@ export class ProductoNuevoComponent implements OnInit {
       this.formProducto.controls.precio.setValue(result.precio);
       this.formProducto.controls.stock.setValue(result.stock);
       this.formProducto.controls.categoria.setValue(result.categoria);
-      // this.formProducto.controls.imagen.setValue(result.imagen);
-      this.base64textString = result.archivoImagen;
+      this.categoriaSeleccionada = { descripcion: result.categoria};
+      if (result.archivoImagen) {
+        this.base64textString = result.archivoImagen;
+      } else {
+        this.base64textString = result.imagen;
+      }
       this.formProducto.controls.tipoAnimal.setValue(result.tipoAnimal);
+      this.animalSeleccionado = { descripcion: result.tipoAnimal};
       if (this.modoVer) {
         this.formProducto.disable();
       }
@@ -79,17 +84,17 @@ export class ProductoNuevoComponent implements OnInit {
       stock: [null, [Validators.required, Validators.compose([Validators.min(0)])]],
       categoria: [null, [Validators.required]],
       tipoAnimal: [null, [Validators.required]],
-      imagen: [null, [Validators.required]],
+      imagen: null
     });
   }
   guardarProducto() {
-    if (this.formProducto.invalid) {
+    if (this.formProducto.invalid || (this.base64textString === null || this.base64textString === undefined )) {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
     } else {
       const producto: Producto = {
         categoria: this.categoriaSeleccionada.descripcion,
         descripcion: this.formProducto.controls.descripcion.value,
-        idProducto: 1,
+        idProducto: this.idProducto,
         nombre: this.formProducto.controls.nombre.value,
         precio: Number(this.formProducto.controls.precio.value),
         stock: Number(this.formProducto.controls.stock.value),
@@ -148,6 +153,7 @@ export class ProductoNuevoComponent implements OnInit {
    */
   deleteFile(index: number) {
     this.files.splice(index, 1);
+    this.base64textString = null;
   }
 
   /**
