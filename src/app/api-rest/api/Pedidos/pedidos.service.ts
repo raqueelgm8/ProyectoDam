@@ -72,4 +72,17 @@ export class PedidosService {
       });
     });
   }
+  async editarEstadoPedido(idUsuario: number, idPedido: number, estadoPedido: string): Promise<Pedido> {
+    return new Promise<Pedido>( async (resolve, reject) => {
+      let pedido: Pedido;
+      const ruta = '/api/pedidos/updateEstado/' + idUsuario + '/' + idPedido + '/' + estadoPedido + '/';
+      this.httpClient.put(ruta, null).subscribe((result) => {
+        pedido = result as Pedido;
+        Swal.fire('¡Éxito!', 'Pedido editado con éxito', 'success');
+        resolve(pedido);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

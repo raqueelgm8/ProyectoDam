@@ -18,6 +18,9 @@ import { ProductosService } from 'src/app/api-rest/api/Productos/productos.servi
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
 import { Combo } from 'src/app/api-rest/models/Combo/combo.model';
 import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as R from 'ramda';
+import { CambiarEstadoPedidoComponent } from '../cambiar-estado-pedido/cambiar-estado-pedido.component';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -79,6 +82,7 @@ export class AdminComponent implements OnInit {
     private router: Router,
     private paginator: MatPaginatorIntl,
     public combos: ComboService,
+    private modal: NgbModal,
   ) {
     this.consultarUsuarios();
     this.consultarProductos();
@@ -143,6 +147,7 @@ export class AdminComponent implements OnInit {
       }
       this.dataSourcePedidos.paginator = this.paginatorPedidos;
       this.dataSourcePedidos.sort = this.matSortPedidos;
+      this.changeDetectorRefs.detectChanges();
     });
   }
   verPedido(pedido: Pedido) {
@@ -320,6 +325,19 @@ export class AdminComponent implements OnInit {
   }
   editarProducto(producto: Producto) {
     this.router.navigate(['/admin/producto-nuevo'], {queryParams: {idProducto: producto.idProducto, modoEditar: true}});
+  }
+  editarPedido(pedido: Pedido) {
+    const modalRef = this.modal.open(CambiarEstadoPedidoComponent, {
+      centered: true,
+      size: 'lg'
+    });
+    modalRef.componentInstance.idPedido = pedido.id.idPedido;
+    modalRef.componentInstance.idUsuario = pedido.id.idUsuario;
+    modalRef.result.then((result) => {
+      if (!R.isNil(result)) {
+        this.consultarPedidos();
+      }
+    });
   }
   eliminarProducto(producto: Producto) {
     Swal.fire({

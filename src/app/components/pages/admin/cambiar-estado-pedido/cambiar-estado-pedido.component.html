@@ -1,1 +1,30 @@
-<p>cambiar-estado-pedido works!</p>
+<div class="modal-header">
+  <h1 class="modal-title">Política de privacidad</h1>
+  <button type="button" class="close" aria-label="close" 
+  (click)="cancelar()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="formCambioEstado">
+    <div class="row">
+      <div class="col-md-5">
+          <label class="" for="raza">Estado</label>
+          <ng-select [items]="tipoEstados" formControlName="cambioEstado" bindLabel="descripcion"
+             placeholder="Estado" [(ngModel)]="estadoSeleccionado" required 
+             [ngClass]="{ 'is-invalid': this.formCambioEstado.get('cambioEstado').errors}">
+          </ng-select>
+          <div *ngIf="this.formCambioEstado.get('cambioEstado').errors">
+              <p *ngIf="this.formCambioEstado.get('cambioEstado').hasError('required')">Debe de introducir un estado</p>
+          </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="row justify-content-end">
+      <button type="button" class="btn btn-primary mr-2" (click)="guardar()">Guardar</button>
+      <button type="button" class="btn btn-primary mr-2" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>
+  
