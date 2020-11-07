@@ -39,7 +39,13 @@ export class DropdownCestaComponent implements OnInit {
   }
   clickCesta() {
     const usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
-    this.router.navigate(['/productos/cesta'], {queryParams: {idUsuario: usuario.idUsuario}});
+    if (usuario) {
+      this.router.navigate(['/productos/cesta'], {queryParams: {idUsuario: usuario.idUsuario}});
+    } else {
+      Swal.fire('Registro necesario', 'Para poder realizar un pedido debe de estar registrado', 'warning');
+      this.router.navigate(['/registro/inicio-sesion']);
+    }
+
   }
   recibirCesta() {
     this.productos = this.cestaService.getItems();

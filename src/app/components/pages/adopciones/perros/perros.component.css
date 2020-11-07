@@ -11,9 +11,10 @@ h1 {
     cursor: pointer;
 }
 .adopcionPerros {
-    color: #0C8425;
-    font-weight: bold;
-    font-family: monospace;
+    color: #0C8425 !important;
+    font-weight: bold !important;
+    font-family: monospace !important;
+    font-size: 32px !important;
 }
 .letraCabecera {
     font-weight: bold;

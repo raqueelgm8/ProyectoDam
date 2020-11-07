@@ -17,3 +17,6 @@ b {
     margin-left: 30px;
     margin-right: 30px;
 }
+p {
+   font: oblique bold 120% cursive;
+}

@@ -168,7 +168,6 @@ export class FormularioAdopcionComponent implements OnInit {
     });
   }
   consultarSolicitud() {
-    console.log('entro en consultar solicitud');
     this.solicitudService.obtenerSolicitudPorId(this.idUsuario, this.idSolicitud, this.idAnimal).then((result) => {
       this.formAdopcion.controls.razon.setValue(result.razonAdopcion);
       this.formAdopcion.controls.mascotas.setValue(result.mascotasCasa === 0 ? '0' : '1');
@@ -181,7 +180,6 @@ export class FormularioAdopcionComponent implements OnInit {
   }
   consultarUsuario() {
     this.usuario = JSON.parse(localStorage.getItem('usuario'));
-    console.log(this.usuario);
     this.idUsuario = this.usuario.idUsuario;
     this.formAdopcion.controls.nombre.setValue(this.usuario.nombre);
     this.formAdopcion.controls.apellidos.setValue(this.usuario.apellidos);

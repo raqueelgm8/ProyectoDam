@@ -67,7 +67,6 @@ export class AppComponent {
   }
   cerrarSesion() {
     localStorage.clear();
-    console.log(this.route.url);
     const url = '/registro/mi-perfil?idUsuario=';
     if (this.route.url.includes(url)) {
       this.clickHome();

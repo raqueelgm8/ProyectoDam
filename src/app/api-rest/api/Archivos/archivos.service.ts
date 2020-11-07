@@ -42,7 +42,6 @@ export class ArchivosService {
   async cargarImagen(archivo: File): Promise<any> {
     return new Promise<any> ( async (resolve, reject) => {
       const documento: Array<string> = await this.fileReadContent(archivo);
-      console.log(documento);
       resolve(documento);
     });
   }

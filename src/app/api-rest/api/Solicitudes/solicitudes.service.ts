@@ -49,7 +49,6 @@ export class SolicitudesService {
     });
   }
   async editarSolicitud(solicitud: Solicitud): Promise<Solicitud> {
-    console.log(solicitud);
     return new Promise<Solicitud>( async (resolve, reject) => {
       const ruta = '/api/solicitudes/editarSolicitud/';
       this.httpClient.put(ruta, solicitud).subscribe((result) => {

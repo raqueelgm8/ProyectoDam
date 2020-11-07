@@ -2,13 +2,16 @@
     <div class="col-md-6 mb-4 ml-5 mt-4" style="width: 40rem;">
         <img [src]="this.animal.imagenSrc" class="card-img-top" alt="...">
     </div>
-    <div class="col-md-5">
-        <b class="text-center">{{animal.nombre}}</b>
+    <div class="col-md-5 justify-content center">
+        <b class="text-center mt-3">{{animal.nombre}}</b>
         <hr>
-        <p >{{animal.descripcion}}</p>
+        <p class="text-center">{{animal.descripcion}}</p>
+        <p class="card-text">Tipo de animal: {{animal.tipoAnimal}}</p>
         <p class="card-text">Edad: {{animal.edad}}</p>
         <p class="card-text">Raza: {{animal.raza}}</p>
-        <!--<p class="card-text">Sexo: {{animal.sexo}}</p>-->
-        <button class="btn btn-success" type="button" (click)="clickAdoptame()">¡Adóptame!</button>
+        <p class="card-text">Sexo: {{animal.sexo === 'M' ? 'Macho' : 'Hembra'}}</p>
+        <div class="justify-content-center">
+            <button class="btn btn-success" type="button" (click)="clickAdoptame()">¡Adóptame!</button>
+        </div>
     </div>
 </div>

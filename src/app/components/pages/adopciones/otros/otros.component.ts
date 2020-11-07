@@ -67,12 +67,10 @@ export class OtrosComponent implements OnInit {
       this.otros = result as Animal[];
       this.otros.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
-        console.log(element.imagen);
         let imagen;
         if (element.archivoImagen !== undefined && element.archivoImagen !== null) {
           imagen = element.archivoImagen;
           var splitted = imagen.split(',', 3);
-          console.log(splitted)
           const binaryString = window.atob(splitted[1]);
           const binaryLen = binaryString.length;
           const bytes = new Uint8Array(binaryLen);
@@ -116,7 +114,7 @@ export class OtrosComponent implements OnInit {
       edad: this.formCabecera.controls.edad.value,
       imagen: null,
       nombre: null,
-      raza: this.razaSeleccionada.descripcion,
+      raza: this.razaSeleccionada ? this.razaSeleccionada.descripcion : null,
       // sexo: this.formCabecera.controls.sexo.value,
       sexo: this.formCabecera.controls.sexo.value !== null && this.formCabecera.controls.sexo.value !== 'null' ?
       this.formCabecera.controls.sexo.value : null,
@@ -128,12 +126,10 @@ export class OtrosComponent implements OnInit {
       this.otros = result;
       this.otros.forEach(element => {
         element.sexo = element.sexo === 'H' ? 'Hembra' : 'Macho';
-        console.log(element.imagen);
         let imagen;
         if (element.archivoImagen !== undefined && element.archivoImagen !== null) {
           imagen = element.archivoImagen;
           var splitted = imagen.split(',', 3);
-          console.log(splitted)
           const binaryString = window.atob(splitted[1]);
           const binaryLen = binaryString.length;
           const bytes = new Uint8Array(binaryLen);

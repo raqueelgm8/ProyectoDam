@@ -46,7 +46,9 @@ export class ProductosComponent implements OnInit {
   }
   consultarUsuario() {
     this.usuario = JSON.parse(localStorage.getItem('usuario'));
-    this.idUsuario = this.usuario.idUsuario;
+    if (this.usuario) {
+      this.idUsuario = this.usuario.idUsuario;
+    }
   }
   buscarAlLPedidos() {
     this.productosService.buscarTodosProductos().then((result) => {
@@ -93,7 +95,6 @@ export class ProductosComponent implements OnInit {
       modalRef.result.then((result) => {
         if (!R.isNil(result)) {
           this.cesta = result;
-          console.log(this.cesta);
           this.cestaEvent.emit(this.cesta);
         }
       });

@@ -120,7 +120,7 @@ export class PerrosComponent implements OnInit {
       edad: this.formCabecera.controls.edad.value,
       imagen: null,
       nombre: null,
-      raza: this.razaSeleccionada.descripcion,
+      raza: this.razaSeleccionada ? this.razaSeleccionada.descripcion : null,
       // sexo: this.formCabecera.controls.sexo.value,
       sexo: this.formCabecera.controls.sexo.value !== null && this.formCabecera.controls.sexo.value !== 'null' ?
       this.formCabecera.controls.sexo.value : null,

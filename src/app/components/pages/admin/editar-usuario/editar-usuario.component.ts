@@ -30,7 +30,6 @@ export class EditarUsuarioComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
       this.modoEditar = params.modoEditar as boolean;
-      console.log(this.modoEditar);
       this.consultarUsuario();
     });
   }
@@ -52,7 +51,6 @@ export class EditarUsuarioComponent implements OnInit {
     });
     if (this.modoEditar.toString() === 'false') {
       this.formPerfil.disable();
-      console.log('estoy');
     }
   }
   recuperarCombos() {
@@ -83,7 +81,6 @@ export class EditarUsuarioComponent implements OnInit {
       });
       if (this.modoEditar.toString() === 'false') {
         this.formPerfil.disable();
-        console.log('estoy');
       }
     });
   }
