@@ -44,7 +44,9 @@ export class OtrosComponent implements OnInit {
   }
   consultarUsuario() {
     this.usuario = JSON.parse(localStorage.getItem('usuario'));
-    this.idUsuario = this.usuario.idUsuario;
+    if (this.usuario) {
+      this.idUsuario = this.usuario.idUsuario;
+    }
   }
   iniciarGrupos() {
     this.formCabecera = this.fb.group({

@@ -58,9 +58,9 @@ export class PerfilComponent implements OnInit {
       if (params.idUsuario === undefined) {
         this.idUsuario = JSON.parse(localStorage.getItem('usuarios')).idUsuario;
       }
-      if (this.idUsuario !== idUsuario) {
+      /*if (this.idUsuario !== idUsuario) {
         this.router.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: idUsuario}});
-      }
+      }*/
     });
   }
   ngAfterViewInit(): void {

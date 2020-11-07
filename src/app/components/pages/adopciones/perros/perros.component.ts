@@ -49,7 +49,9 @@ export class PerrosComponent implements OnInit {
   }
   consultarUsuario() {
     this.usuario = JSON.parse(localStorage.getItem('usuario'));
-    this.idUsuario = this.usuario.idUsuario;
+    if (this.usuario) {
+      this.idUsuario = this.usuario.idUsuario;
+    }
   }
   recuperarCombos() {
     this.combo.obtenerComboTipo('Perro').then((result) => {

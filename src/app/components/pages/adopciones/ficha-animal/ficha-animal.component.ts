@@ -46,7 +46,7 @@ export class FichaAnimalComponent implements OnInit {
       }});
     } else {
       Swal.fire('Registro necesario', 'Para poder enviar una solicitud debe de estar registrado', 'warning');
-      this.router.navigate(['/registro']);
+      this.router.navigate(['/registro/inicio-sesion']);
     }
 
   }
