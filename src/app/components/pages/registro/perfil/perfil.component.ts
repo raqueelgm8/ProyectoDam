@@ -72,7 +72,6 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.paginator.itemsPerPageLabel = "Registros por página";
     this.iniciarForm();
-    this.recuperarCombos();
     this.recuperarPerfil();
     this.recuperarSolicitudes();
     this.recuperarPedidos();
@@ -114,14 +113,15 @@ export class PerfilComponent implements OnInit {
       this.formPerfil.controls.telefono.setValue(result.telefono);
       this.formPerfil.controls.pass1.setValue(result.password);
       this.formPerfil.controls.pass2.setValue(result.password);
-      this.provinciaSeleccionada = this.comboProvincias.find(element => element.id === this.usuario.provincia);
+      this.recuperarCombos(result.provincia);
     }, error => {
       Swal.fire('¡ERROR!', error, 'error');
     });
   }
-  recuperarCombos() {
+  recuperarCombos(idProvincia: string) {
     this.combos.obtenerComboTipo('Provincia').then((result) => {
       this.comboProvincias = result;
+      this.provinciaSeleccionada = this.comboProvincias.find(element => element.id === idProvincia);
     });
   }
   recuperarSolicitudes() {
