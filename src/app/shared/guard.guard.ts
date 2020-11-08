@@ -17,7 +17,7 @@ export class GuardGuard implements CanActivate {
         this.idUsuario = Number(params.idUsuario);
       }
     });
-    if (this.usuario && (this.idUsuario === this.usuario.idUsuario || this.idUsuario === undefined)) {
+    if (this.usuario) {
       return true;
     } else {
       this.router.navigate(['/registro/inicio-sesion']);
