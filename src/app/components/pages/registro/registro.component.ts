@@ -74,7 +74,7 @@ export class RegistroComponent implements OnInit {
         pedidos: null,
         solicitudes: null
       };
-      this.registro.registrarUsuario(user).then((result) => {
+      this.registro.guardarUsuario(user).then((result) => {
         Swal.fire({
           title: '¡El registro se ha realizado con éxito!',
           icon: 'success',

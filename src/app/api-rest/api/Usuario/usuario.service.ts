@@ -45,13 +45,10 @@ export class UsuarioService {
       });
     });
   }
-  async registrarUsuario(usuario: Usuario): Promise<Usuario> {
+  async guardarUsuario(usuario: Usuario): Promise<Usuario> {
     return new Promise<Usuario>( async (resolve, reject) => {
-      const ruta = '/api/usuarios/crearUsuario/'
-      + usuario.nombre + '/' + usuario.apellidos +'/' + usuario.email + '/' + usuario.password + '/'
-      + usuario.sexo + '/' + usuario.dni + '/' + usuario.edad + '/'
-      + usuario.direccion + '/' + usuario.provincia + '/' + usuario.codigoPostal + '/' + usuario.telefono;
-      this.httpClient.post(ruta, {}).subscribe((result) => {
+      const ruta = '/api/usuarios/guardarUsuario/';
+      this.httpClient.post(ruta, usuario).subscribe((result) => {
         usuario = result as Usuario;
         resolve(usuario);
       }, error => {
