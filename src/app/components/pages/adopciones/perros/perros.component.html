@@ -43,8 +43,8 @@
         <!--Cards de los perros-->
     <div class="row card-group">
         <div class="col-10 col-sm-8 col-md-6 col-lg-4" *ngFor="let perro of this.animales">
-            <div class="card mb-4" style="width: 18rem;" (click) = clickCard(perro)>
-                <img [src]="perro.imagenSrc" class="card-img-top2 hover-card " alt="...">
+            <div class="card mb-4" (click) = clickCard(perro)>
+                <img [src]="perro.imagenSrc" class="card-img-top2 hover-card transition" alt="...">
                 <div class="card-body">
                     <b class="card-title">{{perro.nombre}}</b>
                     <hr>
