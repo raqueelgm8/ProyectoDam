@@ -17,6 +17,8 @@ export class RegistroComponent implements OnInit {
   formRegistro: FormGroup;
   comboProvincias: Combo[];
   provinciaSeleccionada: Combo;
+  tipoPass1EsPassword = false;
+  tipoPass2EsPassword = false;
   constructor(
     public fb: FormBuilder,
     public combo: ComboService,
@@ -94,5 +96,11 @@ export class RegistroComponent implements OnInit {
         Swal.fire('ERROR!', 'Error', 'error');
       });
     }
+  }
+  verPass1() {
+    this.tipoPass1EsPassword = !this.tipoPass1EsPassword;
+  }
+  verPass2() {
+    this.tipoPass2EsPassword = !this.tipoPass2EsPassword;
   }
 }

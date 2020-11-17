@@ -60,8 +60,15 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
                     </div>
-                    <input type="password" class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required
+                    <input [type]="tipoPass1EsPassword ? 'text' : 'password'"  class="form-control" formControlName="pass1" name="pass1" id="pass1" placeholder="Contraseña" required
                     [ngClass]="{ 'is-invalid': this.formRegistro.get('pass1').errors}"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa" [ngClass]="{
+                                'fa-eye-slash': !tipoPass1EsPassword,
+                                'fa-eye': tipoPass1EsPassword }" (click)="verPass1()"></i>
+                        </span>
+                     </div>
                 </div>
             </div>
         </div>
@@ -71,8 +78,15 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text text-white bg-success" aria-hidden="true"><i class="fas fa-unlock-alt"></i></span>
                     </div>
-                    <input type="password" class="form-control" formControlName="pass2" name="pass2" id="pass2" placeholder="Verifica contraseña" required
+                    <input [type]="tipoPass2EsPassword ? 'text' : 'password'" class="form-control" formControlName="pass2" name="pass2" id="pass2" placeholder="Verifica contraseña" required
                     [ngClass]="{ 'is-invalid': this.formRegistro.get('pass2').errors}"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa" [ngClass]="{
+                                'fa-eye-slash': !tipoPass2EsPassword,
+                                'fa-eye': tipoPass2EsPassword }" (click)="verPass2()"></i>
+                        </span>
+                     </div>
                 </div>
             </div>
         </div>

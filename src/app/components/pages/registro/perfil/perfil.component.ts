@@ -21,6 +21,8 @@ import {MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 })
 export class PerfilComponent implements OnInit {
 
+  tipoPass1EsPassword = false;
+  tipoPass2EsPassword = false;
   idUsuario: number;
   formPerfil: FormGroup;
   comboProvincias: Combo[];
@@ -241,7 +243,6 @@ export class PerfilComponent implements OnInit {
     this.formPerfil.controls.dni.setValue(this.usuario.dni);
     this.formPerfil.controls.edad.setValue(this.usuario.edad);
     this.formPerfil.controls.direccion.setValue(this.usuario.direccion);
-    // this.formPerfil.controls.provincia.setValue(this.usuario.provincia);
     this.provinciaSeleccionada = this.comboProvincias.find(element => element.id === this.usuario.provincia);
     this.formPerfil.controls.codigoPostal.setValue(this.usuario.codigoPostal);
     this.formPerfil.controls.telefono.setValue(this.usuario.telefono);
@@ -250,5 +251,11 @@ export class PerfilComponent implements OnInit {
     this.router.navigate(['/productos/consultar-pedido', ], {queryParams: {
       idPedido: pedido.id.idPedido, idUsuario: pedido.id.idUsuario
     }});
+  }
+  verPass1() {
+    this.tipoPass1EsPassword = !this.tipoPass1EsPassword;
+  }
+  verPass2() {
+    this.tipoPass2EsPassword = !this.tipoPass2EsPassword;
   }
 }
