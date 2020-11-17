@@ -19,6 +19,7 @@ export class RegistroComponent implements OnInit {
   provinciaSeleccionada: Combo;
   tipoPass1EsPassword = false;
   tipoPass2EsPassword = false;
+  barLabel = 'Fuerza de la contraseña:';
   constructor(
     public fb: FormBuilder,
     public combo: ComboService,

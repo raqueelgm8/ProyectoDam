@@ -99,6 +99,11 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center left-marginPass" id="strength" #strength>
+            <div class="col-md-10">
+                <app-password-security [passwordToCheck]="this.formRegistro.controls.pass1.value" [barLabel]="barLabel"></app-password-security>
+            </div>
+        </div>
         <div class="row left-margin">
             <div class="col-10 mb-3">
                 <div class="input-group">

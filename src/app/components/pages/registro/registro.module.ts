@@ -12,10 +12,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { PasswordSecurityComponent } from './password-security/password-security.component';
 
 
 @NgModule({
-  declarations: [RegistroComponent, InicioSesionComponent, PerfilComponent],
+  declarations: [RegistroComponent, InicioSesionComponent, PerfilComponent, PasswordSecurityComponent],
   imports: [
     CommonModule,
     RegistroRoutingModule,

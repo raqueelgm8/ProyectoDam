@@ -68,3 +68,6 @@ p {
   background-color: inherit;
   z-index: unset;
 }
+.left-marginPass {
+  margin-left: 420px;
+}

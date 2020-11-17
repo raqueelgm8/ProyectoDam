@@ -1,6 +1,6 @@
 .testbox {
     margin: 20px auto;
-    width: 500px; 
+    width: 700px; 
     min-height: 800px; 
     -webkit-border-radius: 8px/7px; 
     -moz-border-radius: 8px/7px; 
@@ -31,4 +31,7 @@ h1 {
 }
 p {
   color: red;
+}
+.left-marginPass {
+  margin-left: 200px;
 }

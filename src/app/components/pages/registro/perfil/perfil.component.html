@@ -187,6 +187,11 @@
                      </div>
                 </div>
             </div>
+            <div class="row mt-2 justify-content-center left-marginPass" id="strength" #strength>
+                <div class="col-md-10">
+                    <app-password-security [passwordToCheck]="this.formPerfil.controls.pass1.value" [barLabel]="barLabel"></app-password-security>
+                </div>
+            </div>
         </div>
         <br>
         <div class="row justify-content-center">

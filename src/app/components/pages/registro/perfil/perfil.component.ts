@@ -20,7 +20,7 @@ import {MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-
+  barLabel = 'Fuerza de la contraseña:';
   tipoPass1EsPassword = false;
   tipoPass2EsPassword = false;
   idUsuario: number;
