@@ -97,14 +97,19 @@ export class FormularioAdopcionComponent implements OnInit {
       if (!R.isNil(result)) {
         if (result === true) {
           this.privacidad = true;
+          this.formAdopcion.controls.politicaPrivacidad.setValue(true);
         } else {
           this.privacidad = false;
+          this.formAdopcion.controls.politicaPrivacidad.setValue(null);
         }
       }
     });
   }
   cambiarCheck() {
     this.privacidad = this.privacidad ? false : true;
+    this.formAdopcion.controls.politicaPrivacidad.setValue(
+      this.privacidad ? true : null
+    );
   }
   clickEnviar() {
     const solicitud: Solicitud = {

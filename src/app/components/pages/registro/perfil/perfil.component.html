@@ -256,8 +256,8 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumnsSolicitudes"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumnsSolicitudes;"></tr>
             </table>
-          </div>
-          <ng-container *ngIf="sinDatosSolicitudes" >
+          </div><!--*ngIf="sinDatosSolicitudes" -->
+          <ng-container >
             <mat-paginator #MatPaginatorSolicitudes="matPaginator" class="indexS" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
           </ng-container>
         <hr>

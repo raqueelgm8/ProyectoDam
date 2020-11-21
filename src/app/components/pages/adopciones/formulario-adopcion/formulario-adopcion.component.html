@@ -149,7 +149,7 @@
             <div class="row ml-4">
                 <div class="col-md-11">
                     <input type="checkbox" value="politicaPrivacidad" id="politicaPrivacidad" name="politicaPrivacidad" formControlName="politicaPrivacidad" class="ml-3" [checked] = "this.privacidad ? true : false"
-                    (change) = cambiarCheck() [ngClass]="{ 'is-invalid': this.formAdopcion.get('politicaPrivacidad').errors}"/>
+                    (change)="cambiarCheck()" [ngClass]="{ 'is-invalid': this.formAdopcion.get('politicaPrivacidad').errors}"/>
                     <a class="left-margin link" (click)="abrirModal()">He leído y acepto la política de privacidad y el tratamiento de mis datos.</a>
                 </div>
             </div>
