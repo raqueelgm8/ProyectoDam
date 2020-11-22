@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CestaService } from 'src/app/api-rest/api/Cesta/cesta.service';
 import { Producto } from 'src/app/api-rest/models/Producto/producto.model';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
@@ -14,11 +14,13 @@ export class DropdownCestaComponent implements OnInit {
   productos: Producto[];
   constructor(
     private cestaService: CestaService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.productos = this.cestaService.getItems();
+    console.log(this.productos);
   }
   clickEliminar(producto: Producto) {
     Swal.fire({
@@ -34,6 +36,10 @@ export class DropdownCestaComponent implements OnInit {
         this.cestaService.removeItem(producto);
         this.productos = this.cestaService.getItems();
         Swal.fire('¡ÉXITO!', 'Producto eliminado de la cesta', 'success');
+        const url = '/productos/cesta?idUsuario=';
+        if (this.router.url.includes(url)) {
+          this.router.navigate(['']);
+        }
       }
     });
   }

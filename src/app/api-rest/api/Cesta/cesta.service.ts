@@ -47,4 +47,7 @@ export class CestaService {
     this.items.splice(index, 1);
     localStorage.setItem('cesta', JSON.stringify(this.items));
   }
+  actualizarCesta(cesta: Producto[]) {
+    localStorage.setItem('cesta', JSON.stringify(cesta));
+  }
 }

@@ -51,7 +51,14 @@ export class FichaProductoComponent implements OnInit {
   }
   addToCart() {
     this.producto.cantidad = this.formCantidad.controls.cantidad.value;
-    this.cartService.addToCart(this.producto);
+    const cesta: Producto[]= this.cartService.getItems();
+    const index = cesta.findIndex(element => element.idProducto === this.producto.idProducto);
+    if (index >= 0) {
+      cesta[index].cantidad = this.producto.cantidad + cesta[index].cantidad;
+      this.cartService.actualizarCesta(cesta);
+    } else {
+      this.cartService.addToCart(this.producto);
+    }
     this.abrirModal();
     this.modal.close();
   }
