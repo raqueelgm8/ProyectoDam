@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CestaService } from './api-rest/api/Cesta/cesta.service';
 import { Producto } from './api-rest/models/Producto/producto.model';
@@ -8,7 +8,7 @@ import { Usuario } from './api-rest/models/Usuario/usuario.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'proyecto-web';
   navbarCollapsed = true;
   cesta: Producto[];
@@ -16,6 +16,7 @@ export class AppComponent {
   productos: Producto[];
   numProductos: number;
   usuarioAdmin = false;
+  interval: any;
   constructor(
     private route: Router,
     private cd: ChangeDetectorRef,
@@ -23,6 +24,11 @@ export class AppComponent {
     private activatedRoute: ActivatedRoute
   ) {
    }
+   ngOnInit() {
+    this.interval = setInterval(() => {
+      this.obtenerNumerProductosCesta();
+  }, 1000);
+ }
   clickHome() {
     this.route.navigate(['/home']);
   }
@@ -83,5 +89,13 @@ export class AppComponent {
   }
   clickAdmin() {
     this.route.navigate(['/admin']);
+  }
+  obtenerNumerProductosCesta() {
+    this.productos = this.cestaService.getItems();
+    if (this.productos.length > 0) {
+      this.numProductos = this.productos.length;
+    } else {
+      this.numProductos = 0;
+    }
   }
 }

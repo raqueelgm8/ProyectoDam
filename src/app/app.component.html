@@ -24,7 +24,7 @@
                 <li class="nav-item dropdown">
                     <a (activate)="recibirCesta()" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Cesta {{this.numProductos}}<span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-cart">
-                        <app-dropdown-cesta (activate)="recibirCesta()"></app-dropdown-cesta>
+                        <app-dropdown-cesta  (activate)="recibirCesta()"></app-dropdown-cesta>
                     </ul>
                 </li>
                 <!--Iniciar Sesión se ve solo si no hemos inciado sesión, por lo que no se verá perfil, y viceversa-->
@@ -50,7 +50,7 @@
 </nav>
 
 <div class="p-0" style="min-height: 70vh;background-image: url(../assets/backgroundBonesPaws.jpg);">
-    <router-outlet class="container" (activate)="recibirUsuario()"></router-outlet>
+    <router-outlet class="container" (activate)="recibirUsuario();recibirCesta()"></router-outlet>
 </div>
 
 <footer id="footer" class="p-3 bg-success">

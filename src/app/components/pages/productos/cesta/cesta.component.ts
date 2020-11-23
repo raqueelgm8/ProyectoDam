@@ -152,7 +152,7 @@ export class CestaComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Producto>(this.cesta);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.matSort;
-        this.total = 0;
+        this.total = this.total - (producto.precio * producto.cantidad);
         Swal.fire('¡ÉXITO!', 'Producto eliminado de la cesta', 'success');
         if (this.cesta === undefined || this.cesta === null || this.cesta.length === 0 || this.cesta === []) {
           this.router.navigate(['']);

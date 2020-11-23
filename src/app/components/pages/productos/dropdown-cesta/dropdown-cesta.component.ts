@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ɵConsole } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TimeInterval } from 'rxjs';
+
 import { CestaService } from 'src/app/api-rest/api/Cesta/cesta.service';
 import { Producto } from 'src/app/api-rest/models/Producto/producto.model';
 import { Usuario } from 'src/app/api-rest/models/Usuario/usuario.model';
@@ -12,16 +14,22 @@ import Swal from 'sweetalert2';
 export class DropdownCestaComponent implements OnInit {
 
   productos: Producto[];
+  interval: any;
   constructor(
     private cestaService: CestaService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
-
+  ngOnDestroy() {
+    if (this.interval) {
+        clearInterval(this.interval);
+    }
+   }
   ngOnInit() {
-    this.productos = this.cestaService.getItems();
-    console.log(this.productos);
-  }
+    this.interval = setInterval(() => {
+      this.productos = this.cestaService.getItems();
+  }, 1000);
+ }
   clickEliminar(producto: Producto) {
     Swal.fire({
       title: '¿Estás seguro de que deseas eliminar el producto de la cesta?',
