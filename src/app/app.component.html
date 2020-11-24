@@ -23,7 +23,7 @@
                 <!--CESTA-->
                 <li class="nav-item dropdown">
                     <a (activate)="recibirCesta()" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Cesta {{this.numProductos}}<span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-cart">
+                    <ul class="dropdown-menu dropdown-cart" style="min-width: 320px;">
                         <app-dropdown-cesta  (activate)="recibirCesta()"></app-dropdown-cesta>
                     </ul>
                 </li>
