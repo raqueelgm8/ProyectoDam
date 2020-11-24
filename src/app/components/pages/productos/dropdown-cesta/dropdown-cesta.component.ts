@@ -64,4 +64,25 @@ export class DropdownCestaComponent implements OnInit {
   recibirCesta() {
     this.productos = this.cestaService.getItems();
   }
+  limpiarCesta() {
+    Swal.fire({
+      title: '¿Estás seguro de que deseas limpiar la cesta?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+    }).then((mensaje) => {
+      if (mensaje.value) {
+        this.cestaService.clearCart();
+        this.productos = this.cestaService.getItems();
+        Swal.fire('¡ÉXITO!', 'Producto eliminado de la cesta', 'success');
+        const url = '/productos/cesta?idUsuario=';
+        if (this.router.url.includes(url)) {
+          this.router.navigate(['']);
+        }
+      }
+    });
+  }
 }

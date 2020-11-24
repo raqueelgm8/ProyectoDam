@@ -3,7 +3,8 @@
 </div>
 <div *ngIf="this.productos !== undefined && this.productos.length > 0">
     <div class="row justify-content-center">
-        <button class="btn btn-primary" (click)="clickCesta()">Ir a la cesta</button>
+        <button class="btn btn-primary mr-2" (click)="clickCesta()"><span class="material-icons">shopping_cart</span></button>
+        <button class="btn btn-danger ml-2" (click)="limpiarCesta()"><span class="material-icons">remove_shopping_cart</span></button>
     </div>
     <li *ngFor="let producto of productos; index as i;">
         <ng-container *ngIf="i <= 4">
