@@ -77,7 +77,7 @@ export class DropdownCestaComponent implements OnInit {
       if (mensaje.value) {
         this.cestaService.clearCart();
         this.productos = this.cestaService.getItems();
-        Swal.fire('¡ÉXITO!', 'Producto eliminado de la cesta', 'success');
+        Swal.fire('¡ÉXITO!', 'La cesta se ha limpiado correctamente', 'success');
         const url = '/productos/cesta?idUsuario=';
         if (this.router.url.includes(url)) {
           this.router.navigate(['']);

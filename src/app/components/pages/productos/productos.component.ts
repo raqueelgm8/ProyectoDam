@@ -40,7 +40,7 @@ export class ProductosComponent implements OnInit {
   ngOnInit(): void {
     this.formCabecera = this.fb.group({
       animal: null,
-      categoria: null
+      categoria: 'null'
     });
     this.buscarAlLPedidos();
   }
@@ -103,7 +103,7 @@ export class ProductosComponent implements OnInit {
     }
   }
   buscar() {
-    const tipoAnimal = this.animalSeleccionado.descripcion;
+    const tipoAnimal = this.animalSeleccionado ? this.animalSeleccionado.descripcion : null;
     const categoria = this.formCabecera.controls.categoria.value !== null && this.formCabecera.controls.categoria.value !== 'null' ?
     this.formCabecera.controls.categoria.value : null;
     this.productosService.buscarProductos(categoria, tipoAnimal).then((result) => {

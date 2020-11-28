@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { AnimalesService } from 'src/app/api-rest/api/Animales/animales.service';
 import { ArchivosService } from 'src/app/api-rest/api/Archivos/archivos.service';
@@ -41,10 +42,10 @@ export class AnimalNuevoComponent implements OnInit {
     private comboService: ComboService,
     private animalService: AnimalesService,
     private cd: ChangeDetectorRef,
-    private _archivosService: ArchivosService,
     private location: Location,
     private route: ActivatedRoute,
     private combo: ComboService,
+    public sanitizer: DomSanitizer,
   ) {
     this.route.queryParams.subscribe(params => {
       if (params.idAnimal) {
@@ -90,7 +91,18 @@ export class AnimalNuevoComponent implements OnInit {
         this.comboRazas = [...result];
         this.cd.detectChanges();
       });
-
+      // IMAGEN 
+      const binaryString = window.atob(result.imagen);
+      const binaryLen = binaryString.length;
+      const bytes = new Uint8Array(binaryLen);
+      for (let i = 0; i < binaryLen; i++) {
+        const ascii = binaryString.charCodeAt(i);
+        bytes[i] = ascii;
+      }
+      const blob = new Blob([bytes], { type: 'application/png'});
+      const fileUrl = URL.createObjectURL(blob);
+      result.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+      this.animal = result as Animal;
     });
   }
   iniciarGrupo() {
