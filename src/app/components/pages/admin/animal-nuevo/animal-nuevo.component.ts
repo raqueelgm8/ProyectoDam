@@ -87,8 +87,9 @@ export class AnimalNuevoComponent implements OnInit {
       if (this.modoVer) {
         this.formAnimal.disable();
       }
-      this.combo.obtenerComboTipo(result.tipoAnimal).then((result) => {
-        this.comboRazas = [...result];
+      this.combo.obtenerComboTipo(result.tipoAnimal).then((combo) => {
+        this.comboRazas = [...combo];
+        this.razaSeleccionada = this.comboRazas.find(element => element.descripcion === result.raza);
         this.cd.detectChanges();
       });
       // IMAGEN 
@@ -136,7 +137,7 @@ export class AnimalNuevoComponent implements OnInit {
         edad: Number(this.formAnimal.controls.edad.value),
         imagen: null,
         nombre: this.formAnimal.controls.nombre.value,
-        raza: this.razaSeleccionada.descripcion,
+        raza: this.razaSeleccionada !== undefined && this.razaSeleccionada !== null ? this.razaSeleccionada.descripcion : this.animal.raza,
         sexo: this.sexoSeleccionado.descripcion[0],
         tipoAnimal: this.animalSeleccionado.descripcion,
         tipoEdad: this.tipoEdadSeleccionado.descripcion,
