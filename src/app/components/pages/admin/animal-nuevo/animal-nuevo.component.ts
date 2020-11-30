@@ -37,6 +37,7 @@ export class AnimalNuevoComponent implements OnInit {
   modoEditar = false;
   modoVer = false;
   animal: Animal;
+  imagenSrc: any;
   constructor(
     private fb: FormBuilder,
     private comboService: ComboService,
@@ -92,7 +93,6 @@ export class AnimalNuevoComponent implements OnInit {
         this.razaSeleccionada = this.comboRazas.find(element => element.descripcion === result.raza);
         this.cd.detectChanges();
       });
-      // IMAGEN 
       const binaryString = window.atob(result.imagen);
       const binaryLen = binaryString.length;
       const bytes = new Uint8Array(binaryLen);
@@ -104,6 +104,7 @@ export class AnimalNuevoComponent implements OnInit {
       const fileUrl = URL.createObjectURL(blob);
       result.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
       this.animal = result as Animal;
+      this.imagenSrc = result.imagenSrc;
     });
   }
   iniciarGrupo() {
@@ -161,6 +162,17 @@ export class AnimalNuevoComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.base64textString = reader.result.toString();
+      var splitted = me.base64textString.split(',', 3);
+      const binaryString = window.atob(splitted[1]);
+      const binaryLen = binaryString.length;
+      const bytes = new Uint8Array(binaryLen);
+      for (let i = 0; i < binaryLen; i++) {
+        const ascii = binaryString.charCodeAt(i);
+        bytes[i] = ascii;
+      }
+      const blob = new Blob([bytes], { type: 'application/png'});
+      const fileUrl = URL.createObjectURL(blob);
+      me.imagenSrc = me.sanitizer.bypassSecurityTrustUrl(fileUrl);
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);

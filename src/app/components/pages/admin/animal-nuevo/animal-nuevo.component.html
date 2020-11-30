@@ -74,7 +74,7 @@
         </div>
         <div class="row">
             <div *ngIf="this.base64textString" style="width: 20rem;" class="col-md-5 mb-4 ml-5 mt-4">
-                <img [src]="this.animal.imagenSrc" class="card-img-top" alt="...">
+                <img [src]="this.imagenSrc" class="card-img-top" alt="...">
             </div>
             <div class="col-md-6 dropZone mt-4" appDnd (fileDropped)="onFileDropped($event)">
                 <input formControlName="imagen" accept="image/*" class="fileClass" type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event.target.files);onFileChange($event)"/>

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ArchivosService } from 'src/app/api-rest/api/Archivos/archivos.service';
 import { ProductosService } from 'src/app/api-rest/api/Productos/productos.service';
@@ -28,13 +29,15 @@ export class ProductoNuevoComponent implements OnInit {
   modoEditar = false;
   modoVer = false;
   producto: Producto;
+  imagenSrc: any;
   constructor(
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
     private archivosService: ArchivosService,
     private productosService: ProductosService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public sanitizer: DomSanitizer,
   ) {
     this.route.queryParams.subscribe(params => {
       if (params.idProducto) {
@@ -120,6 +123,18 @@ export class ProductoNuevoComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.base64textString = reader.result.toString();
+      me.base64textString = reader.result.toString();
+      var splitted = me.base64textString.split(',', 3);
+      const binaryString = window.atob(splitted[1]);
+      const binaryLen = binaryString.length;
+      const bytes = new Uint8Array(binaryLen);
+      for (let i = 0; i < binaryLen; i++) {
+        const ascii = binaryString.charCodeAt(i);
+        bytes[i] = ascii;
+      }
+      const blob = new Blob([bytes], { type: 'application/png'});
+      const fileUrl = URL.createObjectURL(blob);
+      me.imagenSrc = me.sanitizer.bypassSecurityTrustUrl(fileUrl);
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
