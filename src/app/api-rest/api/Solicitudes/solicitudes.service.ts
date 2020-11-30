@@ -69,4 +69,17 @@ export class SolicitudesService {
       });
     });
   }
+  async editarEstadoSolicitud(idUsuario: number, idAnimal: number, idSolicitud: number, estadoPedido: string): Promise<Solicitud> {
+    return new Promise<Solicitud>( async (resolve, reject) => {
+      let solicitud: Solicitud;
+      const ruta = '/api/solicitudes/updateEstado/' + idUsuario + '/' + idAnimal + '/' + idSolicitud + '/' + estadoPedido + '/';
+      this.httpClient.put(ruta, null).subscribe((result) => {
+        solicitud = result as Solicitud;
+        Swal.fire('¡Éxito!', 'Solicitud editada con éxito', 'success');
+        resolve(solicitud);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

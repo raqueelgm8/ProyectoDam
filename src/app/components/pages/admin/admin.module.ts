@@ -14,10 +14,11 @@ import { AnimalNuevoComponent } from './animal-nuevo/animal-nuevo.component';
 import { ProductoNuevoComponent } from './producto-nuevo/producto-nuevo.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { CambiarEstadoPedidoComponent } from './cambiar-estado-pedido/cambiar-estado-pedido.component';
+import { CambiarEstadoSolicitudComponent } from './cambiar-estado-solicitud/cambiar-estado-solicitud.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, AnimalNuevoComponent, ProductoNuevoComponent, EditarUsuarioComponent, CambiarEstadoPedidoComponent],
+  declarations: [AdminComponent, AnimalNuevoComponent, ProductoNuevoComponent, EditarUsuarioComponent, CambiarEstadoPedidoComponent, CambiarEstadoSolicitudComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

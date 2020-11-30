@@ -37,10 +37,10 @@ export class PerfilComponent implements OnInit {
   dataSourceSolicitudes = new MatTableDataSource();
   dataSourcePedidos = new MatTableDataSource();
 
-  @ViewChild('MatPaginatorSolicitudes', {read: MatPaginator}) paginatorSolicitudes: MatPaginator;
-  @ViewChild('MatPaginatorPedidos', {read: MatPaginator}) paginatorPedidos: MatPaginator;
-  @ViewChild('MatSortPedidos', {read: MatPaginator}) matSortPedidos: MatSort;
-  @ViewChild('MatSortSolicitudes', {read: MatPaginator}) matSortSolicitudes: MatSort;
+  @ViewChild('paginatorSolicitudes', {read: MatPaginator}) paginatorSolicitudes: MatPaginator;
+  @ViewChild('paginatorPedidos', {read: MatPaginator}) paginatorPedidos: MatPaginator;
+  @ViewChild('sorter1') sorter1: MatSort;
+  @ViewChild('sorter2') sorter2: MatSort;
   provinciaSeleccionada: Combo;
   constructor(
     public route: ActivatedRoute,
@@ -55,32 +55,25 @@ export class PerfilComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       const usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
-      const idUsuario = usuario.idUsuario;
       this.idUsuario = Number(params.idUsuario);
       if (params.idUsuario === undefined) {
         this.idUsuario = JSON.parse(localStorage.getItem('usuarios')).idUsuario;
       }
-      /*if (this.idUsuario !== idUsuario) {
-        this.router.navigate(['/registro/mi-perfil'], {queryParams: {idUsuario: idUsuario}});
-      }*/
     });
   }
   ngAfterViewInit(): void {
+    this.recuperarSolicitudes();
+    this.recuperarPedidos();
     this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
-    this.dataSourceSolicitudes.sort = this.matSortSolicitudes;
     this.dataSourcePedidos.paginator = this.paginatorPedidos;
-    this.dataSourcePedidos.sort = this.matSortPedidos;
+    this.dataSourceSolicitudes.sort = this.sorter1;
+    this.dataSourceSolicitudes.sort = this.sorter2;
   }
   ngOnInit(): void {
     this.paginator.itemsPerPageLabel = "Registros por página";
     this.iniciarForm();
     this.recuperarPerfil();
-    this.recuperarSolicitudes();
-    this.recuperarPedidos();
-    this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
-    this.dataSourceSolicitudes.sort = this.matSortSolicitudes;
-    this.dataSourcePedidos.paginator = this.paginatorPedidos;
-    this.dataSourcePedidos.sort = this.matSortPedidos;
+
   }
   iniciarForm() {
     this.formPerfil = this.fb.group({
@@ -131,7 +124,7 @@ export class PerfilComponent implements OnInit {
       this.solicitudes = result;
       this.dataSourceSolicitudes = new MatTableDataSource<Solicitud>(this.solicitudes);
       this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
-      this.dataSourceSolicitudes.sort = this.matSortSolicitudes;
+      this.dataSourceSolicitudes.sort = this.sorter1;
       if (result.length === 0) {
         this.sinDatosSolicitudes = false;
       } else {
@@ -149,7 +142,7 @@ export class PerfilComponent implements OnInit {
         this.sinDatosPedidos = true;
       }
       this.dataSourcePedidos.paginator = this.paginatorPedidos;
-      this.dataSourcePedidos.sort = this.matSortPedidos;
+      this.dataSourceSolicitudes.sort = this.sorter2;
     });
   }
   eliminarSolicitud(solicitud: Solicitud) {

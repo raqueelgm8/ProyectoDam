@@ -215,37 +215,37 @@
           </div>
 
           <div *ngIf="sinDatosSolicitudes" class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSourceSolicitudes" class="mat-elevation-z8" matSort width="100%" #MatSortSolicitudes="matSort">
+            <table mat-table [dataSource]="dataSourceSolicitudes" class="mat-elevation-z8" width="100%" matSort #sorter1="matSort">
                 <ng-container matColumnDef="idSolicitud">
-                <th mat-header-cell *matHeaderCellDef>Id Solicitud</th>
+                <th mat-sort-header  mat-header-cell *matHeaderCellDef>Id Solicitud</th>
                 <td mat-cell *matCellDef="let solicitud"> 
                     {{solicitud.id.idSolicitud + '-' + solicitud.id.idUsuario + '-' + solicitud.id.idAnimal}}
                 </td>
               </ng-container>
           
               <ng-container matColumnDef="animal">
-                <th mat-header-cell *matHeaderCellDef>Animal</th>
+                <th mat-sort-header  mat-header-cell *matHeaderCellDef>Animal</th>
                 <td mat-cell *matCellDef="let solicitud"> 
                     {{solicitud.nombreAnimal}}
                 </td>
               </ng-container>
           
               <ng-container matColumnDef="tipoAnimal">
-                <th mat-header-cell *matHeaderCellDef>Tipo animal</th>
+                <th mat-sort-header  mat-header-cell *matHeaderCellDef>Tipo animal</th>
                 <td mat-cell *matCellDef="let solicitud"> 
                     {{solicitud.tipoAnimal}}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="estado">
-                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <th mat-sort-header  mat-header-cell *matHeaderCellDef>Estado</th>
                 <td mat-cell *matCellDef="let solicitud"> 
                     {{solicitud.estado}}
                 </td>
               </ng-container>
               
               <ng-container matColumnDef="acciones">
-                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <th mat-sort-header  mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td mat-cell *matCellDef="let solicitud"> 
                     <button class="btn btn-success mr-1" (click)="verSolicitud(solicitud)"><i class="far fa-eye"></i></button>
                     <button class="btn btn-warning mr-1" (click)="editarSolicitud(solicitud)"><i class="fas fa-edit"></i></button>
@@ -276,44 +276,44 @@
             </div>
         </div>
         <div *ngIf="sinDatosPedidos" class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSourcePedidos" class="mat-elevation-z8" matSort width="100%" #MatSortPedidos="matSort">
+            <table mat-table [dataSource]="dataSourcePedidos" class="mat-elevation-z8" width="100%" matSort #sorter2="matSort">
               <ng-container matColumnDef="idPedido">
-                <th mat-header-cell *matHeaderCellDef>Id Pedido</th>
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Id Pedido</th>
                 <td mat-cell *matCellDef="let pedido"> 
                     {{pedido.id.idPedido + '-' + pedido.id.idUsuario}}
                 </td>
               </ng-container>
           
               <ng-container matColumnDef="estado">
-                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Estado</th>
                 <td mat-cell *matCellDef="let pedido"> 
                     {{pedido.estadoPedido}}
                 </td>
               </ng-container>
           
               <ng-container matColumnDef="total">
-                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Total</th>
                 <td mat-cell *matCellDef="let pedido"> 
                     {{pedido.total + '€'}}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="fechaPedido">
-                <th mat-header-cell *matHeaderCellDef>Fecha Pedido</th>
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Fecha Pedido</th>
                 <td mat-cell *matCellDef="let pedido"> 
                     {{pedido.fechaPedido | date : 'dd/MM/yyyy'}}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="metodoPago">
-                <th mat-header-cell *matHeaderCellDef>Método de pago</th>
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Método de pago</th>
                 <td mat-cell *matCellDef="let pedido"> 
                     {{pedido.metodopago}}
                 </td>
               </ng-container>
               
               <ng-container matColumnDef="acciones">
-                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td mat-cell *matCellDef="let pedido"> 
                     <button class="btn btn-success mr-1" (click)="verPedido(pedido)"><i class="far fa-eye"></i></button>
                     <!--<button class="btn btn-warning mr-1"><i class="fas fa-edit"></i></button>

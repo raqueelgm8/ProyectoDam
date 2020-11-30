@@ -21,6 +21,7 @@ import { ComboService } from 'src/app/api-rest/api/Combo/combo.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as R from 'ramda';
 import { CambiarEstadoPedidoComponent } from '../cambiar-estado-pedido/cambiar-estado-pedido.component';
+import { CambiarEstadoSolicitudComponent } from '../cambiar-estado-solicitud/cambiar-estado-solicitud.component';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -229,9 +230,18 @@ export class AdminComponent implements OnInit {
     });
   }
   editarSolicitud(solicitud: Solicitud) {
-    this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
-      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoEditar: 'editar', modoAdmin: true
-    }});
+    const modalRef = this.modal.open(CambiarEstadoSolicitudComponent, {
+      centered: true,
+      size: 'lg'
+    });
+    modalRef.componentInstance.idAnimal = solicitud.id.idAnimal;
+    modalRef.componentInstance.idSolicitud = solicitud.id.idSolicitud;
+    modalRef.componentInstance.idUsuario = solicitud.id.idUsuario;
+    modalRef.result.then((result) => {
+      if (!R.isNil(result)) {
+        this.consultarSolicitudes();
+      }
+    });
   }
   verSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
