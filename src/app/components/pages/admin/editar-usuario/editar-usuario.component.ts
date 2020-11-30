@@ -29,7 +29,11 @@ export class EditarUsuarioComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       this.idUsuario = Number(params.idUsuario);
-      this.modoEditar = params.modoEditar as boolean;
+      if (params.modoEditar === 'true') {
+        this.modoEditar = true;
+      } else {
+        this.modoEditar = false;
+      }
       this.consultarUsuario();
     });
   }
@@ -97,7 +101,7 @@ export class EditarUsuarioComponent implements OnInit {
       provincia: this.provinciaSeleccionada.id,
       sexo: this.formPerfil.controls.sexo.value,
       telefono: this.formPerfil.controls.telefono.value,
-      idUsuario: null,
+      idUsuario: this.idUsuario,
     };
     if (this.formPerfil.invalid) {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');

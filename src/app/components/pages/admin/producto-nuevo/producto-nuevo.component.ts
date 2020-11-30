@@ -77,6 +77,35 @@ export class ProductoNuevoComponent implements OnInit {
       if (this.modoVer) {
         this.formProducto.disable();
       }
+      let imagen;
+      if (this.producto.archivoImagen !== undefined && this.producto.archivoImagen !== null) {
+        imagen = this.producto.archivoImagen;
+        var splitted = imagen.split(',', 3);
+        const binaryString = window.atob(splitted[1]);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        this.producto.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+        this.imagenSrc = this.producto.imagenSrc;
+      } else {
+        imagen = this.producto.imagen;
+        const binaryString = window.atob(imagen);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        this.producto.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+        this.imagenSrc = this.producto.imagenSrc;
+      }
     });
   }
   iniciarGrupo() {

@@ -93,18 +93,35 @@ export class AnimalNuevoComponent implements OnInit {
         this.razaSeleccionada = this.comboRazas.find(element => element.descripcion === result.raza);
         this.cd.detectChanges();
       });
-      const binaryString = window.atob(result.imagen);
-      const binaryLen = binaryString.length;
-      const bytes = new Uint8Array(binaryLen);
-      for (let i = 0; i < binaryLen; i++) {
-        const ascii = binaryString.charCodeAt(i);
-        bytes[i] = ascii;
+      let imagen;
+      if (this.animal.archivoImagen !== undefined && this.animal.archivoImagen !== null) {
+        imagen = this.animal.archivoImagen;
+        var splitted = imagen.split(',', 3);
+        const binaryString = window.atob(splitted[1]);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        this.animal.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+        this.imagenSrc = this.animal.imagenSrc;
+      } else {
+        imagen = this.animal.imagen;
+        const binaryString = window.atob(imagen);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+          const ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        const blob = new Blob([bytes], { type: 'application/png'});
+        const fileUrl = URL.createObjectURL(blob);
+        this.animal.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
+        this.imagenSrc = this.animal.imagenSrc;
       }
-      const blob = new Blob([bytes], { type: 'application/png'});
-      const fileUrl = URL.createObjectURL(blob);
-      result.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(fileUrl);
-      this.animal = result as Animal;
-      this.imagenSrc = result.imagenSrc;
     });
   }
   iniciarGrupo() {
