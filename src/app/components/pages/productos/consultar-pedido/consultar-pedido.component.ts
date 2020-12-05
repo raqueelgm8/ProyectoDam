@@ -61,13 +61,13 @@ export class ConsultarPedidoComponent implements OnInit {
     this.consultarDetallesPedido();
   }
   consultarPedido() {
-    this.pedidoService.obtenerPedidoPorId(this.idUsuario, this.idPedido).then((result) => {
+    this.pedidoService.obtenerPedidoPorId(this.idPedido).then((result) => {
       this.pedido = result;
       this.total = result.total;
     });
   }
   consultarDetallesPedido() {
-    this.detallesPedidoService.obtenerDetallesPedidoPorPedido(this.idUsuario, this.idPedido).then((result) => {
+    this.detallesPedidoService.obtenerDetallesPedidoPorPedido(this.idPedido).then((result) => {
       this.detallesPedido = result;
       this.detallesPedido.forEach(element => {
         const binaryString = window.atob(element.producto.imagen);

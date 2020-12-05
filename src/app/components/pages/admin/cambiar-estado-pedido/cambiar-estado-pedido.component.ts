@@ -36,7 +36,7 @@ export class CambiarEstadoPedidoComponent implements OnInit {
     }
   }
   consultarPedido() {
-    this.pedidoService.obtenerPedidoPorId(this.idUsuario, this.idPedido).then((result) => {
+    this.pedidoService.obtenerPedidoPorId(this.idPedido).then((result) => {
       this.pedido = result;
       this.formCambioEstado.controls.cambioEstado.setValue(result.estadoPedido);
       this.estadoSeleccionado = { descripcion: result.estadoPedido };
@@ -51,7 +51,7 @@ export class CambiarEstadoPedidoComponent implements OnInit {
     this.modal.close();
   }
   guardar() {
-    this.pedidoService.editarEstadoPedido(this.idUsuario, this.idPedido, this.estadoSeleccionado.descripcion).then((result) => {
+    this.pedidoService.editarEstadoPedido(this.idPedido, this.estadoSeleccionado.descripcion).then((result) => {
       Swal.fire('¡ÉXITO!', 'Pedido editado con éxito!', 'success');
       this.modal.close(true);
     }, error => {

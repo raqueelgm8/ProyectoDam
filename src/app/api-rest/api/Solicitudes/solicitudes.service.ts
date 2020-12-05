@@ -20,9 +20,9 @@ export class SolicitudesService {
       });
     });
   }
-  async obtenerSolicitudPorId(idUsuario: number, idSolicitud: number, idAnimal: number): Promise<Solicitud> {
+  async obtenerSolicitudPorId(idSolicitud: number): Promise<Solicitud> {
     return new Promise<Solicitud>( async (resolve, reject) => {
-      const ruta = '/api/solicitudes/obtenerSolicitudPorId/' + idUsuario + '/' + idSolicitud + '/' + idAnimal;
+      const ruta = '/api/solicitudes/obtenerSolicitudPorId/' + idSolicitud;
       this.httpClient.get(ruta).subscribe((result) => {
         resolve(result as Solicitud);
       }, error => {
@@ -30,8 +30,8 @@ export class SolicitudesService {
       });
     });
   }
-  eliminarSolicitud(idUsuario: number, idSolicitud: number, idAnimal: number){
-    const ruta = '/api/solicitudes/eliminarSolicitud/' + idUsuario + '/' + idSolicitud + '/' + idAnimal;
+  eliminarSolicitud(idSolicitud: number){
+    const ruta = '/api/solicitudes/eliminarSolicitud/' + idSolicitud;
     this.httpClient.delete(ruta, ).subscribe((result) => {
       Swal.fire('¡Éxito!', 'Solicitud eliminada con éxito', 'success');
     }, error => {
@@ -69,10 +69,10 @@ export class SolicitudesService {
       });
     });
   }
-  async editarEstadoSolicitud(idUsuario: number, idAnimal: number, idSolicitud: number, estadoPedido: string): Promise<Solicitud> {
+  async editarEstadoSolicitud(idSolicitud: number, estadoPedido: string): Promise<Solicitud> {
     return new Promise<Solicitud>( async (resolve, reject) => {
       let solicitud: Solicitud;
-      const ruta = '/api/solicitudes/updateEstado/' + idUsuario + '/' + idAnimal + '/' + idSolicitud + '/' + estadoPedido + '/';
+      const ruta = '/api/solicitudes/updateEstado/' +idSolicitud + '/' + estadoPedido + '/';
       this.httpClient.put(ruta, null).subscribe((result) => {
         solicitud = result as Solicitud;
         Swal.fire('¡Éxito!', 'Solicitud editada con éxito', 'success');

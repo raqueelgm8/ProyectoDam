@@ -218,7 +218,7 @@
                 <ng-container matColumnDef="idSolicitud">
                 <th mat-sort-header  mat-header-cell *matHeaderCellDef>Id Solicitud</th>
                 <td mat-cell *matCellDef="let solicitud"> 
-                    {{solicitud.id.idSolicitud + '-' + solicitud.id.idUsuario + '-' + solicitud.id.idAnimal}}
+                    {{solicitud.idSolicitud}}
                 </td>
               </ng-container>
           
@@ -277,7 +277,7 @@
               <ng-container matColumnDef="idPedido">
                 <th mat-sort-header mat-header-cell *matHeaderCellDef>Id Pedido</th>
                 <td mat-cell *matCellDef="let pedido"> 
-                    {{pedido.id.idPedido + '-' + pedido.id.idUsuario}}
+                    {{pedido.idPedido}}
                 </td>
               </ng-container>
               <ng-container matColumnDef="estado">

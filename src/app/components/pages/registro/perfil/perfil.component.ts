@@ -156,10 +156,8 @@ export class PerfilComponent implements OnInit {
       confirmButtonText: 'Eliminar solicitud'
     }).then((mensaje) => {
       if (mensaje.value) {
-        this.solicitudesService.eliminarSolicitud(solicitud.id.idUsuario, solicitud.id.idSolicitud, solicitud.id.idAnimal);
-        const index = this.solicitudes.findIndex(element => element.id.idUsuario === solicitud.id.idUsuario
-                                  && element.id.idSolicitud === solicitud.id.idSolicitud
-                                  && element.id.idAnimal === solicitud.id.idAnimal);
+        this.solicitudesService.eliminarSolicitud(solicitud.idSolicitud);
+        const index = this.solicitudes.findIndex(element => element.idSolicitud === solicitud.idSolicitud);
         this.solicitudes.splice(index, 1);
         this.dataSourceSolicitudes =  new MatTableDataSource(this.solicitudes);
         this.changeDetectorRefs.detectChanges();
@@ -168,12 +166,12 @@ export class PerfilComponent implements OnInit {
   }
   editarSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
-      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoEditar: 'editar'
+      idSolicitud: solicitud.idSolicitud, animalId: solicitud.idAnimal, modoEditar: 'editar'
     }});
   }
   verSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
-      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoConsulta: 'consulta'
+      idSolicitud: solicitud.idSolicitud, animalId: solicitud.idAnimal, modoConsulta: 'consulta'
     }});
   }
   eliminarCuenta() {
@@ -192,7 +190,7 @@ export class PerfilComponent implements OnInit {
           localStorage.setItem('usuarioIniciadoSesion', 'false');
           this.router.navigate(['/home']);
         }, error => {
-          Swal.fire('¡ERROR!', error, 'error');
+          Swal.fire('¡ERROR!', 'No puede eliminar una cuenta con solicitudes o pedidos', 'error');
         });
       }
     });
@@ -242,7 +240,7 @@ export class PerfilComponent implements OnInit {
   }
   verPedido(pedido: Pedido) {
     this.router.navigate(['/productos/consultar-pedido', ], {queryParams: {
-      idPedido: pedido.id.idPedido, idUsuario: pedido.id.idUsuario
+      idPedido: pedido.idPedido, idUsuario: pedido.idUsuario
     }});
   }
   verPass1() {

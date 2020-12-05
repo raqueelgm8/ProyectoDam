@@ -153,7 +153,7 @@ export class AdminComponent implements OnInit {
   }
   verPedido(pedido: Pedido) {
     this.router.navigate(['/productos/consultar-pedido', ], {queryParams: {
-      idPedido: pedido.id.idPedido, idUsuario: pedido.id.idUsuario, modoAdmin: true
+      idPedido: pedido.idPedido, idUsuario: pedido.idUsuario, modoAdmin: true
     }});
   }
   consultarAnimales() {
@@ -217,10 +217,8 @@ export class AdminComponent implements OnInit {
       confirmButtonText: 'Eliminar solicitud'
     }).then((mensaje) => {
       if (mensaje.value) {
-        this.solicitudesService.eliminarSolicitud(solicitud.id.idUsuario, solicitud.id.idSolicitud, solicitud.id.idAnimal);
-        const index = this.listaSolicitud.findIndex(element => element.id.idUsuario === solicitud.id.idUsuario
-                                  && element.id.idSolicitud === solicitud.id.idSolicitud
-                                  && element.id.idAnimal === solicitud.id.idAnimal);
+        this.solicitudesService.eliminarSolicitud(solicitud.idSolicitud);
+        const index = this.listaSolicitud.findIndex(element => element.idSolicitud === solicitud.idSolicitud);
         this.listaSolicitud.splice(index, 1);
         this.dataSourceSolicitudes =  new MatTableDataSource(this.listaSolicitud);
         this.dataSourceSolicitudes.paginator = this.paginatorSolicitudes;
@@ -234,9 +232,9 @@ export class AdminComponent implements OnInit {
       centered: true,
       size: 'lg'
     });
-    modalRef.componentInstance.idAnimal = solicitud.id.idAnimal;
-    modalRef.componentInstance.idSolicitud = solicitud.id.idSolicitud;
-    modalRef.componentInstance.idUsuario = solicitud.id.idUsuario;
+    modalRef.componentInstance.idAnimal = solicitud.idAnimal;
+    modalRef.componentInstance.idSolicitud = solicitud.idSolicitud;
+    modalRef.componentInstance.idUsuario = solicitud.idUsuario;
     modalRef.result.then((result) => {
       if (!R.isNil(result)) {
         this.consultarSolicitudes();
@@ -245,7 +243,7 @@ export class AdminComponent implements OnInit {
   }
   verSolicitud(solicitud: Solicitud) {
     this.router.navigate(['/adopciones/ficha-animal/formulario-adopcion', ], {queryParams: {
-      idSolicitud: solicitud.id.idSolicitud, animalId: solicitud.id.idAnimal, modoConsulta: 'consulta', modoAdmin: true
+      idSolicitud: solicitud.idSolicitud, animalId: solicitud.idAnimal, modoConsulta: 'consulta', modoAdmin: true
     }});
   }
   eliminarPedido(pedido: Pedido) {
@@ -259,8 +257,8 @@ export class AdminComponent implements OnInit {
       confirmButtonText: 'Eliminar pedido'
     }).then((mensaje) => {
       if (mensaje.value) {
-        this.pedidosService.eliminarPedido(pedido.id.idUsuario, pedido.id.idPedido);
-        const index = this.listaPedidos.findIndex(element => element.id === pedido.id);
+        this.pedidosService.eliminarPedido(pedido.idPedido);
+        const index = this.listaPedidos.findIndex(element => element.idPedido === pedido.idPedido);
         this.listaPedidos.splice(index, 1);
         this.dataSourcePedidos =  new MatTableDataSource(this.listaPedidos);
         this.dataSourcePedidos.paginator = this.paginatorPedidos;
@@ -341,8 +339,8 @@ export class AdminComponent implements OnInit {
       centered: true,
       size: 'lg'
     });
-    modalRef.componentInstance.idPedido = pedido.id.idPedido;
-    modalRef.componentInstance.idUsuario = pedido.id.idUsuario;
+    modalRef.componentInstance.idPedido = pedido.idPedido;
+    modalRef.componentInstance.idUsuario = pedido.idUsuario;
     modalRef.result.then((result) => {
       if (!R.isNil(result)) {
         this.consultarPedidos();

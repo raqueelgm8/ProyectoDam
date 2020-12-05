@@ -121,18 +121,16 @@ export class FormularioAdopcionComponent implements OnInit {
       razonAdopcion: this.formAdopcion.controls.razon.value,
       terraza: this.formAdopcion.controls.terraza.value,
       tipoAnimal: this.animal.tipoAnimal,
-      id: {
-        idAnimal: this.idAnimal,
-        idUsuario: this.idUsuario,
-        idSolicitud: null
-      },
+      idAnimal: this.idAnimal,
+      idUsuario: this.idUsuario,
+      idSolicitud: null,
       horariotrabajo: this.formAdopcion.controls.horarioTrabajo.value,
     };
     if (this.formAdopcion.invalid) {
       Swal.fire('ERROR!', 'Debe de rellenar todos los campos', 'error');
     } else {
       if (this.modoEditar) {
-        solicitud.id.idSolicitud = this.idSolicitud;
+        solicitud.idSolicitud = this.idSolicitud;
         this.solicitudService.editarSolicitud(solicitud).then((result) => {
           Swal.fire('¡Éxito!', 'Solicitud enviada correctamente', 'success');
           this.router.navigate(['/registro/mi-perfil'], {queryParams: {
@@ -173,7 +171,7 @@ export class FormularioAdopcionComponent implements OnInit {
     });
   }
   consultarSolicitud() {
-    this.solicitudService.obtenerSolicitudPorId(this.idUsuario, this.idSolicitud, this.idAnimal).then((result) => {
+    this.solicitudService.obtenerSolicitudPorId(this.idSolicitud).then((result) => {
       this.formAdopcion.controls.razon.setValue(result.razonAdopcion);
       this.formAdopcion.controls.mascotas.setValue(result.mascotasCasa === 0 ? '0' : '1');
       this.formAdopcion.controls.terraza.setValue(result.terraza === 0 ? '0' : '1');

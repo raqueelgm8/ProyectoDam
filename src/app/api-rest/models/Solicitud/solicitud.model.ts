@@ -1,9 +1,7 @@
 export class Solicitud {
-    id: {
-        idSolicitud: number;
-        idUsuario: number;
-        idAnimal: number;
-    };
+    idSolicitud: number;
+    idUsuario: number;
+    idAnimal: number;
     razonAdopcion: string;
     mascotasCasa: number;
     terraza: number;

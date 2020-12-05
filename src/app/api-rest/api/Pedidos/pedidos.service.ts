@@ -12,9 +12,9 @@ export class PedidosService {
     public httpClient: HttpClient
   ) { }
 
-  async obtenerPedidoPorId(idUsuario: number, idPedido: number): Promise<Pedido> {
+  async obtenerPedidoPorId(idPedido: number): Promise<Pedido> {
     return new Promise<Pedido>( async (resolve, reject) => {
-      const ruta = '/api/pedidos/getPedido/' + idUsuario + '/' + idPedido;
+      const ruta = '/api/pedidos/getPedido/' + idPedido;
       this.httpClient.get(ruta).subscribe((result) => {
         resolve(result as Pedido);
       }, error => {
@@ -42,9 +42,9 @@ export class PedidosService {
       });
     });
   }
-  async guardarDetallesPedido(idUsuario: number, idPedido: number,detallesPedido: DetallePedido[]): Promise<DetallePedido[]> {
+  async guardarDetallesPedido(idPedido: number,detallesPedido: DetallePedido[]): Promise<DetallePedido[]> {
     return new Promise<DetallePedido[]>( async (resolve, reject) => {
-      const ruta = '/api/detalles/guardarDetalles/' + idUsuario + '/' + idPedido;
+      const ruta = '/api/detalles/guardarDetalles/' + idPedido;
       this.httpClient.post(ruta, detallesPedido).subscribe((result) => {
         resolve(result as DetallePedido[]);
       }, error => {
@@ -52,9 +52,9 @@ export class PedidosService {
       });
     });
   }
-  async eliminarPedido(idUsuario: number, idPedido: number): Promise<string> {
+  async eliminarPedido(idPedido: number): Promise<string> {
     return new Promise<string>( async (resolve, reject) => {
-      this.httpClient.delete('/api/pedidos/eliminarPedido/' + idUsuario + '/' + idPedido).subscribe((result) => {
+      this.httpClient.delete('/api/pedidos/eliminarPedido/' + idPedido).subscribe((result) => {
         Swal.fire('¡Éxito!', 'Usuario eliminado con éxito', 'success');
         resolve('El usuario se ha eliminado correctamente');
       }, error => {
@@ -72,10 +72,10 @@ export class PedidosService {
       });
     });
   }
-  async editarEstadoPedido(idUsuario: number, idPedido: number, estadoPedido: string): Promise<Pedido> {
+  async editarEstadoPedido(idPedido: number, estadoPedido: string): Promise<Pedido> {
     return new Promise<Pedido>( async (resolve, reject) => {
       let pedido: Pedido;
-      const ruta = '/api/pedidos/updateEstado/' + idUsuario + '/' + idPedido + '/' + estadoPedido + '/';
+      const ruta = '/api/pedidos/updateEstado/' + idPedido + '/' + estadoPedido + '/';
       this.httpClient.put(ruta, null).subscribe((result) => {
         pedido = result as Pedido;
         Swal.fire('¡Éxito!', 'Pedido editado con éxito', 'success');

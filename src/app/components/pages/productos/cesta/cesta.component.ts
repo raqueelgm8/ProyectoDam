@@ -65,7 +65,6 @@ export class CestaComponent implements OnInit {
         cantidad: element.cantidad,
         id: {
           idProducto: element.idProducto,
-          idUsuario: this.idUsuario,
           idPedido: null
         },
         precioTotal: element.cantidad * element.precio,
@@ -100,21 +99,21 @@ export class CestaComponent implements OnInit {
       email: this.formCesta.controls.email.value,
       //  moment(new Date(), 'DD/MM/yy').toDate(),
       fechaPedido: moment(new Date(), 'DD/MM/yy').toDate(),
-      id: null,
       metodopago: this.formCesta.controls.metodoPago.value,
       nombre: this.formCesta.controls.nombre.value,
       provincia: this.formCesta.controls.provincia.value,
       telefono: this.formCesta.controls.telefono.value,
       total: null,
       detallePedidos: null,
-      estadoPedido: 'Pendiente'
+      estadoPedido: 'Pendiente',
+      idPedido: null,
+      idUsuario: this.idUsuario
     };
     this.cesta.forEach(element => {
       const detallePedido: DetallePedido = {
         cantidad: element.cantidad,
         id: {
           idProducto: element.idProducto,
-          idUsuario: this.idUsuario,
           idPedido: null
         },
         precioTotal: element.cantidad * element.precio,
@@ -185,7 +184,8 @@ export class CestaComponent implements OnInit {
       email: this.formCesta.controls.email.value,
       //  moment(new Date(), 'DD/MM/yy').toDate(),
       fechaPedido: moment(new Date(), 'DD/MM/yy').toDate(),
-      id: null,
+      idPedido: null,
+      idUsuario: this.idUsuario,
       metodopago: this.formCesta.controls.metodoPago.value,
       nombre: this.formCesta.controls.nombre.value,
       provincia: this.formCesta.controls.provincia.value,
@@ -199,7 +199,6 @@ export class CestaComponent implements OnInit {
         cantidad: element.cantidad,
         id: {
           idProducto: element.idProducto,
-          idUsuario: this.idUsuario,
           idPedido: null
         },
         precioTotal: element.cantidad * element.precio,
@@ -214,13 +213,13 @@ export class CestaComponent implements OnInit {
     this.pedidoService.guardarPedido(this.idUsuario, this.pedido).then((result) => {
       this.pedido = result;
       if (result !== null) {
-        this.pedidoService.guardarDetallesPedido(this.idUsuario, result.id.idPedido, this.detallesPedido).then((detalles) => {
+        this.pedidoService.guardarDetallesPedido(result.idPedido, this.detallesPedido).then((detalles) => {
           this.detallesPedido = [];
           this.total = 0;
           this.cestaService.clearCart();
           Swal.fire('¡ÉXITO!', 'El pedido se ha realizado correctamente', 'success');
           this.router.navigate(['/productos/consultar-pedido', ], {queryParams: {
-            idPedido: this.pedido.id.idPedido, idUsuario: this.pedido.id.idUsuario, limpiarCesta: 'true'
+            idPedido: this.pedido.idPedido, idUsuario: this.pedido.idUsuario, limpiarCesta: 'true'
           }});
         });
       }

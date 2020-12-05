@@ -2,6 +2,8 @@ import { EmailValidator } from '@angular/forms';
 import { DetallePedido } from '../DetallePedido/detalle-pedido.model';
 
 export class Pedido {
+    idPedido: number;
+    idUsuario: number;
     apellidos: string;
     codigoPostal: string;
     direccion: string;
@@ -12,10 +14,6 @@ export class Pedido {
     provincia: string;
     telefono: string;
     detallePedidos: DetallePedido[];
-    id: {
-        idUsuario: number;
-        idPedido: number;
-    };
     total: number;
     estadoPedido: string;
 }

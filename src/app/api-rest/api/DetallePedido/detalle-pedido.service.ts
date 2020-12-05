@@ -11,9 +11,9 @@ export class DetallePedidoService {
     public httpClient: HttpClient
   ) { }
 
-  async obtenerDetallePedidoPorId(idUsuario: number, idPedido: number, idProducto: number): Promise<DetallePedido> {
+  async obtenerDetallePedidoPorId(idPedido: number, idProducto: number): Promise<DetallePedido> {
     return new Promise<DetallePedido>( async (resolve, reject) => {
-      const ruta = '/api/detalles/detallesPedido/' + idUsuario + '/' + idPedido + '/' + idProducto;
+      const ruta = '/api/detalles/detallesPedido/' + idPedido + '/' + idProducto;
       this.httpClient.get(ruta).subscribe((result) => {
         resolve(result as DetallePedido);
       }, error => {
@@ -21,9 +21,9 @@ export class DetallePedidoService {
       });
     });
   }
-  async obtenerDetallesPedidoPorPedido(idUsuario: number, idPedido: number): Promise<DetallePedido[]> {
+  async obtenerDetallesPedidoPorPedido(idPedido: number): Promise<DetallePedido[]> {
     return new Promise<DetallePedido[]>( async (resolve, reject) => {
-      const ruta = '/api/detalles/detallesPedidoPorPedido/' + idUsuario + '/' + idPedido;
+      const ruta = '/api/detalles/detallesPedidoPorPedido/' + '/' + idPedido;
       this.httpClient.get(ruta).subscribe((result) => {
         resolve(result as DetallePedido[]);
       }, error => {

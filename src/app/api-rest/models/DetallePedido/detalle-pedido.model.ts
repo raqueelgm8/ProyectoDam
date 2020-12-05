@@ -6,7 +6,6 @@ export class DetallePedido {
     precioTotal: number;
     id: {
         idProducto: number;
-        idUsuario: number;
         idPedido: number;
     };
     producto: Producto;
